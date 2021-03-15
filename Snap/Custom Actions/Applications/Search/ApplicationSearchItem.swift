@@ -6,10 +6,11 @@ import SwiftUI
 
 class ApplicationSearchItem: SearchItem {
 	/// The item's view.
-	var view: ApplicationView
+	var view: ApplicationView {
+		return ApplicationView(content: AnyView(Text("Generic Application.")))
+	}
 	
-	init(applicationView: ApplicationView, name: String) {
-		view = applicationView
+	init(name: String) {
 		applicationName = name
 		
 		super.init(acceptsArguments: false)

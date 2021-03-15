@@ -16,7 +16,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			self.openSearchWindow()
 			KeyboardShortcutManager(keyboardShortcut: KeyboardShortcut(keyCode: kVK_Space, modifierFlags: [.option], events: [.keyDown])).startListeningForEvents { _ in
 				if NSApp.isHidden {
-					window.text = ""
 					NSApp.activate(ignoringOtherApps: true)
 				} else {
 					NSApp.hide(nil)

@@ -5,10 +5,6 @@
 import SwiftUI
 import ScriptingBridge
 
-@objc protocol Artwork {
-	@objc optional var rawData: AnyObject { get }
-}
-
 @objc protocol MusicApplication {
 	func currentTrack() -> AnyObject
 	var artworks: NSArray { get }
@@ -16,8 +12,11 @@ import ScriptingBridge
 
 class MusicControllerApp: ApplicationSearchItem {
 	init() {
-		let view = ApplicationView(content: AnyView(MusicControllerView()))
-		super.init(applicationView: view, name: "Music Controller")
+		super.init(name: "Music Controller")
+	}
+	
+	override var view: ApplicationView {
+		return ApplicationView(content: AnyView(MusicControllerView()))
 	}
 	
 	struct MusicControllerView: View {
@@ -64,7 +63,7 @@ class MusicControllerApp: ApplicationSearchItem {
 			name = app.currentTrack().properties["name"] as! String
 			album = app.currentTrack().properties["album"] as! String
 			artist = app.currentTrack().properties["artist"] as! String
-			artwork = (app.currentTrack().artworks[0] as! AnyObject).properties["data"] as! NSImage
+			artwork = (app.currentTrack().artworks[0] as AnyObject).properties["data"] as! NSImage
 		}
 		
 		func stop() {

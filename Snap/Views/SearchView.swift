@@ -52,6 +52,9 @@ struct SearchView: View {
 			// If there are more than 0 characters, then search for the string.
 			search.startSearchForString(text)
 			
+			// Reset the application.
+			application = nil
+			
 			// Reset the selected item.
 			selectedItemIndex = 0
 		}
@@ -109,6 +112,10 @@ struct SearchView: View {
 				}
 			}
 		}
+		.onReceive(NotificationCenter.default.publisher(for: .ApplicationShouldExit), perform: { _ in
+			// When the current application should exit, then set it to nil.
+			application = nil
+		})
 	}
 	
 	private func updateSelectedItemIndex(to index: Int) {

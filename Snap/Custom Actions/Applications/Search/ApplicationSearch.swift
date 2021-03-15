@@ -22,8 +22,9 @@ struct ApplicationSearch {
 				result.append(item)
 			}
 		}
-
+		
 		return result
+		
 	}
 	
 	private func getApplicationSearchItem(for application: Application) -> ApplicationSearchItem {

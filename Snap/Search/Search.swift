@@ -26,7 +26,8 @@ class Search: NSObject, ObservableObject, NSMetadataQueryDelegate {
 			
 			// If an Action for the string exists, then append the action to the search results.
 			let applicationSearch = ApplicationSearch()
-			results += applicationSearch.searchForString(string)
+			let searchResults = applicationSearch.searchForString(string)
+			results += searchResults
 			
 			// If there are results, then go through the search results.
 			let metadataQueryResults = metadataQuery.results as! [NSMetadataItem]

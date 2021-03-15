@@ -13,7 +13,7 @@ struct ApplicationView: View {
 			VStack {
 				HStack {
 					Button(action: {
-						print("exit")
+						NotificationCenter.default.post(name: .ApplicationShouldExit, object: nil)
 					}) {
 						Image(systemName: "xmark.circle.fill")
 					}

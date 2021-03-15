@@ -17,7 +17,7 @@ struct Configuration: Decodable {
 	var searchBarFontSize = CGFloat(24)
 	var searchBarHeight = CGFloat(50)
 	var maxHeight = CGFloat(450)
-	var shouldAnimateText = true
+	var shouldAnimateText = false
 	var shouldAnimateNavigation = true
 	var selectedItemBackground = AnyView(Color.blue)
 	
