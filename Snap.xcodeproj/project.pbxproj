@@ -138,15 +138,15 @@
 		6C106F4725F655BB0047E0B0 /* Snap */ = {
 			isa = PBXGroup;
 			children = (
+				6C106F4825F655BB0047E0B0 /* AppDelegate.swift */,
+				6C12A5D225F79C320029FBD7 /* Permissions.swift */,
+				6C82998E25F6997100A25064 /* TypingWindow.swift */,
 				6CE3BE3B25FF9737001636F5 /* Configuration */,
 				6CED3B0225FAA03900E61388 /* Keyboard Shortcuts */,
 				6C5B519D25F90418000B004A /* Custom Actions */,
 				6C12A5F525F7D78F0029FBD7 /* Search */,
 				6C12A5F125F7D7020029FBD7 /* Views */,
 				6C82999825F699BB00A25064 /* Extensions */,
-				6C106F4825F655BB0047E0B0 /* AppDelegate.swift */,
-				6C12A5D225F79C320029FBD7 /* Permissions.swift */,
-				6C82998E25F6997100A25064 /* TypingWindow.swift */,
 				6C106F4C25F655BC0047E0B0 /* Assets.xcassets */,
 				6C106F5125F655BC0047E0B0 /* Main.storyboard */,
 				6C106F5425F655BC0047E0B0 /* Info.plist */,

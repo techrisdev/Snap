@@ -12,14 +12,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	var window: TypingWindow!
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
-		Permissions().requestPermissions { [self] in
-			openSearchWindow()
-			KeyboardShortcutManager(keyboardShortcut: KeyboardShortcut(keyCode: kVK_Space, modifierFlags: [.option], events: [.keyDown])).startListeningForEvents { _ in
-				if NSApp.isHidden {
-					NSApp.activate(ignoringOtherApps: true)
-				} else {
-					NSApp.hide(nil)
-				}
+		Permissions.requestPermissions()
+		openSearchWindow()
+		KeyboardShortcutManager(keyboardShortcut: KeyboardShortcut(keyCode: kVK_Space, modifierFlags: [.option], events: [.keyDown])).startListeningForEvents { _ in
+			if NSApp.isHidden {
+				NSApp.activate(ignoringOtherApps: true)
+			} else {
+				NSApp.hide(nil)
 			}
 		}
 	}
@@ -44,10 +43,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		// The titled style mask must be removed after the window ordered the front; Otherwise, it will stay in the background.
 		window.styleMask.remove(.titled)
-	}
-	
-	func applicationWillTerminate(_ aNotification: Notification) {
-		// Insert code here to tear down your application
 	}
 	
 	func applicationDidResignActive(_ notification: Notification) {
