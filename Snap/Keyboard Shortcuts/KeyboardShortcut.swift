@@ -26,6 +26,7 @@ struct KeyboardShortcut {
 		self.init(keyCode: keyCode, modifiers: carbonModifiers, events: events)
 	}
 	
+	/// Convert NSEvent modifier flags to carbon modifiers.
 	private static func getCarbonModifiers(for modifiers: NSEvent.ModifierFlags) -> Int {
 		var result = 0
 		

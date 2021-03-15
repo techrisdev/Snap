@@ -33,10 +33,10 @@ class MusicControllerApp: ApplicationSearchItem {
 				Text(currentSong.name)
 					.font(.title)
 					.fontWeight(.semibold)
-					.foregroundColor(configuration.textColor)
+					.foregroundColor(Color.fromHexString(configuration.textColor))
 				Text(currentSong.artist + " - " + currentSong.album)
 					.font(.title3)
-					.foregroundColor(configuration.textColor)
+					.foregroundColor(Color.fromHexString(configuration.textColor))
 				Button(action: {
 					currentSong.stop()
 				}) {

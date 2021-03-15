@@ -51,7 +51,8 @@ class SpotlightSearchItem: SearchItem {
 	
 	/// The icon as an NSImage.
 	override var icon: NSImage {
-		let iconSize = Configuration.decoded.iconSize
+		let configuration = Configuration.decoded
+		let iconSize = NSSize(width: configuration.iconSizeWidth, height: configuration.iconSizeHeight)
 		let icon = NSWorkspace.shared.icon(forFile: path)
 		icon.size = iconSize
 		return icon

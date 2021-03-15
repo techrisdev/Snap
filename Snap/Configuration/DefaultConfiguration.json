@@ -1,0 +1,21 @@
+{
+	"backgroundColor": "#111111",
+	"textColor": "#FFFFFF",
+	"showingIcons": true,
+	"iconSizeWidth": 35,
+	"iconSizeHeight": 50,
+	"blockedPaths": [
+		"/Users/christopherkleiner/Library/Containers/",
+		"/System/Library/Frameworks/",
+		"/System/Library/PrivateFrameworks/",
+		"/usr/"
+	],
+	"resultHeight": 70,
+	"itemLimit": 25,
+	"searchBarFontSize": 24,
+	"searchBarHeight": 50,
+	"maxHeight": 450,
+	"shouldAnimateText": false,
+	"shouldAnimateNavigation": true,
+	"selectedItemBackgroundColor": "#0000FF"
+}

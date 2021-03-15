@@ -5,14 +5,14 @@
 import Carbon
 
 class KeyboardShortcutManager {
-	var currentEvent: KeyEvent = .keyUp
-	
 	var keyboardShortcut: KeyboardShortcut
 	
 	init(keyboardShortcut: KeyboardShortcut) {
 		self.keyboardShortcut = keyboardShortcut
 	}
 
+	private var currentEvent: KeyEvent = .keyUp
+	
 	func startListeningForEvents(actionOnEvent: @escaping (KeyEvent) -> Void) {
 		// Create a HotKey ID.
 		let eventHotKeyID = EventHotKeyID(signature: FourCharCode(1397966955), id: keyboardShortcut.id)

@@ -14,7 +14,7 @@ struct SearchItemView: View {
 		ZStack {
 			// If the item is the selected item, give it a background.
 			if isSelectedItem {
-				configuration.selectedItemBackground
+				Color.fromHexString(configuration.selectedItemBackgroundColor)
 					.frame(maxHeight: configuration.resultHeight)
 			}
 			
@@ -28,7 +28,7 @@ struct SearchItemView: View {
 					Text(item.name)
 						.font(.title3)
 						.fontWeight(.semibold)
-						.foregroundColor(configuration.textColor)
+						.foregroundColor(Color.fromHexString(configuration.textColor))
 					Spacer()
 				}
 				
@@ -37,7 +37,7 @@ struct SearchItemView: View {
 						HStack {
 							Text(item.path)
 								.font(.system(size: 12))
-								.foregroundColor(configuration.textColor)
+								.foregroundColor(Color.fromHexString(configuration.textColor))
 							Spacer()
 						}
 						.padding(.bottom, 3.5)

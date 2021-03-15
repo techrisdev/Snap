@@ -13,7 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		Permissions().requestPermissions { [self] in
-			self.openSearchWindow()
+			openSearchWindow()
 			KeyboardShortcutManager(keyboardShortcut: KeyboardShortcut(keyCode: kVK_Space, modifierFlags: [.option], events: [.keyDown])).startListeningForEvents { _ in
 				if NSApp.isHidden {
 					NSApp.activate(ignoringOtherApps: true)
@@ -51,6 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	func applicationDidResignActive(_ notification: Notification) {
+		// When the application loses focus, then hide it.
 		NSApp.hide(nil)
 	}
 }

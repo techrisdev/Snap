@@ -12,7 +12,7 @@ struct SearchBarView: View {
 		VStack {
 			HStack {
 				Text(text)
-					.foregroundColor(configuration.textColor)
+					.foregroundColor(Color.fromHexString(configuration.textColor))
 					.font(.system(size: configuration.searchBarFontSize))
 				
 				Spacer()

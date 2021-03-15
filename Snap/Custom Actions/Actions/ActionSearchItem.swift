@@ -26,7 +26,8 @@ class ActionSearchItem: SearchItem {
 	
 	override var icon: NSImage {
 		let image = NSImage(named: name + "Icon")!
-		image.size = Configuration.decoded.iconSize
+		let configuration = Configuration.decoded
+		image.size = NSSize(width: configuration.iconSizeWidth, height: configuration.iconSizeHeight)
 		return image
 	}
 }
