@@ -54,18 +54,4 @@ struct KeyboardShortcut {
 		let id = keyCode + modifiers
 		return id
 	}
-	
-	var eventSpecification: [EventTypeSpec] {
-		var result = [EventTypeSpec]()
-		
-		for event in events {
-			if event == .keyDown {
-				result.append(EventTypeSpec(eventClass: OSType(kEventClassKeyboard), eventKind: UInt32(kEventHotKeyPressed)))
-			} else if event == .keyUp {
-				result.append(EventTypeSpec(eventClass: OSType(kEventClassKeyboard), eventKind: UInt32(kEventHotKeyReleased)))
-			}
-		}
-		
-		return result
-	}
 }

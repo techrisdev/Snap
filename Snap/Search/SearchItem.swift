@@ -44,6 +44,7 @@ class SearchItem: Identifiable, Equatable {
 	/// Indicates if the item accepts arguments.
 	var acceptsArguments: Bool
 	
+	/// The item's action.
 	var action: (String) -> Void {
 		fatalError("Action on a generic item.")
 	}

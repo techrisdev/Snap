@@ -11,6 +11,7 @@ struct Bookmark: Decodable {
 	var Children: [Bookmark]?
 	var URLString: String?
 	
+	// MARK: The bookmark search isn't working properly.
 	func searchForBookmarks(_ searchString: String) -> [Bookmark] {
 		var result = [Bookmark]()
 		
@@ -43,13 +44,7 @@ struct Bookmark: Decodable {
 		let fileURL = URL(fileURLWithPath: "\(NSHomeDirectory())/Library/Safari/Bookmarks.plist")
 		guard let data = try? Data(contentsOf: fileURL) else { fatalError("Failed to get data from URL '\(fileURL)'.") }
 		let decoder = PropertyListDecoder()
-//		do {
-//			try decoder.decode(Bookmark.self, from: data)
-//		} catch {
-//			print(error)
-//		}
-		
-		
+
 		guard let result = try? decoder.decode(Bookmark.self, from: data) else { fatalError("Failed to decode the Bookmarks.plist file.") }
 		
 		return result

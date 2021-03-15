@@ -23,7 +23,9 @@ class KeyboardShortcutManager {
 		
 		var eventHandler: EventHandlerRef?
 		
-		var eventSpecification = keyboardShortcut.eventSpecification
+		// The event specification for HotKey events.
+		var eventSpecification = [EventTypeSpec(eventClass: OSType(kEventClassKeyboard), eventKind: UInt32(kEventHotKeyPressed)),
+								  EventTypeSpec(eventClass: OSType(kEventClassKeyboard), eventKind: UInt32(kEventHotKeyReleased))]
 
 		// Install an event handler.
 		InstallEventHandler(GetEventDispatcherTarget(), { (_, event, _) -> OSStatus in
@@ -38,12 +40,14 @@ class KeyboardShortcutManager {
 		
 		// Do the given action when a notification with the ID comes in.
 		NotificationCenter.default.addObserver(forName: Notification.Name("HotKeyWithID\(eventHotKeyID.id)"), object: nil, queue: nil, using: { [self] _ in
+			// Set the current event.
 			if currentEvent == .keyUp {
 				currentEvent = .keyDown
 			} else {
 				currentEvent = .keyUp
 			}
 			
+			// Check if the action should be executed by checking if the current event should be recognized.
 			if keyboardShortcut.events.contains(currentEvent) {
 				actionOnEvent(currentEvent)
 			}

@@ -5,7 +5,7 @@
 import SwiftUI
 
 /// Search for Spotlight Metadata.
-class Search: NSObject, ObservableObject, NSMetadataQueryDelegate {
+class Search: NSObject, ObservableObject {
 	/// The search results.
 	@Published var results = [SearchItem]()
 	
@@ -67,6 +67,7 @@ class Search: NSObject, ObservableObject, NSMetadataQueryDelegate {
 				results.append(WebSearchItem(searchString: string, searchType: type))
 			}
 			
+			// MARK: The bookmark search isn't working properly right now.
 //			let bookmarks = Bookmark.decodedBookmarks.searchForBookmarks(string)
 //			for bookmark in bookmarks {
 //				results.append(WebSearchItem(searchString: bookmark.URLString ?? "", searchType: .url, name: bookmark.URLString ?? "", takesNameAsArgument: true))
@@ -82,23 +83,9 @@ class Search: NSObject, ObservableObject, NSMetadataQueryDelegate {
 		// Sort by the item's relevance.
 		metadataQuery.sortDescriptors = [NSSortDescriptor(key: kMDQueryResultContentRelevance as String, ascending: false)]
 		
-		//metadataQuery.operationQueue = .main
-		metadataQuery.delegate = self
-		
 		// Start the metadata query.
 		metadataQuery.start()
 	}
-	
-//	func metadataQuery(_ query: NSMetadataQuery, replacementObjectForResultObject result: NSMetadataItem) -> Any {
-//		if results.count < 10 {
-//			let searchItem = SpotlightSearchItem(item: result)
-//			DispatchQueue.main.async { [self] in
-//				results.append(searchItem)
-//			}
-//		}
-//
-//		return result
-//	}
 	
 	/// Stop the current query.
 	func stopSearch() {
