@@ -26,11 +26,6 @@ class SearchItem: Identifiable, Equatable {
 		return "Generic SearchItem"
 	}
 	
-	/// The Item's kind.
-	var kind: String? {
-		return "SearchItem"
-	}
-	
 	/// The icon as an NSImage.
 	var icon: NSImage {
 		return NSImage()

@@ -9,6 +9,7 @@ import Carbon
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
+	// The application's window.
 	var window: TypingWindow!
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -46,11 +47,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	func setupKeyboardShortcuts() {
 		// Setup the shortcut for hiding and showing the search bar.
-		print(kVK_Space)
 		KeyboardShortcutManager(keyboardShortcut: Configuration.decoded.activationKeyboardShortcut).startListeningForEvents { _ in
 			if NSApp.isHidden {
 				NSApp.activate(ignoringOtherApps: true)
 			} else {
+				// Before hiding, exit out of all running custom applications.
 				NotificationCenter.default.post(name: .ApplicationShouldExit, object: nil)
 				NSApp.hide(nil)
 			}

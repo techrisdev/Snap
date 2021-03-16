@@ -16,10 +16,6 @@ class ActionSearchItem: SearchItem {
 	private var temporaryName: String
 	private var temporaryAction: (String) -> Void
 	
-	override var action: (String) -> Void {
-		return self.temporaryAction
-	}
-	
 	override var name: String {
 		return self.temporaryName
 	}
@@ -29,5 +25,9 @@ class ActionSearchItem: SearchItem {
 		let configuration = Configuration.decoded
 		image.size = NSSize(width: configuration.iconSizeWidth, height: configuration.iconSizeHeight)
 		return image
+	}
+
+	override var action: (String) -> Void {
+		return self.temporaryAction
 	}
 }
