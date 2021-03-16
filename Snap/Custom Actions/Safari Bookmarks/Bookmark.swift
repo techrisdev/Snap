@@ -36,15 +36,16 @@ struct Bookmark: Decodable {
 				result += searchResult
 			}
 		}
-		
+		print(result.count)
 		return result
 	}
 	
 	private static func decode() -> Bookmark {
 		let fileURL = URL(fileURLWithPath: "\(NSHomeDirectory())/Library/Safari/Bookmarks.plist")
 		guard let data = try? Data(contentsOf: fileURL) else { fatalError("Failed to get data from URL '\(fileURL)'.") }
+		
+		// Decode the Safari bookmarks.
 		let decoder = PropertyListDecoder()
-
 		guard let result = try? decoder.decode(Bookmark.self, from: data) else { fatalError("Failed to decode the Bookmarks.plist file.") }
 		
 		return result

@@ -74,6 +74,9 @@ class Search: NSObject, ObservableObject {
 //			}
 		})
 		
+		// Stop the query in case it is already running.
+		stopSearch()
+		
 		// Configure the search predicate to find all Items that begin with the given string.
 		metadataQuery.predicate = NSPredicate(fromMetadataQueryString: "kMDItemDisplayName = \"\(string)*\"wcd")
 		

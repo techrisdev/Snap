@@ -63,7 +63,6 @@
 		6C106F4F25F655BC0047E0B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6C106F5225F655BC0047E0B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6C106F5425F655BC0047E0B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6C106F5525F655BC0047E0B0 /* Snap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Snap.entitlements; sourceTree = "<group>"; };
 		6C106F5A25F655BC0047E0B0 /* SnapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C106F5E25F655BC0047E0B0 /* SnapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapTests.swift; sourceTree = "<group>"; };
 		6C106F6025F655BC0047E0B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -94,6 +93,7 @@
 		6CB6016F25FE2AD200613136 /* ApplicationSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSearchItem.swift; sourceTree = "<group>"; };
 		6CB6017A25FE2EB200613136 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		6CB6018025FE2ED100613136 /* ApplicationSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSearch.swift; sourceTree = "<group>"; };
+		6CC0353125FFD6E60075E970 /* Snap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Snap.entitlements; sourceTree = "<group>"; };
 		6CDFBFD625FE404700100171 /* ApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationView.swift; sourceTree = "<group>"; };
 		6CE3BE3C25FF9755001636F5 /* DefaultConfiguration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DefaultConfiguration.json; sourceTree = "<group>"; };
 		6CED3B0325FAA04D00E61388 /* KeyboardShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcut.swift; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 				6C106F4C25F655BC0047E0B0 /* Assets.xcassets */,
 				6C106F5125F655BC0047E0B0 /* Main.storyboard */,
 				6C106F5425F655BC0047E0B0 /* Info.plist */,
-				6C106F5525F655BC0047E0B0 /* Snap.entitlements */,
+				6CC0353125FFD6E60075E970 /* Snap.entitlements */,
 				6C106F4E25F655BC0047E0B0 /* Preview Content */,
 			);
 			path = Snap;

@@ -6,12 +6,10 @@
 	<string>Snap wants to execute Apple Events.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Snap wants to search for Contacts.</string>
-	<key>NSFileProviderDomainUsageDescription</key>
-	<string></string>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Snap wants to search for Events</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
@@ -34,8 +32,6 @@
 	<string>Main</string>
 	<key>LSUIElement</key>
 	<true/>
-	<key>NSRemindersUsageDescription</key>
-	<string>Snap wants to search for events</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>
