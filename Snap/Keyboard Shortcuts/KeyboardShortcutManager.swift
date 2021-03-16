@@ -19,7 +19,7 @@ class KeyboardShortcutManager {
 		
 		// Register the shortcut.
 		var eventHotKey: EventHotKeyRef?
-		RegisterEventHotKey(keyboardShortcut.keyCode, keyboardShortcut.modifiers, eventHotKeyID, GetEventDispatcherTarget(), 0, &eventHotKey)
+		RegisterEventHotKey(keyboardShortcut.keyCode, keyboardShortcut.carbonModifiers, eventHotKeyID, GetEventDispatcherTarget(), 0, &eventHotKey)
 		
 		var eventHandler: EventHandlerRef?
 		

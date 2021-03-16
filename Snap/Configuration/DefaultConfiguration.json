@@ -17,5 +17,10 @@
 	"maxHeight": 450,
 	"shouldAnimateText": false,
 	"shouldAnimateNavigation": true,
-	"selectedItemBackgroundColor": "#0000FF"
+	"selectedItemBackgroundColor": "#0000FF",
+	"activationKeyboardShortcut": {
+		"keyCode": 49,
+		"carbonModifiers": 2048,
+		"events": ["keyDown"]
+	}
 }

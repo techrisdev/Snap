@@ -12,15 +12,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	var window: TypingWindow!
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
+		// Request needed permissions
 		Permissions.requestPermissions()
+		
+		// Open the search bar.
 		openSearchWindow()
-		KeyboardShortcutManager(keyboardShortcut: KeyboardShortcut(keyCode: kVK_Space, modifierFlags: [.option], events: [.keyDown])).startListeningForEvents { _ in
-			if NSApp.isHidden {
-				NSApp.activate(ignoringOtherApps: true)
-			} else {
-				NSApp.hide(nil)
-			}
-		}
+		
+		// Setup the keyboard shortcuts.
+		setupKeyboardShortcuts()
 	}
 	
 	func openSearchWindow() {
@@ -43,6 +42,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		// The titled style mask must be removed after the window ordered the front; Otherwise, it will stay in the background.
 		window.styleMask.remove(.titled)
+	}
+	
+	func setupKeyboardShortcuts() {
+		// Setup the shortcut for hiding and showing the search bar.
+		print(kVK_Space)
+		KeyboardShortcutManager(keyboardShortcut: Configuration.decoded.activationKeyboardShortcut).startListeningForEvents { _ in
+			if NSApp.isHidden {
+				NSApp.activate(ignoringOtherApps: true)
+			} else {
+				NotificationCenter.default.post(name: .ApplicationShouldExit, object: nil)
+				NSApp.hide(nil)
+			}
+		}
 	}
 	
 	func applicationDidResignActive(_ notification: Notification) {

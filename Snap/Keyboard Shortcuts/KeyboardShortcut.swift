@@ -5,25 +5,25 @@
 import Carbon
 import Cocoa
 
-struct KeyboardShortcut {
+struct KeyboardShortcut: Codable {
 	/// The shortcut's key code.
 	var keyCode: UInt32
 	
 	/// The shortcut's modifiers.
-	var modifiers: UInt32
+	var carbonModifiers: UInt32
 	
 	/// The events the shortcut is recognizing.
 	var events: [KeyEvent]
 	
-	init(keyCode: Int, modifiers: Int, events: [KeyEvent]) {
+	private init(keyCode: Int, carbonModifiers: Int, events: [KeyEvent]) {
 		self.keyCode = UInt32(keyCode)
-		self.modifiers = UInt32(modifiers)
+		self.carbonModifiers = UInt32(carbonModifiers)
 		self.events = events
 	}
 	
 	init(keyCode: Int, modifierFlags: NSEvent.ModifierFlags, events: [KeyEvent]) {
 		let carbonModifiers = KeyboardShortcut.getCarbonModifiers(for: modifierFlags)
-		self.init(keyCode: keyCode, modifiers: carbonModifiers, events: events)
+		self.init(keyCode: keyCode, carbonModifiers: carbonModifiers, events: events)
 	}
 	
 	/// Convert NSEvent modifier flags to carbon modifiers.
@@ -52,7 +52,7 @@ struct KeyboardShortcut {
 	/// The shortcut's ID.
 	var id: UInt32 {
 		// Create an ID from the key code and modifiers.
-		let id = keyCode + modifiers
+		let id = keyCode + carbonModifiers
 		return id
 	}
 }

@@ -4,7 +4,7 @@
 
 import Foundation
 
-enum KeyEvent {
+enum KeyEvent: String, Codable {
 	case keyDown
 	case keyUp
 }

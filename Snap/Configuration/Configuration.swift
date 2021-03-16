@@ -21,6 +21,7 @@ struct Configuration: Decodable {
 	var shouldAnimateText = false
 	var shouldAnimateNavigation = true
 	var selectedItemBackgroundColor = "#0000FF"
+	var activationKeyboardShortcut = KeyboardShortcut(keyCode: 0, modifierFlags: .command, events: [.keyDown])
 	
 	static private func decodeConfigurationFile() -> Configuration {
 		let decoder = JSONDecoder()
