@@ -57,6 +57,38 @@ struct SettingsView: View {
 					
 					// Write the new configuration to the configuration path.
 					newConfiguration.write()
+					
+					// Configure an alert.
+					// The alert should tell the user that the app needs to restart so the changes get applied.
+					let alert = NSAlert()
+					alert.informativeText = "Applying Changes"
+					alert.messageText = "Snap needs to restart to apply the changes."
+					
+					alert.addButton(withTitle: "Restart")
+					alert.addButton(withTitle: "Continue")
+					
+					let appDelegate = NSApp.delegate as! AppDelegate
+					
+					// Show the alert.
+					alert.beginSheetModal(for: appDelegate.settingsWindow, completionHandler: { response in
+						// If the user want's to restart the application, then...
+						if response == .alertFirstButtonReturn {
+							// Restart the application.
+							guard let applicationURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.techris.Snap") else {
+								// If the application url doesn't exist, then return. This should never happen.
+								return
+							}
+
+							let task = Process()
+							task.launchPath = "/usr/bin/open"
+							task.arguments = [applicationURL.path]
+							task.launch()
+							
+							NSApp.terminate(nil)
+						} else {
+							appDelegate.settingsWindow.close()
+						}
+					})
 				}
 				.padding()
 			}

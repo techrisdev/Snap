@@ -23,7 +23,9 @@ extension Color {
 	}
 	
 	var hexString: String {
-		let nsColor = NSColor(self).usingColorSpace(.deviceRGB)!
+		guard let nsColor = NSColor(self).usingColorSpace(.deviceRGB) else {
+			return "#FFFFFF"
+		}
 		
 		let redComponent = Int(round(nsColor.redComponent * 0xFF))
 		let greenComponent = Int(round(nsColor.greenComponent * 0xFF))

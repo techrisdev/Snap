@@ -17,6 +17,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	// The application's window.
 	var window: TypingWindow!
+	
+	// The settings window.
+	var settingsWindow: NSWindow!
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		// Request needed permissions
@@ -92,6 +95,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				
 				// Close the window.
 				window.close()
+				
+				// Hide the application so the application in the background activates automatically.
+				NSApp.hide(nil)
 			} else {
 				// Activate the application and the search bar window.
 				activate()
@@ -114,17 +120,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	@objc func showSettingsWindow() {
+		// Close the search bar.
 		window.close()
-		let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 480, height: 320),
+		
+		// Configure the settings window.
+		settingsWindow = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 480, height: 320),
 							  styleMask: [.titled, .closable, .resizable, .fullSizeContentView],
 							  backing: .buffered,
 							  defer: false)
-		window.title = "Settings"
-		window.isReleasedWhenClosed = false
-		window.center()
-		window.contentView = NSHostingView(rootView: SettingsView())
+		settingsWindow.title = "Settings"
+		settingsWindow.isReleasedWhenClosed = false
+		settingsWindow.center()
+		settingsWindow.contentView = NSHostingView(rootView: SettingsView())
 		NSApp.activate(ignoringOtherApps: true)
-		window.makeKeyAndOrderFront(nil)
+		settingsWindow.makeKeyAndOrderFront(nil)
 	}
 }
 
