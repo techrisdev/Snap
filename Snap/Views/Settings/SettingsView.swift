@@ -7,13 +7,18 @@ import SwiftUI
 struct SettingsView: View {
 	static private var configuration = Configuration.decoded
 	
+	// General Settings
 	@State private var backgroundColor = Color.fromHexString(configuration.backgroundColor)
 	@State private var textColor = Color.fromHexString(configuration.textColor)
 	@State private var activationKeyboardShortcut = configuration.activationKeyboardShortcut
+	@State private var maximumHeight = configuration.maxHeight
+	
+	// Search bar settings
 	@State private var searchBarFontSize = configuration.searchBarFontSize
 	@State private var searchBarHeight = configuration.searchBarHeight
-	@State private var maximumHeight = configuration.maxHeight
 	@State private var shouldAnimateText = configuration.shouldAnimateText
+	
+	// Result settings
 	@State private var showingIcons = configuration.showingIcons
 	@State private var iconWidth = configuration.iconSizeWidth
 	@State private var iconHeight = configuration.iconSizeHeight
@@ -21,7 +26,7 @@ struct SettingsView: View {
 	@State private var resultItemHeight = configuration.resultItemHeight
 	@State private var resultItemLimit = configuration.itemLimit
 	@State private var shouldAnimateNavigation = configuration.shouldAnimateNavigation
-	@State private var selectedItemBackgroundColor = configuration.selectedItemBackgroundColor
+	@State private var selectedItemBackgroundColor = Color.fromHexString(configuration.selectedItemBackgroundColor)
 	
 	var body: some View {
 		VStack {
@@ -29,22 +34,38 @@ struct SettingsView: View {
 				.font(.largeTitle)
 				.fontWeight(.bold)
 				.padding(.top)
+			
 			ScrollView {
 				SettingsSection(text: "General") {
 					VStack(alignment: .leading) {
 						ColorPicker("Background Color", selection: $backgroundColor)
-							.font(.title2)
 						ColorPicker("Text Color", selection: $textColor)
-							.font(.title2)
 						KeyboardShortcutView(keyboardShortcut: $activationKeyboardShortcut) {
-							Text("Activation Shortcut")
-								.font(.title2)
+							Text("Activation Shortcut:")
 						}
+						
+						Stepper("Maximum Window Height: \(maximumHeight, specifier: "%g")", value: $maximumHeight)
 					}
 				}
 				
 				SettingsSection(text: "Search Bar") {
-					Text("Placeholder")
+					VStack(alignment: .leading) {
+						Stepper("Font Size: \(searchBarFontSize, specifier: "%g")", value: $searchBarFontSize)
+						Stepper("Height: \(searchBarHeight, specifier: "%g")", value: $searchBarHeight)
+						Toggle("Animated Text", isOn: $shouldAnimateText)
+					}
+				}
+				
+				SettingsSection(text: "Results") {
+					VStack(alignment: .leading) {
+						Toggle("Showing Icons", isOn: $showingIcons)
+						Stepper("Icon Width: \(iconWidth)", value: $iconWidth)
+						Stepper("Icon Height: \(iconHeight)", value: $iconHeight)
+						Stepper("Result Item Height: \(resultItemHeight, specifier: "%g")", value: $resultItemHeight)
+						Stepper("Result Item Limit: \(resultItemLimit)", value: $resultItemLimit)
+						Toggle("Animated Navigation", isOn: $shouldAnimateNavigation)
+						ColorPicker("Selected Item Background Color", selection: $selectedItemBackgroundColor)
+					}
 				}
 			}
 			
@@ -53,7 +74,7 @@ struct SettingsView: View {
 				Spacer()
 				Button("Save") {
 					// Create a configuration with all settings.
-					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, searchBarFontSize: searchBarFontSize, searchBarHeight: searchBarHeight, maxHeight: maximumHeight, shouldAnimateText: shouldAnimateText, showingIcons: showingIcons, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, blockedPaths: blockedPaths, resultItemHeight: resultItemHeight, itemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor)
+					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, searchBarFontSize: searchBarFontSize, searchBarHeight: searchBarHeight, maxHeight: maximumHeight, shouldAnimateText: shouldAnimateText, showingIcons: showingIcons, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, blockedPaths: blockedPaths, resultItemHeight: resultItemHeight, itemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString)
 					
 					// Write the new configuration to the configuration path.
 					newConfiguration.write()

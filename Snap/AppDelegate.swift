@@ -124,7 +124,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		window.close()
 		
 		// Configure the settings window.
-		settingsWindow = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 480, height: 320),
+		settingsWindow = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 520, height: 400),
 							  styleMask: [.titled, .closable, .resizable, .fullSizeContentView],
 							  backing: .buffered,
 							  defer: false)
