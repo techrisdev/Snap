@@ -4,24 +4,26 @@
 
 import SwiftUI
 
-struct Configuration: Decodable {
+struct Configuration: Codable {
 	static let decoded = decodeConfigurationFile()
 	
-	var backgroundColor = "#111111"
-	var textColor = "#FFFFFF"
-	var showingIcons = true
-	var iconSizeWidth = 35
-	var iconSizeHeight = 50
-	var blockedPaths = ["/Users/christopherkleiner/Library/Containers/", "/System/Library/Frameworks/", "/System/Library/PrivateFrameworks/", "/usr/"]
-	var resultHeight = CGFloat(70)
-	var itemLimit = 25
-	var searchBarFontSize = CGFloat(24)
-	var searchBarHeight = CGFloat(50)
-	var maxHeight = CGFloat(450)
-	var shouldAnimateText = false
-	var shouldAnimateNavigation = true
-	var selectedItemBackgroundColor = "#0000FF"
-	var activationKeyboardShortcut = KeyboardShortcut(keyCode: 0, modifierFlags: .command, events: [.keyDown])
+	static private let applicationSupportURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("Snap/")
+	
+	var backgroundColor: String
+	var textColor: String
+	var activationKeyboardShortcut: KeyboardShortcut
+	var searchBarFontSize: CGFloat
+	var searchBarHeight: CGFloat
+	var maxHeight: CGFloat
+	var shouldAnimateText: Bool
+	var showingIcons: Bool
+	var iconSizeWidth: Int
+	var iconSizeHeight: Int
+	var blockedPaths: [String]
+	var resultItemHeight: CGFloat
+	var itemLimit: Int
+	var shouldAnimateNavigation: Bool
+	var selectedItemBackgroundColor: String
 	
 	static private func decodeConfigurationFile() -> Configuration {
 		let decoder = JSONDecoder()
@@ -29,9 +31,7 @@ struct Configuration: Decodable {
 		
 		do {
 			let fileManager = FileManager.default
-			
-			let applicationSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("Snap/")
-			
+
 			// Check if the Application Support directory for Snap exists; If it doesn't, then create it.
 			if !fileManager.fileExists(atPath: applicationSupportURL.path) {
 				try? fileManager.createDirectory(at: applicationSupportURL, withIntermediateDirectories: false, attributes: nil)
@@ -68,5 +68,19 @@ struct Configuration: Decodable {
 		
 		// Return the default configuration.
 		return defaultConfiguration
+	}
+	
+	/// Write a configuration file to the default path.
+	func write() {
+		let encoder = JSONEncoder()
+		do {
+			// Encode the configuration.
+			let jsonData = try encoder.encode(self)
+			
+			// Write the data.
+			try jsonData.write(to: Configuration.applicationSupportURL.appendingPathComponent("/Configuration.json"))
+		} catch {
+			fatalError("Failed to write the configuration. Error: \n\(error)")
+		}
 	}
 }

@@ -24,7 +24,7 @@ struct SearchResultView: View {
 						SearchItemView(item: item, isSelectedItem: results.firstIndex(of: item) == selectedItemIndex, isShowingPath: showingPath)
 					}
 					.id(item.id)
-					.frame(height: configuration.resultHeight)
+					.frame(height: configuration.resultItemHeight)
 					.buttonStyle(PlainButtonStyle())
 					
 				}

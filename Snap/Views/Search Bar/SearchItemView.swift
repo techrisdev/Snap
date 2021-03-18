@@ -15,7 +15,7 @@ struct SearchItemView: View {
 			// If the item is the selected item, give it a background.
 			if isSelectedItem {
 				Color.fromHexString(configuration.selectedItemBackgroundColor)
-					.frame(maxHeight: configuration.resultHeight)
+					.frame(maxHeight: configuration.resultItemHeight)
 			}
 			
 			VStack {

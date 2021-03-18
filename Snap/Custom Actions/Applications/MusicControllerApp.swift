@@ -60,10 +60,11 @@ class MusicControllerApp: ApplicationSearchItem {
 		
 		init() {
 			let app: AnyObject = SBApplication(bundleIdentifier: "com.apple.music")!
-			name = app.currentTrack().properties["name"] as! String
-			album = app.currentTrack().properties["album"] as! String
-			artist = app.currentTrack().properties["artist"] as! String
-			artwork = (app.currentTrack().artworks[0] as AnyObject).properties["data"] as! NSImage
+			
+			name = app.currentTrack().properties["name"] as? String ?? ""
+			album = app.currentTrack().properties["album"] as? String ?? ""
+			artist = app.currentTrack().properties["artist"] as? String ?? ""
+			artwork = (app.currentTrack().artworks[0] as AnyObject).properties["data"] as? NSImage ?? NSImage()
 		}
 		
 		func stop() {

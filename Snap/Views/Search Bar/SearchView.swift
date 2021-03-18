@@ -16,9 +16,7 @@ struct SearchView: View {
 	var body: some View {
 		VStack {
 			ZStack {
-				//LinearGradient(gradient: Gradient(colors: [.orange, .yellow]), startPoint: .topLeading, endPoint: .bottomTrailing)
-				//Configuration.decoded.background
-				Color.black
+				Color.fromHexString(configuration.backgroundColor)
 				
 				if application == nil {
 					VStack {
