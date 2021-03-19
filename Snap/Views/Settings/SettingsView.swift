@@ -7,6 +7,8 @@ import SwiftUI
 struct SettingsView: View {
 	static private var configuration = Configuration.decoded
 	
+	@State private var showingBlockedPaths = false
+	
 	// General Settings
 	@State private var backgroundColor = Color.fromHexString(configuration.backgroundColor)
 	@State private var textColor = Color.fromHexString(configuration.textColor)
@@ -20,9 +22,9 @@ struct SettingsView: View {
 	
 	// Result settings
 	@State private var showingIcons = configuration.showingIcons
+	@State private var blockedPaths = configuration.blockedPaths
 	@State private var iconWidth = configuration.iconSizeWidth
 	@State private var iconHeight = configuration.iconSizeHeight
-	@State private var blockedPaths = configuration.blockedPaths
 	@State private var resultItemHeight = configuration.resultItemHeight
 	@State private var resultItemLimit = configuration.itemLimit
 	@State private var shouldAnimateNavigation = configuration.shouldAnimateNavigation
@@ -59,6 +61,47 @@ struct SettingsView: View {
 				SettingsSection(text: "Results") {
 					VStack(alignment: .leading) {
 						Toggle("Showing Icons", isOn: $showingIcons)
+						Button(action: {
+							showingBlockedPaths.toggle()
+						}) {
+							Text("Blocked Paths")
+						}
+						.popover(isPresented: $showingBlockedPaths) {
+							ScrollView {
+								VStack(alignment: .leading) {
+									ForEach(blockedPaths, id: \.self) { path in
+										HStack {
+											Text(path)
+											Spacer()
+											Button(action: {
+												if let index = blockedPaths.firstIndex(of: path) {
+													blockedPaths.remove(at: index)
+												}
+											}) {
+												Image(systemName: "minus")
+											}
+										}
+									}
+								}
+							}
+							.padding()
+
+							Button(action: {
+								let openPanel = NSOpenPanel()
+								openPanel.begin(completionHandler: { response in
+									if response == .OK {
+										// Get the selected url.
+										if let url = openPanel.url {
+											// Append the new path to the blocked paths.
+											blockedPaths.append(url.path)
+										}
+									}
+								})
+							}) {
+								Image(systemName: "plus")
+							}
+							.padding([.bottom, .leading, .trailing])
+						}
 						Stepper("Icon Width: \(iconWidth)", value: $iconWidth)
 						Stepper("Icon Height: \(iconHeight)", value: $iconHeight)
 						Stepper("Result Item Height: \(resultItemHeight, specifier: "%g")", value: $resultItemHeight)
@@ -90,8 +133,11 @@ struct SettingsView: View {
 					
 					let appDelegate = NSApp.delegate as! AppDelegate
 					
+					// Unwrap the settings window.
+					guard let settingsWindow = appDelegate.settingsWindow else { return }
+					
 					// Show the alert.
-					alert.beginSheetModal(for: appDelegate.settingsWindow, completionHandler: { response in
+					alert.beginSheetModal(for: settingsWindow, completionHandler: { response in
 						// If the user want's to restart the application, then...
 						if response == .alertFirstButtonReturn {
 							// Restart the application.
@@ -99,7 +145,7 @@ struct SettingsView: View {
 								// If the application url doesn't exist, then return. This should never happen.
 								return
 							}
-
+							
 							let task = Process()
 							task.launchPath = "/usr/bin/open"
 							task.arguments = [applicationURL.path]
@@ -107,7 +153,8 @@ struct SettingsView: View {
 							
 							NSApp.terminate(nil)
 						} else {
-							appDelegate.settingsWindow.close()
+							// Close the settings window.
+							settingsWindow.close()
 						}
 					})
 				}
