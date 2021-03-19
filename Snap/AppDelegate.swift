@@ -16,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	var menu: NSMenu!
 	
 	// The application's window.
-	var window: TypingWindow!
+	var window: NSWindow!
 	
 	// The settings window.
 	var settingsWindow: NSWindow?
@@ -71,7 +71,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		let searchView = SearchView()
 		
 		// Create the window and set the content view.
-		window = TypingWindow(
+		window = NSWindow(
 			contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
 			styleMask: [.fullSizeContentView],
 			backing: .buffered, defer: false)

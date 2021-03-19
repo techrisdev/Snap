@@ -5,14 +5,15 @@
 import SwiftUI
 
 struct SearchView: View {
-	let appDelegate = NSApp.delegate as! AppDelegate
 	@ObservedObject var search = Search()
+	
 	@State private var selectedItemIndex = 0
 	@State private var text = ""
 	@State private var showingPath = false
 	@State private var application: ApplicationSearchItem? = nil
 	
 	let configuration = Configuration.decoded
+	let notificationCenter = NotificationCenter.default
 	var body: some View {
 		VStack {
 			ZStack {
@@ -20,8 +21,10 @@ struct SearchView: View {
 				
 				if application == nil {
 					VStack {
-						SearchBarView(text: text)
-						SearchResultView(results: search.results, selectedItemIndex: selectedItemIndex, showingPath: $showingPath)
+						SearchBarView(text: $text)
+						//TextView(text: $text)
+						//SearchResultView(results: search.results, selectedItemIndex: selectedItemIndex, showingPath: $showingPath)
+						SearchResultView(results: search.results, selectedItemIndex: selectedItemIndex, text: text, currentSearchArguments: currentSearchArguments, showingPath: $showingPath)
 					}
 				}
 					
@@ -30,11 +33,7 @@ struct SearchView: View {
 		}
 		.frame(height: !search.results.isEmpty ? configuration.maxHeight : configuration.searchBarHeight)
 		.frame(maxWidth: .infinity, maxHeight: search.results.isEmpty ? configuration.searchBarHeight : .infinity)
-		.onReceive(NotificationCenter.default.publisher(for: .TextChanged)) { _ in
-			withAnimation(configuration.shouldAnimateText ? .default : .none) {
-				text = appDelegate.window.text
-			}
-			
+		.onChange(of: text, perform: { _ in
 			// If the text doesn't contain any characters, then...
 			if text.count == 0 {
 				// Stop the search.
@@ -55,14 +54,14 @@ struct SearchView: View {
 			
 			// Reset the selected item.
 			selectedItemIndex = 0
-		}
+		})
 		.onReceive(NotificationCenter.default.publisher(for: .ReturnKeyWasPressed)) { _ in
 			// When the return key was pressed, then open the selected item.
 			if search.results.indices.contains(selectedItemIndex) {
 				let selectedItem = search.results[selectedItemIndex]
 				
 				// If the item doesn't accept arguments, then give it the whole string.
-				let currentSearchArguments = selectedItem.acceptsArguments ? appDelegate.window.currentSearchArguments : appDelegate.window.text
+				let currentSearchArguments = selectedItem.acceptsArguments ? self.currentSearchArguments : text
 				
 				// If the path is shown, then open the path in Finder. If it isn't, then do the default action for the item.
 				if !showingPath {
@@ -102,11 +101,11 @@ struct SearchView: View {
 		.onReceive(NotificationCenter.default.publisher(for: .TabKeyWasPressed)) { _ in
 			// If the search result contains the currently selected item, Complete the current search item.
 			if search.results.indices.contains(0) {
-				appDelegate.window.text = search.results[selectedItemIndex].name
+				text = search.results[selectedItemIndex].name
 				
 				// If the currently selected item accepts arguments, then append a space at the end, so the user can start typing arguments immediately.
 				if search.results[selectedItemIndex].acceptsArguments {
-					appDelegate.window.text += " "
+					text += " "
 				}
 			}
 		}
@@ -114,6 +113,37 @@ struct SearchView: View {
 			// When the current application should exit, then set it to nil.
 			application = nil
 		})
+		.onAppear(perform: {
+			// Add a monitor for key events to get notified when certain keys get pressed.
+			NSEvent.addSnapKeyboardMonitor()
+		})
+	}
+	
+	private var currentSearchArguments: String {
+		let textSplitBySpaces = text.components(separatedBy: .whitespaces)
+		
+		if textSplitBySpaces.indices.contains(1) {
+			// Drop the search item.
+			let argumentArray = textSplitBySpaces.dropFirst()
+			
+			var result = ""
+			
+			// Go through the arguments.
+			for argument in argumentArray {
+				// If the argument isn't the first argument, then append a space to the string.
+				if !result.isEmpty {
+					result.append(" ")
+				}
+				
+				// Append the argument.
+				result.append(argument)
+			}
+			
+			return result
+		}
+		
+		// If the search doesn't contain an argument, then return an empty string.
+		return ""
 	}
 	
 	private func updateSelectedItemIndex(to index: Int) {

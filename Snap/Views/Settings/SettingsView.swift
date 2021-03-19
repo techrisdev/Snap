@@ -18,6 +18,7 @@ struct SettingsView: View {
 	// Search bar settings
 	@State private var searchBarFontSize = configuration.searchBarFontSize
 	@State private var searchBarHeight = configuration.searchBarHeight
+	@State private var insertionPointColor = Color.fromHexString(configuration.insertionPointColor)
 	@State private var shouldAnimateText = configuration.shouldAnimateText
 	
 	// Result settings
@@ -59,6 +60,7 @@ struct SettingsView: View {
 					VStack(alignment: .leading) {
 						Stepper("Font Size: \(searchBarFontSize, specifier: "%g")", value: $searchBarFontSize)
 						Stepper("Height: \(searchBarHeight, specifier: "%g")", value: $searchBarHeight)
+						ColorPicker("Insertion Point Color", selection: $insertionPointColor)
 						Toggle("Animated Text", isOn: $shouldAnimateText)
 					}
 				}
@@ -90,7 +92,7 @@ struct SettingsView: View {
 								}
 							}
 							.padding()
-
+							
 							Button(action: {
 								// Set up the open panel.
 								let openPanel = NSOpenPanel()
@@ -126,7 +128,7 @@ struct SettingsView: View {
 				Spacer()
 				Button("Save") {
 					// Create a configuration with all settings.
-					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, searchBarFontSize: searchBarFontSize, searchBarHeight: searchBarHeight, maxHeight: maximumHeight, shouldAnimateText: shouldAnimateText, showingIcons: showingIcons, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, blockedPaths: blockedPaths, resultItemHeight: resultItemHeight, itemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString)
+					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, searchBarFontSize: searchBarFontSize, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, maxHeight: maximumHeight, shouldAnimateText: shouldAnimateText, showingIcons: showingIcons, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, blockedPaths: blockedPaths, resultItemHeight: resultItemHeight, itemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString)
 					
 					// Write the new configuration to the configuration path.
 					newConfiguration.write()
@@ -134,8 +136,8 @@ struct SettingsView: View {
 					// Configure an alert.
 					// The alert should tell the user that the app needs to restart so the changes get applied.
 					let alert = NSAlert()
-					alert.informativeText = "Applying Changes"
-					alert.messageText = "Snap needs to restart to apply the changes."
+					alert.messageText = "Applying Changes"
+					alert.informativeText = "Snap needs to restart to apply the changes."
 					
 					alert.addButton(withTitle: "Restart")
 					alert.addButton(withTitle: "Continue")

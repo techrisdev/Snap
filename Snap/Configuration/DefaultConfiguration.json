@@ -14,6 +14,7 @@
 	"itemLimit": 25,
 	"searchBarFontSize": 24,
 	"searchBarHeight": 50,
+	"insertionPointColor": "#FFFFFF",
 	"maxHeight": 450,
 	"shouldAnimateText": false,
 	"shouldAnimateNavigation": true,

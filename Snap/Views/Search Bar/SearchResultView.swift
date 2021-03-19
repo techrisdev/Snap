@@ -8,17 +8,18 @@ import Carbon
 struct SearchResultView: View {
 	var results: [SearchItem]
 	var selectedItemIndex: Int
-	
-	let configuration = Configuration.decoded
-	let appDelegate = NSApp.delegate as! AppDelegate
+	var text: String
+	var currentSearchArguments: String
 	
 	@Binding var showingPath: Bool
+	
+	let configuration = Configuration.decoded
 	var body: some View {
 		ScrollView {
 			ScrollViewReader { value in
 				ForEach(results, id: \.id) { item in
 					Button(action: {
-						let currentSearchArguments = item.acceptsArguments ? appDelegate.window.currentSearchArguments : appDelegate.window.text
+						let currentSearchArguments = item.acceptsArguments ? self.currentSearchArguments : text
 						item.action(currentSearchArguments)
 					}) {
 						SearchItemView(item: item, isSelectedItem: item.firstIndexInArray(results) == selectedItemIndex, isShowingPath: showingPath)
@@ -37,15 +38,21 @@ struct SearchResultView: View {
 			}
 		}
 		.onAppear {
-			// Listen for a keyboard shortcut to show the path and show the file in Finder (later) instead of opening the file.
-			let keyboardShortcutManager = KeyboardShortcutManager(keyboardShortcut: KeyboardShortcut(keyCode: kVK_ANSI_F, modifierFlags: [.command], events: [.keyDown, .keyUp]))
-			keyboardShortcutManager.startListeningForEvents { event in
-				if event == .keyDown {
-					showingPath = true
-				} else {
-					showingPath = false
+			// Listen for an event (keyboard shortcut) to show the path and show the file in Finder (later) instead of opening the file.
+			NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .keyUp], handler: { event in
+				let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+				if modifiers == .command && event.keyCode == kVK_ANSI_F {
+					if event.type == .keyDown {
+						showingPath = true
+					} else {
+						showingPath = false
+					}
+					
+					return nil
 				}
-			}
+				
+				return event
+			})
 		}
 	}
 }

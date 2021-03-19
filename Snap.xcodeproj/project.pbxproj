@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6C0723D22604DE69009F0E63 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0723D12604DE69009F0E63 /* Icon.swift */; };
 		6C0723D82604FD40009F0E63 /* SearchItem Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0723D72604FD40009F0E63 /* SearchItem Extension.swift */; };
+		6C072421260509CC009F0E63 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C072420260509CC009F0E63 /* TextView.swift */; };
+		6C07242B26050FFD009F0E63 /* NSEvent Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C07242A26050FFD009F0E63 /* NSEvent Extension.swift */; };
 		6C106F4925F655BB0047E0B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C106F4825F655BB0047E0B0 /* AppDelegate.swift */; };
 		6C106F4B25F655BB0047E0B0 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C106F4A25F655BB0047E0B0 /* SearchView.swift */; };
 		6C106F4D25F655BC0047E0B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C106F4C25F655BC0047E0B0 /* Assets.xcassets */; };
@@ -39,7 +41,6 @@
 		6C75A007260279460074DF40 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C75A006260279460074DF40 /* SettingsView.swift */; };
 		6C75A0392603967B0074DF40 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C75A0382603967B0074DF40 /* SettingsSection.swift */; };
 		6C75A03D260396900074DF40 /* KeyboardShortcutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C75A03C260396900074DF40 /* KeyboardShortcutView.swift */; };
-		6C82998F25F6997100A25064 /* TypingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C82998E25F6997100A25064 /* TypingWindow.swift */; };
 		6C82999425F699B600A25064 /* Notification Name Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C82999325F699B600A25064 /* Notification Name Extension.swift */; };
 		6C83FE5925FF900000DAC7C1 /* Color Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C83FE5825FF900000DAC7C1 /* Color Extension.swift */; };
 		6CB6017025FE2AD200613136 /* ApplicationSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6016F25FE2AD200613136 /* ApplicationSearchItem.swift */; };
@@ -63,6 +64,8 @@
 /* Begin PBXFileReference section */
 		6C0723D12604DE69009F0E63 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		6C0723D72604FD40009F0E63 /* SearchItem Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchItem Extension.swift"; sourceTree = "<group>"; };
+		6C072420260509CC009F0E63 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		6C07242A26050FFD009F0E63 /* NSEvent Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSEvent Extension.swift"; sourceTree = "<group>"; };
 		6C106F4525F655BB0047E0B0 /* Snap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C106F4825F655BB0047E0B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6C106F4A25F655BB0047E0B0 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -97,7 +100,6 @@
 		6C75A006260279460074DF40 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		6C75A0382603967B0074DF40 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 		6C75A03C260396900074DF40 /* KeyboardShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcutView.swift; sourceTree = "<group>"; };
-		6C82998E25F6997100A25064 /* TypingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingWindow.swift; sourceTree = "<group>"; };
 		6C82999325F699B600A25064 /* Notification Name Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification Name Extension.swift"; sourceTree = "<group>"; };
 		6C83FE5825FF900000DAC7C1 /* Color Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color Extension.swift"; sourceTree = "<group>"; };
 		6CB6016F25FE2AD200613136 /* ApplicationSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSearchItem.swift; sourceTree = "<group>"; };
@@ -150,7 +152,6 @@
 			children = (
 				6C106F4825F655BB0047E0B0 /* AppDelegate.swift */,
 				6C12A5D225F79C320029FBD7 /* Permissions.swift */,
-				6C82998E25F6997100A25064 /* TypingWindow.swift */,
 				6C0723D12604DE69009F0E63 /* Icon.swift */,
 				6CE3BE3B25FF9737001636F5 /* Configuration */,
 				6CED3B0225FAA03900E61388 /* Keyboard Shortcuts */,
@@ -226,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				6C106F4A25F655BB0047E0B0 /* SearchView.swift */,
+				6C072420260509CC009F0E63 /* TextView.swift */,
 				6C12A5E425F7C7540029FBD7 /* SearchBarView.swift */,
 				6C12A5DF25F7C5E00029FBD7 /* SearchResultView.swift */,
 				6C12A5E925F7D59A0029FBD7 /* SearchItemView.swift */,
@@ -251,6 +253,7 @@
 				6C5B518425F80B78000B004A /* String Extension.swift */,
 				6C83FE5825FF900000DAC7C1 /* Color Extension.swift */,
 				6C0723D72604FD40009F0E63 /* SearchItem Extension.swift */,
+				6C07242A26050FFD009F0E63 /* NSEvent Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -421,14 +424,15 @@
 				6C4DF3DB25FA7E10003B6D90 /* KeyboardShortcutManager.swift in Sources */,
 				6C75A0392603967B0074DF40 /* SettingsSection.swift in Sources */,
 				6C5B519F25F90430000B004A /* Action.swift in Sources */,
+				6C072421260509CC009F0E63 /* TextView.swift in Sources */,
 				6C5B51A525F915E2000B004A /* WebSearchItem.swift in Sources */,
 				6C5B517325F7FE38000B004A /* ActionSearch.swift in Sources */,
 				6C12A5EA25F7D59A0029FBD7 /* SearchItemView.swift in Sources */,
-				6C82998F25F6997100A25064 /* TypingWindow.swift in Sources */,
 				6CB6017B25FE2EB200613136 /* Application.swift in Sources */,
 				6C106F8325F658670047E0B0 /* SearchItem.swift in Sources */,
 				6C344FED25FCC7C60042CC05 /* Bookmark.swift in Sources */,
 				6CDFBFD725FE404700100171 /* ApplicationView.swift in Sources */,
+				6C07242B26050FFD009F0E63 /* NSEvent Extension.swift in Sources */,
 				6C83FE5925FF900000DAC7C1 /* Color Extension.swift in Sources */,
 				6CB6017025FE2AD200613136 /* ApplicationSearchItem.swift in Sources */,
 				6C5B518525F80B78000B004A /* String Extension.swift in Sources */,

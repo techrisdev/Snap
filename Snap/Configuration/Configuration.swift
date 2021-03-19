@@ -14,6 +14,7 @@ struct Configuration: Codable {
 	var activationKeyboardShortcut: KeyboardShortcut
 	var searchBarFontSize: CGFloat
 	var searchBarHeight: CGFloat
+	var insertionPointColor: String
 	var maxHeight: CGFloat
 	var shouldAnimateText: Bool
 	var showingIcons: Bool

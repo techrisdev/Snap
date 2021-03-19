@@ -5,16 +5,13 @@
 import SwiftUI
 
 struct SearchBarView: View {
-	var text: String
+	@Binding var text: String
 	
 	let configuration = Configuration.decoded
 	var body: some View {
 		VStack {
 			HStack {
-				Text(text)
-					.foregroundColor(Color.fromHexString(configuration.textColor))
-					.font(.system(size: configuration.searchBarFontSize))
-				
+				TextView(text: $text)
 				Spacer()
 			}
 			.padding([.leading, .trailing, .top])
