@@ -21,7 +21,7 @@ struct SearchItemView: View {
 			VStack {
 				HStack {
 					if configuration.showingIcons {
-						Image(nsImage: item.icon)
+						Image(nsImage: item.icon.image)
 					}
 					
 					Spacer()

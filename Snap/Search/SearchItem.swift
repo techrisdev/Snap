@@ -5,42 +5,22 @@
 import Cocoa
 
 /// A Search Item for Spotlight Searches.
-class SearchItem: Identifiable, Equatable {
-	static func == (lhs: SearchItem, rhs: SearchItem) -> Bool {
-		if lhs.id == rhs.id {
-			return true
-		}
-		
-		return false
-	}
+protocol SearchItem {
+	/// The item's UUID.
+	var id: UUID { get }
 	
-	init(acceptsArguments: Bool) {
-		self.acceptsArguments = acceptsArguments
-	}
-
-	/// The Item's UUID.
-	let id = UUID()
+	/// The item's name.
+	var name: String { get }
 	
-	/// The Item's name.
-	var name: String {
-		return "Generic SearchItem"
-	}
-	
-	/// The icon as an NSImage.
-	var icon: NSImage {
-		return NSImage()
-	}
+	/// The item's icon.
+	var icon: Icon { get }
 	
 	/// The path to the item.
-	var path: String {
-		return ""
-	}
-	
+	var path: String { get }
+
 	/// Indicates if the item accepts arguments.
-	var acceptsArguments: Bool
+	var acceptsArguments: Bool { get }
 	
 	/// The item's action.
-	var action: (String) -> Void {
-		fatalError("Action on a generic item.")
-	}
+	var action: (String) -> Void { get }
 }

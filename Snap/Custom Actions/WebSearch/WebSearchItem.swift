@@ -4,7 +4,7 @@
 
 import Cocoa
 
-class WebSearchItem: ActionSearchItem {
+struct WebSearchItem: SearchItem {
 	init(searchString: String, searchType: WebSearchType, name: String? = nil, acceptsArguments: Bool = false, takesNameAsArgument: Bool = false) {
 		self.searchString = searchString
 		self.searchType = searchType
@@ -14,19 +14,30 @@ class WebSearchItem: ActionSearchItem {
 
 		switch searchType {
 		case .google:
-			super.init(action: googleSearch, name: name, acceptsArguments: acceptsArguments)
+			self.action = googleSearch
+			self.name = name
+			self.acceptsArguments = acceptsArguments
 		case .duckduckgo:
-			super.init(action: duckDuckGoSearch, name: name, acceptsArguments: acceptsArguments)
+			self.action = duckDuckGoSearch
+			self.name = name
+			self.acceptsArguments = acceptsArguments
 		case .url:
-			super.init(action: openURL, name: name, acceptsArguments: acceptsArguments)
+			self.action = openURL
+			self.name = name
+			self.acceptsArguments = acceptsArguments
 		}
 	}
 	
-	override var icon: NSImage {
-		let image = NSImage(named: searchType.rawValue + "Icon") ?? NSImage()
-		let configuration = Configuration.decoded
-		image.size = NSSize(width: configuration.iconSizeWidth, height: configuration.iconSizeHeight)
-		return image
+	var id = UUID()
+	
+	var name: String
+	
+	var acceptsArguments: Bool
+	
+	var action: (String) -> Void
+	
+	var icon: Icon {
+		return Icon(path: "")
 	}
 	
 	var takesNameAsArgument: Bool

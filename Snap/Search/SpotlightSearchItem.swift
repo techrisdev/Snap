@@ -4,15 +4,16 @@
 
 import Cocoa
 
-class SpotlightSearchItem: SearchItem {
-	
+struct SpotlightSearchItem: SearchItem {
 	private var item: NSMetadataItem
 	
 	init(item: NSMetadataItem) {
 		self.item = item
-		
-		super.init(acceptsArguments: false)
 	}
+	
+	var id = UUID()
+	
+	var acceptsArguments = false
 	
 	/// The File System Size in Bytes.
 	var size: Int? {
@@ -20,25 +21,27 @@ class SpotlightSearchItem: SearchItem {
 	}
 	
 	/// The path to the file.
-	override var path: String {
+	var path: String {
 		return item.valueForAttribute(kMDItemPath, valueType: String.self) ?? "/"
 	}
 	
 	/// The Item's display name.
-	override var name: String {
+	var name: String {
 		return item.valueForAttribute(kMDItemDisplayName, valueType: String.self)!
 	}
 	
 	/// The icon as an NSImage.
-	override var icon: NSImage {
+	var icon: Icon {
 		let configuration = Configuration.decoded
 		let iconSize = NSSize(width: configuration.iconSizeWidth, height: configuration.iconSizeHeight)
-		let icon = NSWorkspace.shared.icon(forFile: path)
-		icon.size = iconSize
+		let nsImage = NSWorkspace.shared.icon(forFile: path)
+		nsImage.size = iconSize
+		
+		let icon = Icon(image: nsImage)
 		return icon
 	}
 	
-	override var action: (String) -> Void {
+	var action: (String) -> Void {
 		return { _ in
 			NSWorkspace.shared.open(URL(fileURLWithPath: self.path))
 		}

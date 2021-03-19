@@ -7,8 +7,8 @@ import Foundation
 struct ApplicationSearch {
 	private let applications = Application.allCases
 	
-	func searchForString(_ string: String) -> [ApplicationSearchItem] {
-		var result = [ApplicationSearchItem]()
+	func searchForString(_ string: String) -> [SearchItem] {
+		var result = [SearchItem]()
 		
 		for application in applications {
 			// Create a NSPredicate with the format.
@@ -27,7 +27,7 @@ struct ApplicationSearch {
 		
 	}
 	
-	private func getApplicationSearchItem(for application: Application) -> ApplicationSearchItem {
+	private func getApplicationSearchItem(for application: Application) -> SearchItem {
 		switch application {
 		case .music:
 			return MusicControllerApp()

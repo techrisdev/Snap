@@ -4,21 +4,15 @@
 
 import SwiftUI
 
-class ApplicationSearchItem: SearchItem {
+protocol ApplicationSearchItem: SearchItem {
 	/// The item's view.
+	var view: ApplicationView { get }
+}
+
+extension ApplicationSearchItem {
 	var view: ApplicationView {
-		return ApplicationView(content: AnyView(Text("Generic Application.")))
-	}
-	
-	init(name: String) {
-		applicationName = name
-		
-		super.init(acceptsArguments: false)
-	}
-	
-	private var applicationName: String
-	
-	override var name: String {
-		return applicationName
+		get {
+			return ApplicationView(content: AnyView(Text("Generic Application.")))
+		}
 	}
 }

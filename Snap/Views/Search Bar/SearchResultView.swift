@@ -16,12 +16,12 @@ struct SearchResultView: View {
 	var body: some View {
 		ScrollView {
 			ScrollViewReader { value in
-				ForEach(results) { item in
+				ForEach(results, id: \.id) { item in
 					Button(action: {
 						let currentSearchArguments = item.acceptsArguments ? appDelegate.window.currentSearchArguments : appDelegate.window.text
 						item.action(currentSearchArguments)
 					}) {
-						SearchItemView(item: item, isSelectedItem: results.firstIndex(of: item) == selectedItemIndex, isShowingPath: showingPath)
+						SearchItemView(item: item, isSelectedItem: item.firstIndexInArray(results) == selectedItemIndex, isShowingPath: showingPath)
 					}
 					.id(item.id)
 					.frame(height: configuration.resultItemHeight)

@@ -45,8 +45,13 @@ struct SettingsView: View {
 						KeyboardShortcutView(keyboardShortcut: $activationKeyboardShortcut) {
 							Text("Activation Shortcut:")
 						}
-						
-						Stepper("Maximum Window Height: \(maximumHeight, specifier: "%g")", value: $maximumHeight)
+
+						Slider(value: $maximumHeight, in: 20...1000) {
+							Text("Maximum Window Height: \(maximumHeight, specifier: "%.0f")")
+								.padding(.trailing, 7.5)
+						}
+						.padding(.trailing, 12.5)
+						.frame(maxWidth: 435)
 					}
 				}
 				
@@ -87,12 +92,16 @@ struct SettingsView: View {
 							.padding()
 
 							Button(action: {
+								// Set up the open panel.
 								let openPanel = NSOpenPanel()
+								openPanel.canChooseDirectories = true
+								openPanel.allowsMultipleSelection = true
 								openPanel.begin(completionHandler: { response in
 									if response == .OK {
-										// Get the selected url.
-										if let url = openPanel.url {
-											// Append the new path to the blocked paths.
+										// Get the selected urls.
+										let urls = openPanel.urls
+										for url in urls {
+											// Append the URL's path.
 											blockedPaths.append(url.path)
 										}
 									}

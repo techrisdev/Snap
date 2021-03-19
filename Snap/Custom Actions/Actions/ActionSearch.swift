@@ -24,8 +24,8 @@ struct ActionSearch {
 			
 			// Check if the predicate returned true.
 			if predicate.evaluate(with: nil) {
-				let item = ActionSearchItem(action: Actions.getAction(for: action), name: action.rawValue.firstCharacterCapitalized())
-				
+				let item = ActionSearchItem(name: action.rawValue.firstCharacterCapitalized(), action: Actions.getAction(for: action))
+
 				// Append the new item.
 				result.append(item)
 			}

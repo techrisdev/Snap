@@ -10,12 +10,14 @@ import ScriptingBridge
 	var artworks: NSArray { get }
 }
 
-class MusicControllerApp: ApplicationSearchItem {
-	init() {
-		super.init(name: "Music Controller")
-	}
+struct MusicControllerApp: ApplicationSearchItem {
+	var id = UUID()
 	
-	override var view: ApplicationView {
+	var acceptsArguments = false
+	
+	var name = "Music Controller"
+	
+	var view: ApplicationView {
 		return ApplicationView(content: AnyView(MusicControllerView()))
 	}
 	
