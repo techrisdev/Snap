@@ -6,16 +6,18 @@ import SwiftUI
 
 struct ApplicationView: View {
 	var content: AnyView
+	
+	let configuration = Configuration.decoded
 	var body: some View {
 		ZStack {
-			// MARK: TODO: Configured background color, not black.
-			Color.black
+			Color.fromHexString(configuration.backgroundColor)
 			VStack {
 				HStack {
 					Button(action: {
 						NotificationCenter.default.post(name: .ApplicationShouldExit, object: nil)
 					}) {
-						Image(systemName: "xmark.circle.fill")
+						Text("􀁡")
+							.foregroundColor(Color.fromHexString(configuration.textColor))
 					}
 					.padding()
 					

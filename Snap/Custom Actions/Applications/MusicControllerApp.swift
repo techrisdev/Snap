@@ -22,10 +22,10 @@ struct MusicControllerApp: ApplicationSearchItem {
 	}
 	
 	struct MusicControllerView: View {
+		@State private var currentSong = Song()
+		
 		let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 		let configuration = Configuration.decoded
-		
-		@State private var currentSong = Song()
 		var body: some View {
 			VStack {
 				Image(nsImage: currentSong.artwork)
@@ -42,7 +42,8 @@ struct MusicControllerApp: ApplicationSearchItem {
 				Button(action: {
 					currentSong.stop()
 				}) {
-					Image(systemName: "playpause")
+					Text("􀊇")
+						.foregroundColor(Color.fromHexString(configuration.textColor))
 				}
 				Spacer()
 			}

@@ -7,7 +7,7 @@ import SwiftUI
 struct Configuration: Codable {
 	static let decoded = decodeConfigurationFile()
 	
-	static private let applicationSupportURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("Snap/")
+	static let applicationSupportURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("Snap/")
 	
 	var backgroundColor: String
 	var textColor: String
@@ -25,7 +25,7 @@ struct Configuration: Codable {
 	var itemLimit: Int
 	var shouldAnimateNavigation: Bool
 	var selectedItemBackgroundColor: String
-	
+
 	static private func decodeConfigurationFile() -> Configuration {
 		let decoder = JSONDecoder()
 		let defaultConfigurationURL = Bundle.main.url(forResource: "DefaultConfiguration", withExtension: "json")!

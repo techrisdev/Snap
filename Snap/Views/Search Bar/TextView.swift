@@ -7,12 +7,13 @@ import SwiftUI
 struct TextView: NSViewControllerRepresentable {
 	@Binding var text: String
 	
-	func makeNSViewController(context: Context) -> some NSViewController {
+	func makeNSViewController(context: Context) -> some TextViewController {
 		return TextViewController(text: $text)
 	}
 	
 	func updateNSViewController(_ nsViewController: NSViewControllerType, context: Context) {
-		
+		let textView = nsViewController.view as! NSTextView
+		textView.string = text
 	}
 }
 
@@ -43,14 +44,18 @@ class TextViewController: NSViewController, NSTextViewDelegate {
 		textView.font = .systemFont(ofSize: fontSize)
 		textView.insertionPointColor = NSColor(insertionPointColor)
 		
+		textView.string = text
 		textView.delegate = self
+		
 		view = textView
 	}
 	
 	override func viewDidAppear() {
 		// Make the view the first responder.
 		view.window?.makeFirstResponder(view)
-		(view as! NSTextView).selectAll(nil)
+		
+		let textView = view as! NSTextView
+		textView.selectAll(nil)
 	}
 	
 	func textDidChange(_ notification: Notification) {

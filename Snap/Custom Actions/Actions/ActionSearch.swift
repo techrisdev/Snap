@@ -5,7 +5,7 @@
 import Cocoa
 
 struct ActionSearch {
-	private let actions = Action.allCases
+	private let actions = Action.decodedActions
 	
 	func searchForString(_ string: String) -> [SearchItem] {
 		var result = [SearchItem]()
@@ -20,11 +20,11 @@ struct ActionSearch {
 			}
 		
 			// Create a NSPredicate with the format.
-			let predicate = NSPredicate(format: "'\(action.rawValue)' like[cd] '\(string)\\*'")
+			let predicate = NSPredicate(format: "'\(action.name)' like[cd] '\(string)\\*'")
 			
 			// Check if the predicate returned true.
 			if predicate.evaluate(with: nil) {
-				let item = ActionSearchItem(name: action.rawValue.firstCharacterCapitalized(), action: Actions.getAction(for: action))
+				let item = ActionSearchItem(name: action.name, action: action.action)
 
 				// Append the new item.
 				result.append(item)

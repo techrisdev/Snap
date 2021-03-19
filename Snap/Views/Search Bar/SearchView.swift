@@ -22,8 +22,6 @@ struct SearchView: View {
 				if application == nil {
 					VStack {
 						SearchBarView(text: $text)
-						//TextView(text: $text)
-						//SearchResultView(results: search.results, selectedItemIndex: selectedItemIndex, showingPath: $showingPath)
 						SearchResultView(results: search.results, selectedItemIndex: selectedItemIndex, text: text, currentSearchArguments: currentSearchArguments, showingPath: $showingPath)
 					}
 				}
