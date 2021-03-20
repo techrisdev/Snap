@@ -43,7 +43,8 @@ struct SpotlightSearchItem: SearchItem {
 	
 	var action: (String) -> Void {
 		return { _ in
-			NSWorkspace.shared.open(URL(fileURLWithPath: self.path))
+			let url = URL(fileURLWithPath: path)
+			NSWorkspace.shared.open(url)
 		}
 	}
 }

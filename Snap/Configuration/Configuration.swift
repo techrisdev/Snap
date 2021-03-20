@@ -16,7 +16,6 @@ struct Configuration: Codable {
 	var searchBarHeight: CGFloat
 	var insertionPointColor: String
 	var maxHeight: CGFloat
-	var shouldAnimateText: Bool
 	var showingIcons: Bool
 	var iconSizeWidth: Int
 	var iconSizeHeight: Int

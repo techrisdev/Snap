@@ -16,7 +16,6 @@
 	"searchBarHeight": 50,
 	"insertionPointColor": "#FFFFFF",
 	"maxHeight": 450,
-	"shouldAnimateText": false,
 	"shouldAnimateNavigation": true,
 	"selectedItemBackgroundColor": "#0000FF",
 	"activationKeyboardShortcut": {

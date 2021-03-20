@@ -19,7 +19,6 @@ struct SettingsView: View {
 	@State private var searchBarFontSize = configuration.searchBarFontSize
 	@State private var searchBarHeight = configuration.searchBarHeight
 	@State private var insertionPointColor = Color.fromHexString(configuration.insertionPointColor)
-	@State private var shouldAnimateText = configuration.shouldAnimateText
 	
 	// Result settings
 	@State private var showingIcons = configuration.showingIcons
@@ -61,7 +60,6 @@ struct SettingsView: View {
 						Stepper("Font Size: \(searchBarFontSize, specifier: "%g")", value: $searchBarFontSize)
 						Stepper("Height: \(searchBarHeight, specifier: "%g")", value: $searchBarHeight)
 						ColorPicker("Insertion Point Color", selection: $insertionPointColor)
-						Toggle("Animated Text", isOn: $shouldAnimateText)
 					}
 				}
 				
@@ -128,7 +126,7 @@ struct SettingsView: View {
 				Spacer()
 				Button("Save") {
 					// Create a configuration with all settings.
-					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, searchBarFontSize: searchBarFontSize, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, maxHeight: maximumHeight, shouldAnimateText: shouldAnimateText, showingIcons: showingIcons, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, blockedPaths: blockedPaths, resultItemHeight: resultItemHeight, itemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString)
+					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, searchBarFontSize: searchBarFontSize, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, maxHeight: maximumHeight, showingIcons: showingIcons, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, blockedPaths: blockedPaths, resultItemHeight: resultItemHeight, itemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString)
 					
 					// Write the new configuration to the configuration path.
 					newConfiguration.write()
