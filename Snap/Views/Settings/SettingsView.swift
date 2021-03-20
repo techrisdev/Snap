@@ -143,7 +143,7 @@ struct SettingsView: View {
 					let appDelegate = NSApp.delegate as! AppDelegate
 					
 					// Unwrap the settings window.
-					guard let settingsWindow = appDelegate.settingsWindow else { return }
+					guard let settingsWindow = appDelegate.snap.settingsWindow else { return }
 					
 					// Show the alert.
 					alert.beginSheetModal(for: settingsWindow, completionHandler: { response in

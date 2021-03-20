@@ -5,7 +5,6 @@
 	"iconSizeWidth": 35,
 	"iconSizeHeight": 50,
 	"blockedPaths": [
-		"/Users/christopherkleiner/Library/Containers/",
 		"/System/Library/Frameworks/",
 		"/System/Library/PrivateFrameworks/",
 		"/usr/"

@@ -12,6 +12,7 @@
 		6C072421260509CC009F0E63 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C072420260509CC009F0E63 /* TextView.swift */; };
 		6C07242B26050FFD009F0E63 /* NSEvent Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C07242A26050FFD009F0E63 /* NSEvent Extension.swift */; };
 		6C07242F260527F0009F0E63 /* Actions.json in Resources */ = {isa = PBXBuildFile; fileRef = 6C07242E260527F0009F0E63 /* Actions.json */; };
+		6C07246D2605F9ED009F0E63 /* Snap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C07246C2605F9ED009F0E63 /* Snap.swift */; };
 		6C106F4925F655BB0047E0B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C106F4825F655BB0047E0B0 /* AppDelegate.swift */; };
 		6C106F4B25F655BB0047E0B0 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C106F4A25F655BB0047E0B0 /* SearchView.swift */; };
 		6C106F4D25F655BC0047E0B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C106F4C25F655BC0047E0B0 /* Assets.xcassets */; };
@@ -67,6 +68,7 @@
 		6C072420260509CC009F0E63 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		6C07242A26050FFD009F0E63 /* NSEvent Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSEvent Extension.swift"; sourceTree = "<group>"; };
 		6C07242E260527F0009F0E63 /* Actions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Actions.json; sourceTree = "<group>"; };
+		6C07246C2605F9ED009F0E63 /* Snap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snap.swift; sourceTree = "<group>"; };
 		6C106F4525F655BB0047E0B0 /* Snap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C106F4825F655BB0047E0B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6C106F4A25F655BB0047E0B0 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				6C106F4825F655BB0047E0B0 /* AppDelegate.swift */,
+				6C07246C2605F9ED009F0E63 /* Snap.swift */,
 				6C12A5D225F79C320029FBD7 /* Permissions.swift */,
 				6C0723D12604DE69009F0E63 /* Icon.swift */,
 				6CE3BE3B25FF9737001636F5 /* Configuration */,
@@ -446,6 +449,7 @@
 				6C0723D22604DE69009F0E63 /* Icon.swift in Sources */,
 				6C106F4B25F655BB0047E0B0 /* SearchView.swift in Sources */,
 				6C12A5E525F7C7540029FBD7 /* SearchBarView.swift in Sources */,
+				6C07246D2605F9ED009F0E63 /* Snap.swift in Sources */,
 				6C106F4925F655BB0047E0B0 /* AppDelegate.swift in Sources */,
 				6C75A007260279460074DF40 /* SettingsView.swift in Sources */,
 				6C82999425F699B600A25064 /* Notification Name Extension.swift in Sources */,
