@@ -139,11 +139,9 @@ struct SettingsView: View {
 					
 					alert.addButton(withTitle: "Restart")
 					alert.addButton(withTitle: "Continue")
-					
-					let appDelegate = NSApp.delegate as! AppDelegate
-					
+
 					// Unwrap the settings window.
-					guard let settingsWindow = appDelegate.snap.settingsWindow else { return }
+					guard let settingsWindow = Snap.standard.settingsWindow else { return }
 					
 					// Show the alert.
 					alert.beginSheetModal(for: settingsWindow, completionHandler: { response in

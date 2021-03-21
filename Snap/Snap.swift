@@ -6,6 +6,9 @@ import Cocoa
 import SwiftUI
 
 class Snap {
+	// The app delegate's snap instance.
+	static let standard = (NSApp.delegate as! AppDelegate).snap
+	
 	// The menu bar status item.
 	let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 	

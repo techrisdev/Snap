@@ -10,12 +10,10 @@ struct SearchBarView: View {
 	let configuration = Configuration.decoded
 	var body: some View {
 		VStack {
-			HStack {
-				TextView(text: $text)
-				Spacer()
-			}
-			.padding([.leading, .trailing, .top])
-			.frame(height: configuration.searchBarHeight)
+			SearchTextField(text: $text)
 		}
+		.padding([.leading, .trailing], 5)
+		.padding(.top)
+		.frame(height: configuration.searchBarHeight)
 	}
 }

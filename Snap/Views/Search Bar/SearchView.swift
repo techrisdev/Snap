@@ -56,6 +56,9 @@ struct SearchView: View {
 		.onReceive(NotificationCenter.default.publisher(for: .ReturnKeyWasPressed)) { _ in
 			// When the return key was pressed, then open the selected item.
 			if search.results.indices.contains(selectedItemIndex) {
+				// If an action gets executed, then deactivate the application.
+				Snap.standard.deactivate()
+				
 				let selectedItem = search.results[selectedItemIndex]
 				
 				// If the item doesn't accept arguments, then give it the whole string.
@@ -77,6 +80,7 @@ struct SearchView: View {
 						return
 					}
 					
+					// Execute the item's action.
 					selectedItem.action(currentSearchArguments)
 				} else {
 					// Open the URL in Finder.
