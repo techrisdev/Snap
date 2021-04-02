@@ -27,7 +27,7 @@ struct KeyboardShortcut: Codable {
 	}
 	
 	/// Convert NSEvent modifier flags to carbon modifiers.
-	private static func getCarbonModifiers(for modifiers: NSEvent.ModifierFlags) -> Int {
+	static func getCarbonModifiers(for modifiers: NSEvent.ModifierFlags) -> Int {
 		var result = 0
 		
 		if modifiers.contains(.command) {

@@ -195,11 +195,15 @@ class Snap {
 				return nil
 			}
 			
-			// The key combination for quick look was pressed.
-			// MARK: TODO: Make this combination configurable.
-			// For now, the combination is always shift-q.
+			// Check if the key combination for Quick Look was pressed.
+			// Get the keyboard shortcut.
+			let quickLookKeyboardShortcut = Configuration.decoded.quickLookKeyboardShortcut
+			
+			// Get the carbon modifier flags from the NSEvent.
 			let modifierFlags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
-			if event.keyCode == 12 && modifierFlags == .shift {
+			let carbonModifierFlags = KeyboardShortcut.getCarbonModifiers(for: modifierFlags)
+			
+			if event.keyCode == quickLookKeyboardShortcut.keyCode && quickLookKeyboardShortcut.carbonModifiers == carbonModifierFlags {
 				// Post a notification.
 				notificationCenter.post(name: .ShouldPresentQuickLook, object: nil)
 				

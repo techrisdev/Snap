@@ -13,7 +13,7 @@
 	"itemLimit": 25,
 	"searchBarFont": {
 		"name": "Arial",
-		"size": 12
+		"size": 24
 	},
 	"searchBarHeight": 50,
 	"insertionPointColor": "#FFFFFF",
@@ -26,8 +26,8 @@
 		"events": ["keyDown"]
 	},
 	"quickLookKeyboardShortcut": {
-		"keyCode": 49,
-		"carbonModifiers": 2048,
+		"keyCode": 0,
+		"carbonModifiers": 256,
 		"events": ["keyDown"]
 	}
 }
