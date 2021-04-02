@@ -26,8 +26,7 @@ struct SearchItemView: View {
 					
 					Spacer()
 					Text(item.name)
-						.font(.title3)
-						.fontWeight(.semibold)
+						.font(.init(configuration.resultItemFont.nsFont))
 						.foregroundColor(Color.fromHexString(configuration.textColor))
 					Spacer()
 				}

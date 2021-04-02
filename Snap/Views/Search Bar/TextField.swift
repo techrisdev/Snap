@@ -37,11 +37,6 @@ class SearchTextFieldController: NSViewController, NSTextFieldDelegate {
 		let color = Color.fromHexString(configuration.textColor)
 		return NSColor(color)
 	}()
-
-	lazy var font: NSFont = {
-		// Return the font.
-		return configuration.searchBarFont.nsFont
-	}()
 	
 	override func loadView() {
 		// Set up the text field.
@@ -65,7 +60,7 @@ class SearchTextFieldController: NSViewController, NSTextFieldDelegate {
 		let backgroundColor = NSColor(.fromHexString(configuration.backgroundColor))
 		textField.backgroundColor = backgroundColor
 		textField.textColor = textColor
-		textField.setFont(font)
+		textField.setFont(configuration.searchBarFont.nsFont)
 		textField.isBordered = false
 		textField.focusRingType = .none
 		

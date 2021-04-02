@@ -19,6 +19,10 @@
 	"insertionPointColor": "#FFFFFF",
 	"maximumHeight": 450,
 	"shouldAnimateNavigation": true,
+	"resultItemFont": {
+		"name": "Arial",
+		"size": 18
+	},
 	"selectedItemBackgroundColor": "#0000FF",
 	"activationKeyboardShortcut": {
 		"keyCode": 49,

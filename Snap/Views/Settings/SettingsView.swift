@@ -23,6 +23,7 @@ struct SettingsView: View {
 	@State private var blockedPaths = configuration.blockedPaths
 	@State private var iconWidth = configuration.iconSizeWidth
 	@State private var iconHeight = configuration.iconSizeHeight
+	@State private var resultItemFont = configuration.resultItemFont
 	@State private var resultItemHeight = configuration.resultItemHeight
 	@State private var resultItemLimit = configuration.itemLimit
 	@State private var shouldAnimateNavigation = configuration.shouldAnimateNavigation
@@ -33,7 +34,7 @@ struct SettingsView: View {
 	@State private var showingBlockedPaths = false
 	
 	// The font picker, it will be set later.
-	@State private var fontPicker: FontPicker!
+	//@State private var fontPicker: FontPicker!
 	
 	var body: some View {
 		VStack {
@@ -61,11 +62,7 @@ struct SettingsView: View {
 				
 				SettingsSection(text: "Search Bar") {
 					VStack(alignment: .leading) {
-						Button("Choose Font") {
-							fontPicker = FontPicker(font: $searchBarFont)
-							fontPicker.open()
-						}
-						Text("Font: \(searchBarFont.name) \(searchBarFont.size, specifier: "%g")")
+						FontPickerView(font: $searchBarFont)
 						Stepper("Height: \(searchBarHeight, specifier: "%g")", value: $searchBarHeight)
 						ColorPicker("Insertion Point Color", selection: $insertionPointColor)
 					}
@@ -121,6 +118,7 @@ struct SettingsView: View {
 						}
 						Stepper("Icon Width: \(iconWidth)", value: $iconWidth)
 						Stepper("Icon Height: \(iconHeight)", value: $iconHeight)
+						FontPickerView(font: $resultItemFont)
 						Stepper("Result Item Height: \(resultItemHeight, specifier: "%g")", value: $resultItemHeight)
 						Stepper("Result Item Limit: \(resultItemLimit)", value: $resultItemLimit)
 						Toggle("Animated Navigation", isOn: $shouldAnimateNavigation)
@@ -139,7 +137,7 @@ struct SettingsView: View {
 				Spacer()
 				Button("Save") {
 					// Create a configuration with all settings.
-					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, maximumHeight: maximumHeight, searchBarFont: searchBarFont, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, showingIcons: showingIcons, blockedPaths: blockedPaths, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, resultItemHeight: resultItemHeight, itemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString, quickLookKeyboardShortcut: quickLookKeyboardShortcut)
+					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, maximumHeight: maximumHeight, searchBarFont: searchBarFont, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, showingIcons: showingIcons, blockedPaths: blockedPaths, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, resultItemFont: resultItemFont, resultItemHeight: resultItemHeight, itemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString, quickLookKeyboardShortcut: quickLookKeyboardShortcut)
 					
 					// Write the new configuration to the configuration path.
 					newConfiguration.write()
@@ -183,5 +181,17 @@ struct SettingsView: View {
 		}
 		.padding(.leading)
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
+	}
+}
+
+struct FontPickerView: View {
+	@Binding var font: Font
+	@State private var fontPicker: FontPicker!
+	var body: some View {
+		Button("Choose Font") {
+			fontPicker = FontPicker(font: $font)
+			fontPicker.open()
+		}
+		Text("Font: \(font.name) \(font.size, specifier: "%g")")
 	}
 }

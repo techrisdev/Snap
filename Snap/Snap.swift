@@ -72,6 +72,7 @@ class Snap {
 			// The target should be self, otherwise, actions won't be executed.
 			menuItem.target = self
 			
+			// Add the item to the new menu.
 			menu.addItem(menuItem)
 		}
 		
@@ -234,5 +235,8 @@ class Snap {
 		
 		// Remove the event monitor.
 		NSEvent.removeMonitor(monitor)
+		
+		// Set the monitor to nil to avoid crashing if the app deactivates for a reason not related to the search bar.
+		self.monitor = nil
 	}
 }

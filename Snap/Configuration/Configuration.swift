@@ -25,6 +25,7 @@ struct Configuration: Codable {
 	var blockedPaths: [String]
 	var iconSizeWidth: Int
 	var iconSizeHeight: Int
+	var resultItemFont: Font
 	var resultItemHeight: CGFloat
 	var itemLimit: Int
 	var shouldAnimateNavigation: Bool
