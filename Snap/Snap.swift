@@ -149,6 +149,9 @@ class Snap {
 		settingsWindow?.contentView = NSHostingView(rootView: SettingsView())
 		NSApp.activate(ignoringOtherApps: true)
 		settingsWindow?.makeKeyAndOrderFront(nil)
+		
+		// Stop listening for events, they aren't relevant for the settings window.
+		removeKeyboardMonitor()
 	}
 	
 	@objc func quit() {
@@ -156,9 +159,12 @@ class Snap {
 		NSApp.terminate(nil)
 	}
 	
+	/// The currently listening keyboard monitor.
+	private var monitor: Any?
+	
 	/// A monitor which recognizes specific key events and sends notifications.
 	func addKeyboardMonitor() {
-		NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { [self] event in
+		monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { [self] event in
 			// The Up-Arrow key was pressed.
 			if event.keyCode == 126 {
 				// Post a notification.
@@ -212,5 +218,14 @@ class Snap {
 			
 			return event
 		})
+	}
+	
+	/// Stop listening for keyboard events.
+	private func removeKeyboardMonitor() {
+		// Unwrap the monitor. The monitor should never be nil because normally, the "addKeyboardMonitor" method is called before removing monitors. To avoid crashes because of mistakes, it's an optional anyway.
+		guard let monitor = monitor else { return }
+		
+		// Remove the event monitor.
+		NSEvent.removeMonitor(monitor)
 	}
 }

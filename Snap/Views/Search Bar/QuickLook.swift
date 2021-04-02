@@ -39,7 +39,7 @@ class QuickLook: NSObject, QLPreviewPanelDataSource {
 	}
 	
 	@objc private func panelWillClose() {
-		print(QLPreviewPanel.willCloseNotification)
+		// Send a notification.
 		notificationCenter.post(name: QuickLook.panelWillCloseNotification, object: nil)
 	}
 	

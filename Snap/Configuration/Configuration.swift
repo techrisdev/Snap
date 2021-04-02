@@ -12,7 +12,7 @@ struct Configuration: Codable {
 	var backgroundColor: String
 	var textColor: String
 	var activationKeyboardShortcut: KeyboardShortcut
-	var searchBarFontSize: CGFloat
+	var searchBarFont: Font
 	var searchBarHeight: CGFloat
 	var insertionPointColor: String
 	var maxHeight: CGFloat

@@ -39,8 +39,8 @@ class SearchTextFieldController: NSViewController, NSTextFieldDelegate {
 	}()
 
 	lazy var font: NSFont = {
-		let fontSize = configuration.searchBarFontSize
-		return .systemFont(ofSize: fontSize)
+		// Return the font.
+		return configuration.searchBarFont.nsFont
 	}()
 	
 	override func loadView() {
@@ -48,7 +48,6 @@ class SearchTextFieldController: NSViewController, NSTextFieldDelegate {
 		textField = NSSearchTextField()
 		
 		// Set up single line mode and scrolling.
-		textField.focusRingType = .none
 		textField.usesSingleLineMode = true
 		textField.cell?.isScrollable = true
 
@@ -59,7 +58,8 @@ class SearchTextFieldController: NSViewController, NSTextFieldDelegate {
 		textField.stringValue = text
 		
 		// Set the text field's placeholder.
-		textField.placeholderAttributedString = NSAttributedString(string: "Search", attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: textColor.withAlphaComponent(0.6)])
+		// MARK: TODO: The placeholder string is not centered.
+//		textField.placeholderAttributedString = NSAttributedString(string: "Search", attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: textColor.withAlphaComponent(0.6)])
 		
 		// Configure the text field's text and colors.
 		let backgroundColor = NSColor(.fromHexString(configuration.backgroundColor))
@@ -67,12 +67,15 @@ class SearchTextFieldController: NSViewController, NSTextFieldDelegate {
 		textField.textColor = textColor
 		textField.setFont(font)
 		textField.isBordered = false
+		textField.focusRingType = .none
 		
 		// Set the view to the new text field.
 		view = textField
 	}
 	
+	/// The field editor for the text field.
 	lazy var fieldEditor: NSTextView = {
+		// Get the text field's field editor.
 		return textField.window?.fieldEditor(true, for: textField) as! NSTextView
 	}()
 	

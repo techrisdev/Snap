@@ -16,7 +16,7 @@ struct SettingsView: View {
 	@State private var maximumHeight = configuration.maxHeight
 	
 	// Search bar settings
-	@State private var searchBarFontSize = configuration.searchBarFontSize
+	@State private var searchBarFont = configuration.searchBarFont
 	@State private var searchBarHeight = configuration.searchBarHeight
 	@State private var insertionPointColor = Color.fromHexString(configuration.insertionPointColor)
 	
@@ -29,6 +29,9 @@ struct SettingsView: View {
 	@State private var resultItemLimit = configuration.itemLimit
 	@State private var shouldAnimateNavigation = configuration.shouldAnimateNavigation
 	@State private var selectedItemBackgroundColor = Color.fromHexString(configuration.selectedItemBackgroundColor)
+	
+	// The font picker, it will be set later.
+	@State private var fontPicker: FontPicker!
 	
 	var body: some View {
 		VStack {
@@ -57,7 +60,11 @@ struct SettingsView: View {
 				
 				SettingsSection(text: "Search Bar") {
 					VStack(alignment: .leading) {
-						Stepper("Font Size: \(searchBarFontSize, specifier: "%g")", value: $searchBarFontSize)
+						Button("Choose Font") {
+							fontPicker = FontPicker(font: $searchBarFont)
+							fontPicker.open()
+						}
+						Text("Font: \(searchBarFont.name) \(searchBarFont.size, specifier: "%g")")
 						Stepper("Height: \(searchBarHeight, specifier: "%g")", value: $searchBarHeight)
 						ColorPicker("Insertion Point Color", selection: $insertionPointColor)
 					}
@@ -126,7 +133,7 @@ struct SettingsView: View {
 				Spacer()
 				Button("Save") {
 					// Create a configuration with all settings.
-					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, searchBarFontSize: searchBarFontSize, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, maxHeight: maximumHeight, showingIcons: showingIcons, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, blockedPaths: blockedPaths, resultItemHeight: resultItemHeight, itemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString)
+					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, searchBarFont: searchBarFont, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, maxHeight: maximumHeight, showingIcons: showingIcons, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, blockedPaths: blockedPaths, resultItemHeight: resultItemHeight, itemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString)
 					
 					// Write the new configuration to the configuration path.
 					newConfiguration.write()

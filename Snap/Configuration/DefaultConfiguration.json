@@ -11,7 +11,10 @@
 	],
 	"resultItemHeight": 70,
 	"itemLimit": 25,
-	"searchBarFontSize": 24,
+	"searchBarFont": {
+		"name": "Arial",
+		"size": 12
+	},
 	"searchBarHeight": 50,
 	"insertionPointColor": "#FFFFFF",
 	"maxHeight": 450,
