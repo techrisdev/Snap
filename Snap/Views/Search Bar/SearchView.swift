@@ -32,7 +32,7 @@ struct SearchView: View {
 				application?.view
 			}
 		}
-		.frame(height: !search.results.isEmpty ? configuration.maxHeight : configuration.searchBarHeight)
+		.frame(height: !search.results.isEmpty ? configuration.maximumHeight : configuration.searchBarHeight)
 		.frame(maxWidth: .infinity, maxHeight: search.results.isEmpty ? configuration.searchBarHeight : .infinity)
 		.onChange(of: text, perform: { _ in
 			// If the text doesn't contain any characters, then...

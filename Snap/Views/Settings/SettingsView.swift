@@ -7,13 +7,11 @@ import SwiftUI
 struct SettingsView: View {
 	static private var configuration = Configuration.decoded
 	
-	@State private var showingBlockedPaths = false
-	
 	// General Settings
 	@State private var backgroundColor = Color.fromHexString(configuration.backgroundColor)
 	@State private var textColor = Color.fromHexString(configuration.textColor)
 	@State private var activationKeyboardShortcut = configuration.activationKeyboardShortcut
-	@State private var maximumHeight = configuration.maxHeight
+	@State private var maximumHeight = configuration.maximumHeight
 	
 	// Search bar settings
 	@State private var searchBarFont = configuration.searchBarFont
@@ -29,6 +27,10 @@ struct SettingsView: View {
 	@State private var resultItemLimit = configuration.itemLimit
 	@State private var shouldAnimateNavigation = configuration.shouldAnimateNavigation
 	@State private var selectedItemBackgroundColor = Color.fromHexString(configuration.selectedItemBackgroundColor)
+	@State private var quickLookKeyboardShortcut = configuration.quickLookKeyboardShortcut
+	
+	// The state of the "Blocked Paths" popover.
+	@State private var showingBlockedPaths = false
 	
 	// The font picker, it will be set later.
 	@State private var fontPicker: FontPicker!
@@ -48,7 +50,6 @@ struct SettingsView: View {
 						KeyboardShortcutView(keyboardShortcut: $activationKeyboardShortcut) {
 							Text("Activation Shortcut:")
 						}
-
 						Slider(value: $maximumHeight, in: 20...1000) {
 							Text("Maximum Window Height: \(maximumHeight, specifier: "%.0f")")
 								.padding(.trailing, 7.5)
@@ -124,6 +125,11 @@ struct SettingsView: View {
 						Stepper("Result Item Limit: \(resultItemLimit)", value: $resultItemLimit)
 						Toggle("Animated Navigation", isOn: $shouldAnimateNavigation)
 						ColorPicker("Selected Item Background Color", selection: $selectedItemBackgroundColor)
+						KeyboardShortcutView(keyboardShortcut: $quickLookKeyboardShortcut) {
+							VStack(alignment: .leading) {
+								Text("Quick Look Shortcut:")
+							}
+						}
 					}
 				}
 			}
@@ -133,7 +139,7 @@ struct SettingsView: View {
 				Spacer()
 				Button("Save") {
 					// Create a configuration with all settings.
-					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, searchBarFont: searchBarFont, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, maxHeight: maximumHeight, showingIcons: showingIcons, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, blockedPaths: blockedPaths, resultItemHeight: resultItemHeight, itemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString)
+					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, maximumHeight: maximumHeight, searchBarFont: searchBarFont, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, showingIcons: showingIcons, blockedPaths: blockedPaths, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, resultItemHeight: resultItemHeight, itemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString, quickLookKeyboardShortcut: quickLookKeyboardShortcut)
 					
 					// Write the new configuration to the configuration path.
 					newConfiguration.write()

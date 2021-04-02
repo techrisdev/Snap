@@ -17,10 +17,15 @@
 	},
 	"searchBarHeight": 50,
 	"insertionPointColor": "#FFFFFF",
-	"maxHeight": 450,
+	"maximumHeight": 450,
 	"shouldAnimateNavigation": true,
 	"selectedItemBackgroundColor": "#0000FF",
 	"activationKeyboardShortcut": {
+		"keyCode": 49,
+		"carbonModifiers": 2048,
+		"events": ["keyDown"]
+	},
+	"quickLookKeyboardShortcut": {
 		"keyCode": 49,
 		"carbonModifiers": 2048,
 		"events": ["keyDown"]

@@ -9,21 +9,27 @@ struct Configuration: Codable {
 	
 	static let applicationSupportURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("Snap/")
 	
+	// General Settings
 	var backgroundColor: String
 	var textColor: String
 	var activationKeyboardShortcut: KeyboardShortcut
+	var maximumHeight: CGFloat
+	
+	// Search bar settings
 	var searchBarFont: Font
 	var searchBarHeight: CGFloat
 	var insertionPointColor: String
-	var maxHeight: CGFloat
+	
+	// Result settings
 	var showingIcons: Bool
+	var blockedPaths: [String]
 	var iconSizeWidth: Int
 	var iconSizeHeight: Int
-	var blockedPaths: [String]
 	var resultItemHeight: CGFloat
 	var itemLimit: Int
 	var shouldAnimateNavigation: Bool
 	var selectedItemBackgroundColor: String
+	var quickLookKeyboardShortcut: KeyboardShortcut
 
 	static private func decodeConfigurationFile() -> Configuration {
 		let decoder = JSONDecoder()

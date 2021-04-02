@@ -41,6 +41,9 @@ class Snap {
 		// Deactivate the application.
 		notificationCenter.post(name: .ApplicationShouldExit, object: nil)
 		window.close()
+		
+		// Remove the listener for keyboard events.
+		removeKeyboardMonitor()
 	}
 
 	private func setupStatusItem() {
