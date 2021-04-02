@@ -14,8 +14,6 @@ struct Action: Codable {
 	var action: (String) -> Void {
 		return { arguments in
 			let appleScriptWithArguments = appleScript.replacingOccurrences(of: "\\arguments\\", with: "\(arguments)")
-			print(appleScript)
-			print(appleScriptWithArguments)
 			AppleScript.executeByTellingSystemEvents(string: appleScriptWithArguments)
 		}
 	}

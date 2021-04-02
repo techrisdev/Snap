@@ -36,7 +36,7 @@ struct Bookmark: Decodable {
 				result += searchResult
 			}
 		}
-		print(result.count)
+		
 		return result
 	}
 	

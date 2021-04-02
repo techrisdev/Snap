@@ -2,7 +2,7 @@
 //
 // Created by TeChris on 11.03.21.
 
-import Carbon
+import Carbon.HIToolbox.Events
 
 class KeyboardShortcutManager {
 	var keyboardShortcut: KeyboardShortcut

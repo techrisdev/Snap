@@ -2,8 +2,8 @@
 //
 // Created by TeChris on 11.03.21.
 
-import Carbon
 import Cocoa
+import Carbon.HIToolbox.Events
 
 struct KeyboardShortcut: Codable {
 	/// The shortcut's key code.

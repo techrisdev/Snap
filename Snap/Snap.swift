@@ -6,19 +6,19 @@ import Cocoa
 import SwiftUI
 
 class Snap {
-	// The app delegate's snap instance.
+	/// The app delegate's snap instance.
 	static let standard = (NSApp.delegate as! AppDelegate).snap
 	
-	// The menu bar status item.
-	let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+	/// The menu bar status item.
+	private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 	
-	// The menu of the status item.
-	var menu: NSMenu!
+	/// The menu of the status item.
+	private var menu: NSMenu!
 	
-	// The application's window.
-	var window: NSWindow!
+	/// The application's search window.
+	private var window: NSWindow!
 	
-	// The settings window.
+	/// The app's settings window.
 	var settingsWindow: NSWindow?
 	
 	func start() {
@@ -35,9 +35,11 @@ class Snap {
 		setupKeyboardShortcuts()
 	}
 	
+	let notificationCenter = NotificationCenter.default
+	
 	func deactivate() {
 		// Deactivate the application.
-		NotificationCenter.default.post(name: .ApplicationShouldExit, object: nil)
+		notificationCenter.post(name: .ApplicationShouldExit, object: nil)
 		window.close()
 	}
 
@@ -62,11 +64,15 @@ class Snap {
 					   action: #selector(quit),
 					   keyEquivalent: "q")]
 		
+		// Add all menu items to the menu.
 		for menuItem in menuItems {
+			// The target should be self, otherwise, actions won't be executed.
 			menuItem.target = self
+			
 			menu.addItem(menuItem)
 		}
 		
+		// Set the menu for the status item to the new menu.
 		statusItem.menu = menu
 	}
 	
@@ -95,7 +101,7 @@ class Snap {
 		KeyboardShortcutManager(keyboardShortcut: Configuration.decoded.activationKeyboardShortcut).startListeningForEvents { [self] _ in
 			if window.isVisible {
 				// Before closing the window, exit out of all running custom applications.
-				NotificationCenter.default.post(name: .ApplicationShouldExit, object: nil)
+				notificationCenter.post(name: .ApplicationShouldExit, object: nil)
 				
 				// Close the window.
 				window.close()
@@ -148,5 +154,63 @@ class Snap {
 	@objc func quit() {
 		// Terminate the application.
 		NSApp.terminate(nil)
+	}
+	
+	/// A monitor which recognizes specific key events and sends notifications.
+	func addKeyboardMonitor() {
+		NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { [self] event in
+			// The Up-Arrow key was pressed.
+			if event.keyCode == 126 {
+				// Post a notification.
+				notificationCenter.post(name: .UpArrowKeyWasPressed, object: nil)
+				
+				// Return from the closure.
+				return nil
+			}
+			
+			// The Down-Arrow key was pressed.
+			if event.keyCode == 125 {
+				// Post a notification.
+				notificationCenter.post(name: .DownArrowKeyWasPressed, object: nil)
+				
+				// Return from the closure.
+				return nil
+			}
+			
+			// The tab key was pressed.
+			if event.keyCode == 48 {
+				// Post a notification.
+				notificationCenter.post(name: .TabKeyWasPressed, object: nil)
+				
+				// Return from the closure.
+				return nil
+			}
+			
+			// The key combination for quick look was pressed.
+			// MARK: TODO: Make this combination configurable.
+			// For now, the combination is always shift-q.
+			let modifierFlags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+			if event.keyCode == 12 && modifierFlags == .shift {
+				// Post a notification.
+				notificationCenter.post(name: .ShouldPresentQuickLook, object: nil)
+				
+				// Return from the closure.
+				return nil
+			}
+			
+			// Get the event's characters.
+			let characters = event.charactersIgnoringModifiers ?? ""
+			
+			// The return key was pressed.
+			if characters == "\r" {
+				// Post a notification.
+				notificationCenter.post(name: .ReturnKeyWasPressed, object: nil)
+				
+				// Return from the closure.
+				return nil
+			}
+			
+			return event
+		})
 	}
 }

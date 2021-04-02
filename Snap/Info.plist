@@ -7,7 +7,7 @@
 	<key>NSContactsUsageDescription</key>
 	<string>Snap wants to search for Contacts.</string>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Snap wants to search for Events</string>
+	<string>Snap wants to search for Events.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

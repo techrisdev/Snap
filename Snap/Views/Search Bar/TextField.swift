@@ -39,7 +39,6 @@ class SearchTextFieldController: NSViewController, NSTextFieldDelegate {
 	}()
 
 	lazy var font: NSFont = {
-		print("hi")
 		let fontSize = configuration.searchBarFontSize
 		return .systemFont(ofSize: fontSize)
 	}()
@@ -106,7 +105,7 @@ class NSSearchTextField: NSTextField {
 			return super.font
 		}
 		set {
-			// The font for some reasont gets set automatically, that's why the setter does nothing.
+			// The font for some reason gets set automatically, that's why the setter does nothing.
 		}
 	}
 }

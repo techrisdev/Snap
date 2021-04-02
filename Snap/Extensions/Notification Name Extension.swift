@@ -13,4 +13,5 @@ extension Notification.Name {
 	static let CommandKeyPressed = NSNotification.Name("CommandKeyPressed")
 	static let CommandKeyReleased = NSNotification.Name("CommandKeyReleased")
 	static let ApplicationShouldExit = NSNotification.Name("ApplicationShouldExit")
+	static let ShouldPresentQuickLook = NSNotification.Name("ShouldPresentQuickLook")
 }

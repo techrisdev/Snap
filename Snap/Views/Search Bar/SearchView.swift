@@ -5,15 +5,18 @@
 import SwiftUI
 
 struct SearchView: View {
-	@ObservedObject var search = Search()
+	@ObservedObject private var search = Search()
 	
 	@State private var selectedItemIndex = 0
 	@State private var text = ""
 	@State private var showingPath = false
 	@State private var application: ApplicationSearchItem? = nil
 	
-	let configuration = Configuration.decoded
-	let notificationCenter = NotificationCenter.default
+	private let configuration = Configuration.decoded
+	private let notificationCenter = NotificationCenter.default
+	private let snap = Snap.standard
+	private let quickLook = QuickLook()
+	
 	var body: some View {
 		VStack {
 			ZStack {
@@ -53,13 +56,11 @@ struct SearchView: View {
 			// Reset the selected item.
 			selectedItemIndex = 0
 		})
-		.onReceive(NotificationCenter.default.publisher(for: .ReturnKeyWasPressed)) { _ in
+		.onReceive(notificationCenter.publisher(for: .ReturnKeyWasPressed)) { _ in
 			// When the return key was pressed, then open the selected item.
 			if search.results.indices.contains(selectedItemIndex) {
 				// If an action gets executed, then deactivate the application.
-				Snap.standard.deactivate()
-				
-				let selectedItem = search.results[selectedItemIndex]
+				snap.deactivate()
 				
 				// If the item doesn't accept arguments, then give it the whole string.
 				let currentSearchArguments = selectedItem.acceptsArguments ? self.currentSearchArguments : text
@@ -88,19 +89,19 @@ struct SearchView: View {
 				}
 			}
 		}
-		.onReceive(NotificationCenter.default.publisher(for: .UpArrowKeyWasPressed)) { _ in
+		.onReceive(notificationCenter.publisher(for: .UpArrowKeyWasPressed)) { _ in
 			let newIndex = selectedItemIndex - 1
 			
 			// Update the selected item.
 			updateSelectedItemIndex(to: newIndex)
 		}
-		.onReceive(NotificationCenter.default.publisher(for: .DownArrowKeyWasPressed)) { _ in
+		.onReceive(notificationCenter.publisher(for: .DownArrowKeyWasPressed)) { _ in
 			let newIndex = selectedItemIndex + 1
 			
 			// Update the selected item.
 			updateSelectedItemIndex(to: newIndex)
 		}
-		.onReceive(NotificationCenter.default.publisher(for: .TabKeyWasPressed)) { _ in
+		.onReceive(notificationCenter.publisher(for: .TabKeyWasPressed)) { _ in
 			// If the search result contains the currently selected item, Complete the current search item.
 			if search.results.indices.contains(0) {
 				text = search.results[selectedItemIndex].name
@@ -111,13 +112,25 @@ struct SearchView: View {
 				}
 			}
 		}
-		.onReceive(NotificationCenter.default.publisher(for: .ApplicationShouldExit), perform: { _ in
+		.onReceive(notificationCenter.publisher(for: .ApplicationShouldExit), perform: { _ in
 			// When the current application should exit, then set it to nil.
 			application = nil
 		})
+		.onReceive(notificationCenter.publisher(for: .ShouldPresentQuickLook), perform: { _ in
+			// Open a preview panel.
+			quickLook.filePath = selectedItem.path
+			quickLook.present()
+		})
+		.onReceive(notificationCenter.publisher(for: QuickLook.panelWillCloseNotification), perform: { _ in
+			// Stop listening for notifications.
+			quickLook.stopObserving()
+			
+			// Activate the search window.
+			snap.activate()
+		})
 		.onAppear(perform: {
 			// Add a monitor for key events to get notified when certain keys get pressed.
-			NSEvent.addSnapKeyboardMonitor()
+			snap.addKeyboardMonitor()
 		})
 	}
 	
@@ -146,6 +159,11 @@ struct SearchView: View {
 		
 		// If the search doesn't contain an argument, then return an empty string.
 		return ""
+	}
+	
+	// The currently selected item.
+	private var selectedItem: SearchItem {
+		search.results[selectedItemIndex]
 	}
 	
 	private func updateSelectedItemIndex(to index: Int) {

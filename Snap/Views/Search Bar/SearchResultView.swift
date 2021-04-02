@@ -3,7 +3,7 @@
 // Created by TeChris on 09.03.21.
 
 import SwiftUI
-import Carbon
+import Carbon.HIToolbox.Events
 
 struct SearchResultView: View {
 	var results: [SearchItem]
