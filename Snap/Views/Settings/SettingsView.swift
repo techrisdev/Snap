@@ -5,7 +5,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-	static private var configuration = Configuration.decoded
+	static private let configuration = Configuration.decoded
 	
 	// General Settings
 	@State private var backgroundColor = Color.fromHexString(configuration.backgroundColor)
@@ -181,17 +181,5 @@ struct SettingsView: View {
 		}
 		.padding(.leading)
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
-	}
-}
-
-struct FontPickerView: View {
-	@Binding var font: Font
-	@State private var fontPicker: FontPicker!
-	var body: some View {
-		Button("Choose Font") {
-			fontPicker = FontPicker(font: $font)
-			fontPicker.open()
-		}
-		Text("Font: \(font.name) \(font.size, specifier: "%g")")
 	}
 }

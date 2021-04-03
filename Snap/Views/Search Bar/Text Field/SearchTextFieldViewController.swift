@@ -1,23 +1,10 @@
-// TextField.swift
+// SearchTextFieldViewController.swift
 //
-// Created by TeChris on 19.03.21.
+// Created by TeChris on 03.04.21.
 
 import SwiftUI
 
-struct SearchTextField: NSViewControllerRepresentable {
-	@Binding var text: String
-	
-	func makeNSViewController(context: Context) -> some SearchTextFieldController {
-		return SearchTextFieldController(text: $text)
-	}
-	
-	func updateNSViewController(_ nsViewController: NSViewControllerType, context: Context) {
-		let textField = nsViewController.textField
-		textField?.stringValue = text
-	}
-}
-
-class SearchTextFieldController: NSViewController, NSTextFieldDelegate {
+class SearchTextFieldViewController: NSViewController, NSTextFieldDelegate {
 	@Binding var text: String
 	
 	init(text: Binding<String>) {
@@ -38,11 +25,15 @@ class SearchTextFieldController: NSViewController, NSTextFieldDelegate {
 		return NSColor(color)
 	}()
 	
+	lazy var font = configuration.searchBarFont.nsFont
+	
 	override func loadView() {
 		// Set up the text field.
 		textField = NSSearchTextField()
 		
 		// Set up single line mode and scrolling.
+		textField.cell = VerticallyCenteredTextFieldCell()
+		textField.isEditable = true
 		textField.usesSingleLineMode = true
 		textField.cell?.isScrollable = true
 
@@ -54,13 +45,13 @@ class SearchTextFieldController: NSViewController, NSTextFieldDelegate {
 		
 		// Set the text field's placeholder.
 		// MARK: TODO: The placeholder string is not centered.
-//		textField.placeholderAttributedString = NSAttributedString(string: "Search", attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: textColor.withAlphaComponent(0.6)])
+		//textField.placeholderAttributedString = NSAttributedString(string: "Search", attributes: [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : textColor.withAlphaComponent(0.6), NSAttributedString.Key.baselineOffset : -(font.pointSize / 2)])
 		
 		// Configure the text field's text and colors.
 		let backgroundColor = NSColor(.fromHexString(configuration.backgroundColor))
 		textField.backgroundColor = backgroundColor
 		textField.textColor = textColor
-		textField.setFont(configuration.searchBarFont.nsFont)
+		textField.setFont(font)
 		textField.isBordered = false
 		textField.focusRingType = .none
 		
@@ -88,22 +79,5 @@ class SearchTextFieldController: NSViewController, NSTextFieldDelegate {
 	func controlTextDidChange(_ obj: Notification) {
 		// Get the text field's current string.
 		text = textField.stringValue
-	}
-}
-
-/// A custom NSTextField.
-class NSSearchTextField: NSTextField {
-	func setFont(_ font: NSFont) {
-		// Set the text field's font.
-		super.font = font
-	}
-	
-	override var font: NSFont? {
-		get {
-			return super.font
-		}
-		set {
-			// The font for some reason gets set automatically, that's why the setter does nothing.
-		}
 	}
 }
