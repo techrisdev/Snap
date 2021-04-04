@@ -11,7 +11,7 @@ import ScriptingBridge
 }
 
 struct MusicControllerApp: ApplicationSearchItem {
-	var id = UUID()
+	let id = UUID()
 	
 	var acceptsArguments = false
 	

@@ -28,7 +28,7 @@ struct WebSearchItem: SearchItem {
 		}
 	}
 	
-	var id = UUID()
+	let id = UUID()
 	
 	var name: String
 	

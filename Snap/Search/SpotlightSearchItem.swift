@@ -11,7 +11,7 @@ struct SpotlightSearchItem: SearchItem {
 		self.item = item
 	}
 	
-	var id = UUID()
+	let id = UUID()
 	
 	var acceptsArguments = false
 	

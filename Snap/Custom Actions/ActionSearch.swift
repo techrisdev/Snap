@@ -5,7 +5,7 @@
 import Cocoa
 
 struct ActionSearch {
-	private let actions = ActionDecoder.actions
+	private let actions = ActionDecoder.actions + SnapAction.allItems
 	
 	func searchForString(_ string: String) -> [SearchItem] {
 		var result = [SearchItem]()

@@ -56,6 +56,8 @@
 		6CB6018125FE2ED100613136 /* ApplicationSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6018025FE2ED100613136 /* ApplicationSearch.swift */; };
 		6CDFBFD725FE404700100171 /* ApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDFBFD625FE404700100171 /* ApplicationView.swift */; };
 		6CE3BE3D25FF9755001636F5 /* DefaultConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CE3BE3C25FF9755001636F5 /* DefaultConfiguration.json */; };
+		6CE420712619D0D3002F0769 /* SettingsAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE420702619D0D3002F0769 /* SettingsAction.swift */; };
+		6CE420772619D1D1002F0769 /* SnapActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE420762619D1D1002F0769 /* SnapActions.swift */; };
 		6CED3B0425FAA04D00E61388 /* KeyboardShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CED3B0325FAA04D00E61388 /* KeyboardShortcut.swift */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +126,8 @@
 		6CC0353125FFD6E60075E970 /* Snap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Snap.entitlements; sourceTree = "<group>"; };
 		6CDFBFD625FE404700100171 /* ApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationView.swift; sourceTree = "<group>"; };
 		6CE3BE3C25FF9755001636F5 /* DefaultConfiguration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DefaultConfiguration.json; sourceTree = "<group>"; };
+		6CE420702619D0D3002F0769 /* SettingsAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAction.swift; sourceTree = "<group>"; };
+		6CE420762619D1D1002F0769 /* SnapActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapActions.swift; sourceTree = "<group>"; };
 		6CED3B0325FAA04D00E61388 /* KeyboardShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcut.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -236,6 +240,7 @@
 				6C5B517C25F80757000B004A /* ActionSearchItem.swift */,
 				6C5B519325F90250000B004A /* ActionDecoder.swift */,
 				6C344FD225FB96550042CC05 /* AppleScript.swift */,
+				6CE420762619D1D1002F0769 /* SnapActions.swift */,
 				6CB6017625FE2E6300613136 /* Actions */,
 				6CB6017725FE2E7400613136 /* Web Search */,
 				6C344FEB25FCC6F30042CC05 /* Safari Bookmarks */,
@@ -307,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				6C07242E260527F0009F0E63 /* Actions.json */,
+				6CE420702619D0D3002F0769 /* SettingsAction.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -324,8 +330,8 @@
 			isa = PBXGroup;
 			children = (
 				6CB6018025FE2ED100613136 /* ApplicationSearch.swift */,
-				6CB6017A25FE2EB200613136 /* Application.swift */,
 				6CB6016F25FE2AD200613136 /* ApplicationSearchItem.swift */,
+				6CB6017A25FE2EB200613136 /* Application.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -459,6 +465,7 @@
 				6C75A0392603967B0074DF40 /* SettingsSection.swift in Sources */,
 				6C072421260509CC009F0E63 /* SearchTextField.swift in Sources */,
 				6C5B51A525F915E2000B004A /* WebSearchItem.swift in Sources */,
+				6CE420712619D0D3002F0769 /* SettingsAction.swift in Sources */,
 				6C5B517325F7FE38000B004A /* ActionSearch.swift in Sources */,
 				6C7873D726179C39002D48FE /* FontPickerView.swift in Sources */,
 				6C12A5EA25F7D59A0029FBD7 /* SearchItemView.swift in Sources */,
@@ -468,6 +475,7 @@
 				6CDFBFD725FE404700100171 /* ApplicationView.swift in Sources */,
 				6C83FE5925FF900000DAC7C1 /* Color Extension.swift in Sources */,
 				6CB6017025FE2AD200613136 /* ApplicationSearchItem.swift in Sources */,
+				6CE420772619D1D1002F0769 /* SnapActions.swift in Sources */,
 				6C5B518525F80B78000B004A /* String Extension.swift in Sources */,
 				6CB6018125FE2ED100613136 /* ApplicationSearch.swift in Sources */,
 				6C344FD325FB96550042CC05 /* AppleScript.swift in Sources */,

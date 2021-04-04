@@ -15,4 +15,10 @@ extension ApplicationSearchItem {
 			return ApplicationView(content: AnyView(Text("Generic Application.")))
 		}
 	}
+	
+	var action: (String) -> Void {
+		get {
+			return { _ in }
+		}
+	}
 }
