@@ -1,31 +1,21 @@
-// Action.swift
+// ActionDecoder.swift
 //
 // Created by TeChris on 10.03.21.
 
-import Cocoa
+import AppKit
 
-struct Action: Codable {
-	static let decodedActions = decode()
+struct ActionDecoder {
+	/// The decoded actions.
+	static let actions = decode()
 	
-	var name: String
-	
-	var appleScript: String
-	
-	var action: (String) -> Void {
-		return { arguments in
-			let appleScriptWithArguments = appleScript.replacingOccurrences(of: "\\arguments\\", with: "\(arguments)")
-			AppleScript.executeByTellingSystemEvents(string: appleScriptWithArguments)
-		}
-	}
-	
-	static private func decode() -> [Action] {
+	static private func decode() -> [ActionSearchItem] {
 		let decoder = JSONDecoder()
 		
 		// The urls where actions are stored.
 		let defaultActionsURL = Bundle.main.url(forResource: "Actions", withExtension: "json")!
 		let userDefinedActionsURL = URL(fileURLWithPath: Configuration.applicationSupportURL.path + "Actions.json")
 		
-		var result = [Action]()
+		var result = [ActionSearchItem]()
 		
 		let urls = [defaultActionsURL, userDefinedActionsURL]
 		for url in urls {
@@ -34,7 +24,7 @@ struct Action: Codable {
 			
 			// Decode the file.
 			do {
-				result += try decoder.decode([Action].self, from: data)
+				result += try decoder.decode([ActionSearchItem].self, from: data)
 			} catch {
 				// Present an alert with the error that occured.
 				let alert = NSAlert()

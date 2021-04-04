@@ -2,13 +2,13 @@
 //
 // Created by TeChris on 12.03.21.
 
-import Cocoa
+import AppKit
 
 class AppleScript {
-	var script: String
+	private var script: String
 	
+	/// Initialize the class with a script.
 	init(script: String) {
-		// Initialize with a script.
 		self.script = script
 	}
 	
@@ -40,14 +40,14 @@ class AppleScript {
 		return errorInfo
 	}
 	
-	var failureAlert: NSAlert {
+	private var failureAlert: NSAlert {
 		// If error is nil, then throw a fatal error.
 		guard let errorInfo = errorInfo else { fatalError("There is no error.") }
-		
+
 		let alert = NSAlert()
 		alert.messageText = "Apple Script failure"
 		alert.informativeText = "Something went wrong :(\n\nError: \(errorInfo)"
-		
+
 		// Return the new alert.
 		return alert
 	}

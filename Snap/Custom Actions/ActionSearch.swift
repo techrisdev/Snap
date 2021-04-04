@@ -5,7 +5,7 @@
 import Cocoa
 
 struct ActionSearch {
-	private let actions = Action.decodedActions
+	private let actions = ActionDecoder.actions
 	
 	func searchForString(_ string: String) -> [SearchItem] {
 		var result = [SearchItem]()
@@ -24,10 +24,8 @@ struct ActionSearch {
 			
 			// Check if the predicate returned true.
 			if predicate.evaluate(with: nil) {
-				let item = ActionSearchItem(name: action.name, action: action.action)
-
 				// Append the new item.
-				result.append(item)
+				result.append(action)
 			}
 		}
 		
