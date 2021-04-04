@@ -311,8 +311,8 @@
 		6CB6017625FE2E6300613136 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
+				6CE4207E2619D7C2002F0769 /* Non-Codable */,
 				6C07242E260527F0009F0E63 /* Actions.json */,
-				6CE420702619D0D3002F0769 /* SettingsAction.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -344,6 +344,14 @@
 				6CE3BE3C25FF9755001636F5 /* DefaultConfiguration.json */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		6CE4207E2619D7C2002F0769 /* Non-Codable */ = {
+			isa = PBXGroup;
+			children = (
+				6CE420702619D0D3002F0769 /* SettingsAction.swift */,
+			);
+			path = "Non-Codable";
 			sourceTree = "<group>";
 		};
 		6CED3B0225FAA03900E61388 /* Keyboard Shortcuts */ = {
