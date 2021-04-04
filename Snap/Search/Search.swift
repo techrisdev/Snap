@@ -31,7 +31,6 @@ class Search: NSObject, ObservableObject {
 			
 			// If there are results, then go through the search results.
 			let metadataQueryResults = metadataQuery.results as! [NSMetadataItem]
-
 			if !metadataQueryResults.isEmpty {
 				for result in metadataQueryResults {
 					// Limit the result to 30 elements.
@@ -40,7 +39,7 @@ class Search: NSObject, ObservableObject {
 					}
 
 					// Create a new SearchItem.
-					let searchItem = SpotlightSearchItem(item: result)
+					let searchItem = SpotlightSearchItem(result)
 
 					// Check if the item's path is blocked.
 					var shouldAppendItem = true

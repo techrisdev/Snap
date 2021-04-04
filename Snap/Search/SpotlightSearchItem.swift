@@ -7,18 +7,13 @@ import Cocoa
 struct SpotlightSearchItem: SearchItem {
 	private var item: NSMetadataItem
 	
-	init(item: NSMetadataItem) {
+	init(_ item: NSMetadataItem) {
 		self.item = item
 	}
 	
 	var id = UUID()
 	
 	var acceptsArguments = false
-	
-	/// The File System Size in Bytes.
-	var size: Int? {
-		return item.valueForAttribute(kMDItemFSSize, valueType: Int.self)
-	}
 	
 	/// The path to the file.
 	var path: String {

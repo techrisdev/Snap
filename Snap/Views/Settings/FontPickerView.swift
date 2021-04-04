@@ -8,10 +8,12 @@ struct FontPickerView: View {
 	@Binding var font: Font
 	@State private var fontPicker: FontPicker!
 	var body: some View {
-		Button("Choose Font") {
-			fontPicker = FontPicker(font: $font)
-			fontPicker.open()
+		HStack {
+			Text("Font: \(font.name) \(font.size, specifier: "%g")")
+			Button("Choose Font") {
+				fontPicker = FontPicker(font: $font)
+				fontPicker.open()
+			}
 		}
-		Text("Font: \(font.name) \(font.size, specifier: "%g")")
 	}
 }

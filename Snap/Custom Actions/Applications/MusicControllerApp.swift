@@ -31,7 +31,6 @@ struct MusicControllerApp: ApplicationSearchItem {
 				Image(nsImage: currentSong.artwork)
 					.resizable()
 					.frame(width: 150, height: 150)
-				Spacer()
 				Text(currentSong.name)
 					.font(.title)
 					.fontWeight(.semibold)
@@ -39,11 +38,11 @@ struct MusicControllerApp: ApplicationSearchItem {
 				Text(currentSong.artist + " - " + currentSong.album)
 					.font(.title3)
 					.foregroundColor(Color.fromHexString(configuration.textColor))
-				Button(action: {
-					currentSong.stop()
-				}) {
-					Text("􀊇")
-						.foregroundColor(Color.fromHexString(configuration.textColor))
+				HStack {
+					ApplicationButton(action: { currentSong.backward() }) { Image(systemName: "backward") }
+					ApplicationButton(action: { currentSong.playpause() } ) { Image(systemName: "playpause") }
+						.padding(2)
+					ApplicationButton(action: { currentSong.forward() }) { Image(systemName: "forward") }
 				}
 				Spacer()
 			}
@@ -62,16 +61,38 @@ struct MusicControllerApp: ApplicationSearchItem {
 		var artwork: NSImage
 		
 		init() {
+			// Create a Scripting Bridge application.
 			let app: AnyObject = SBApplication(bundleIdentifier: "com.apple.music")!
 			
-			name = app.currentTrack().properties["name"] as? String ?? ""
-			album = app.currentTrack().properties["album"] as? String ?? ""
-			artist = app.currentTrack().properties["artist"] as? String ?? ""
-			artwork = (app.currentTrack().artworks[0] as AnyObject).properties["data"] as? NSImage ?? NSImage()
+			// The currently playing track.
+			let currentTrack = app.currentTrack()
+			
+			name = currentTrack.properties["name"] as? String ?? ""
+			album = currentTrack.properties["album"] as? String ?? ""
+			artist = currentTrack.properties["artist"] as? String ?? ""
+			
+			// Check if the track has artworks.
+			guard let artworks = currentTrack.artworks else {
+				artwork = NSImage()
+				return
+			}
+			
+			// Get the first artwork.
+			let artwork = artworks[0] as AnyObject
+			
+			self.artwork = artwork.properties["data"] as? NSImage ?? NSImage()
 		}
 		
-		func stop() {
+		func playpause() {
 			AppleScript.executeByTellingSystemEvents(string: "tell application \"Music\" to playpause")
+		}
+		
+		func forward() {
+			AppleScript.executeByTellingSystemEvents(string: "tell application \"Music\" to next track")
+		}
+		
+		func backward() {
+			AppleScript.executeByTellingSystemEvents(string: "tell application \"Music\" to previous track")
 		}
 	}
 }

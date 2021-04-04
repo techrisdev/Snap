@@ -13,26 +13,16 @@ struct ApplicationView: View {
 			Color.fromHexString(configuration.backgroundColor)
 			VStack {
 				HStack {
-					Button(action: {
+					// A button for closing the application.
+					ApplicationButton(action: {
 						NotificationCenter.default.post(name: .ApplicationShouldExit, object: nil)
-					}) {
-						Text("􀁡")
-							.foregroundColor(Color.fromHexString(configuration.textColor))
-					}
+					}) { Text("􀁡") }
 					.padding()
-					
 					Spacer()
 				}
-				Spacer()
 				content
+				Spacer()
 			}
 		}
-	}
-}
-
-struct ApplicationView_Previews: PreviewProvider {
-	static var previews: some View {
-		ApplicationView(content: AnyView(Text("Hello, World")
-											.foregroundColor(.white)))
 	}
 }

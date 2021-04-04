@@ -59,9 +59,6 @@ struct SearchView: View {
 		.onReceive(notificationCenter.publisher(for: .ReturnKeyWasPressed)) { _ in
 			// When the return key was pressed, then open the selected item.
 			if search.results.indices.contains(selectedItemIndex) {
-				// If an action gets executed, then deactivate the application.
-				snap.deactivate()
-				
 				// If the item doesn't accept arguments, then give it the whole string.
 				let currentSearchArguments = selectedItem.acceptsArguments ? self.currentSearchArguments : text
 				
@@ -80,6 +77,9 @@ struct SearchView: View {
 						application = applicationItem
 						return
 					}
+					
+					// If another application will be activated, deactivate Snap.
+					snap.deactivate()
 					
 					// Execute the item's action.
 					selectedItem.action(currentSearchArguments)
