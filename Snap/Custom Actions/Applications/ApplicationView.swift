@@ -10,7 +10,7 @@ struct ApplicationView: View {
 	let configuration = Configuration.decoded
 	var body: some View {
 		ZStack {
-			Color.fromHexString(configuration.backgroundColor)
+			configuration.backgroundColor.color
 			VStack {
 				HStack {
 					// A button for closing the application.

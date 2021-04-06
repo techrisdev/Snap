@@ -8,15 +8,15 @@ struct SettingsView: View {
 	static private let configuration = Configuration.decoded
 	
 	// General Settings
-	@State private var backgroundColor = Color.fromHexString(configuration.backgroundColor)
-	@State private var textColor = Color.fromHexString(configuration.textColor)
+	@State private var backgroundColor = configuration.backgroundColor.color
+	@State private var textColor = configuration.textColor.color
 	@State private var activationKeyboardShortcut = configuration.activationKeyboardShortcut
 	@State private var maximumHeight = configuration.maximumHeight
 	
 	// Search bar settings
 	@State private var searchBarFont = configuration.searchBarFont
 	@State private var searchBarHeight = configuration.searchBarHeight
-	@State private var insertionPointColor = Color.fromHexString(configuration.insertionPointColor)
+	@State private var insertionPointColor = configuration.insertionPointColor.color
 	
 	// Result settings
 	@State private var showingIcons = configuration.showingIcons
@@ -27,7 +27,7 @@ struct SettingsView: View {
 	@State private var resultItemHeight = configuration.resultItemHeight
 	@State private var resultItemLimit = configuration.itemLimit
 	@State private var shouldAnimateNavigation = configuration.shouldAnimateNavigation
-	@State private var selectedItemBackgroundColor = Color.fromHexString(configuration.selectedItemBackgroundColor)
+	@State private var selectedItemBackgroundColor = configuration.selectedItemBackgroundColor.color
 	@State private var quickLookKeyboardShortcut = configuration.quickLookKeyboardShortcut
 	
 	// The state of the "Blocked Paths" popover.
@@ -152,7 +152,7 @@ struct SettingsView: View {
 					alert.addButton(withTitle: "Continue")
 
 					// Unwrap the settings window.
-					guard let settingsWindow = Snap.standard.settingsWindow else { return }
+					guard let settingsWindow = Snap.default.settingsWindow else { return }
 					
 					// Show the alert.
 					alert.beginSheetModal(for: settingsWindow, completionHandler: { response in

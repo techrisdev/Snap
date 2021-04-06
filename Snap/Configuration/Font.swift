@@ -2,13 +2,18 @@
 //
 // Created by TeChris on 02.04.21.
 
-import Cocoa
+import SwiftUI
 
 struct Font: Codable {
 	/// The font converted to a NSFont.
 	var nsFont: NSFont {
 		guard let font = NSFont(name: name, size: size) else { return NSFont() }
 		return font
+	}
+	
+	/// The font converted to a SwiftUI font.
+	var font: SwiftUI.Font {
+		return SwiftUI.Font(nsFont)
 	}
 	
 	/// Initialize the structure.

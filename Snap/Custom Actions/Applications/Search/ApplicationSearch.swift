@@ -33,6 +33,8 @@ struct ApplicationSearch {
 		switch application {
 		case .music:
 			return MusicControllerApp()
+		case .clipboardHistory:
+			return ClipboardHistoryApp()
 		}
 	}
 }

@@ -10,6 +10,11 @@ struct Icon: Codable {
 	
 	private var nsImage: NSImage? = nil
 	
+	/// Initialize with a NSImage.
+	init(_ nsImage: NSImage) {
+		self.nsImage = nsImage
+	}
+	
 	init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 		path = try container.decodeIfPresent(String.self, forKey: .path)

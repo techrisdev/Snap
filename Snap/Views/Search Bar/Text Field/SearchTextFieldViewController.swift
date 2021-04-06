@@ -21,7 +21,7 @@ class SearchTextFieldViewController: NSViewController, NSTextFieldDelegate {
 	let configuration = Configuration.decoded
 	
 	lazy var textColor: NSColor = {
-		let color = Color.fromHexString(configuration.textColor)
+		let color = configuration.textColor.color
 		return NSColor(color)
 	}()
 	
@@ -48,7 +48,7 @@ class SearchTextFieldViewController: NSViewController, NSTextFieldDelegate {
 		//textField.placeholderAttributedString = NSAttributedString(string: "Search", attributes: [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : textColor.withAlphaComponent(0.6), NSAttributedString.Key.baselineOffset : -(font.pointSize / 2)])
 		
 		// Configure the text field's text and colors.
-		let backgroundColor = NSColor(.fromHexString(configuration.backgroundColor))
+		let backgroundColor = NSColor(configuration.backgroundColor.color)
 		textField.backgroundColor = backgroundColor
 		textField.textColor = textColor
 		textField.setFont(font)
@@ -70,7 +70,7 @@ class SearchTextFieldViewController: NSViewController, NSTextFieldDelegate {
 		view.window?.makeFirstResponder(view)
 		
 		// Change the insertion point color.
-		fieldEditor.insertionPointColor = NSColor(.fromHexString(configuration.insertionPointColor))
+		fieldEditor.insertionPointColor = NSColor(configuration.insertionPointColor.color)
 		
 		// Select all characters so the user can start typing.
 		textField.selectText(nil)

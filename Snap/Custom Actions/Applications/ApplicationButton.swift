@@ -7,13 +7,13 @@ import SwiftUI
 /// A button which uses the reversed configured colors so the user recognizes them as interactive.
 struct ApplicationButton<Label> : View where Label : View {
 	var action: () -> Void
+	var frame: NSSize = NSSize(width: 30, height: 25)
 	var label: () -> Label
-	
 	// The color is reversed: Here, the foreground color is the background color.
-	private let foregroundColor = Color.fromHexString(Configuration.decoded.backgroundColor)
+	private let foregroundColor = Configuration.decoded.backgroundColor.color
 	
 	// Here, the color is reversed as well.
-	private let backgroundColor = Color.fromHexString(Configuration.decoded.textColor)
+	private let backgroundColor = Configuration.decoded.textColor.color
 	var body: some View {
 		Button(action: action) {
 			ZStack {
@@ -24,7 +24,7 @@ struct ApplicationButton<Label> : View where Label : View {
 					.foregroundColor(foregroundColor)
 			}
 		}
-		.frame(width: 30, height: 25)
+		.frame(width: frame.width, height: frame.height)
 		.buttonStyle(PlainButtonStyle())
 	}
 }

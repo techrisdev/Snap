@@ -10,123 +10,121 @@ struct SearchView: View {
 	@State private var selectedItemIndex = 0
 	@State private var text = ""
 	@State private var showingPath = false
-	@State private var application: ApplicationSearchItem? = nil
+	@State var application: ApplicationSearchItem? = nil
 	
 	private let configuration = Configuration.decoded
 	private let notificationCenter = NotificationCenter.default
-	private let snap = Snap.standard
+	private let snap = Snap.default
 	private let quickLook = QuickLook()
 	
 	var body: some View {
-		VStack {
-			ZStack {
-				Color.fromHexString(configuration.backgroundColor)
-				
-				if application == nil {
-					VStack {
-						SearchBarView(text: $text)
-						SearchResultView(results: search.results, selectedItemIndex: selectedItemIndex, text: text, currentSearchArguments: currentSearchArguments, showingPath: $showingPath)
-					}
+		ZStack {
+			configuration.backgroundColor.color
+			
+			if application == nil {
+				VStack {
+					SearchBarView(text: $text)
+					SearchResultView(results: search.results, selectedItemIndex: selectedItemIndex, text: text, currentSearchArguments: currentSearchArguments, showingPath: $showingPath)
 				}
-					
-				application?.view
-			}
-		}
-		.frame(height: !search.results.isEmpty ? configuration.maximumHeight : configuration.searchBarHeight)
-		.frame(maxWidth: .infinity, maxHeight: search.results.isEmpty ? configuration.searchBarHeight : .infinity)
-		.onChange(of: text, perform: { _ in
-			// If the text doesn't contain any characters, then...
-			if text.count == 0 {
-				// Stop the search.
-				search.stopSearch()
-				
-				// Empty the results so no results get displayed.
-				search.results = [SearchItem]()
-				
-				// Return from the Closure.
-				return
-			}
-			
-			// If there are more than 0 characters, then search for the string.
-			search.startSearchForString(text)
-			
-			// Reset the application.
-			application = nil
-			
-			// Reset the selected item.
-			selectedItemIndex = 0
-		})
-		.onReceive(notificationCenter.publisher(for: .ReturnKeyWasPressed)) { _ in
-			// When the return key was pressed, then open the selected item.
-			if search.results.indices.contains(selectedItemIndex) {
-				// If the item doesn't accept arguments, then give it the whole string.
-				let currentSearchArguments = selectedItem.acceptsArguments ? self.currentSearchArguments : text
-				
-				// If the path is shown, then open the path in Finder. If it isn't, then do the default action for the item.
-				if !showingPath {
-					// If the item is a web search item, then do then check if the item takes its name as an argument.
-					if let webSearchItem = selectedItem as? WebSearchItem {
-						if webSearchItem.takesNameAsArgument {
-							webSearchItem.action(selectedItem.name)
-							return
-						}
-					}
-					
-					// If the item is an application item, then display the view.
-					if let applicationItem = selectedItem as? ApplicationSearchItem {
-						application = applicationItem
+				.onChange(of: text, perform: { _ in
+					// If the text doesn't contain any characters, then...
+					if text.count == 0 {
+						// Stop the search.
+						search.stopSearch()
+						
+						// Empty the results so no results get displayed.
+						search.results = [SearchItem]()
+						
+						// Return from the Closure.
 						return
 					}
 					
-					// If another application will be activated, deactivate Snap.
-					snap.deactivate()
+					// If there are more than 0 characters, then search for the string.
+					search.startSearchForString(text)
 					
-					// Execute the item's action.
-					selectedItem.action(currentSearchArguments)
-				} else {
-					// Open the URL in Finder.
-					NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: selectedItem.path)])
+					// Reset the application.
+					application = nil
+					
+					// Reset the selected item.
+					selectedItemIndex = 0
+				})
+				.onReceive(notificationCenter.publisher(for: .ReturnKeyWasPressed)) { _ in
+					// When the return key was pressed, then open the selected item.
+					if search.results.indices.contains(selectedItemIndex) {
+						// If the item doesn't accept arguments, then give it the whole string.
+						let currentSearchArguments = selectedItem.acceptsArguments ? self.currentSearchArguments : text
+						
+						// If the path is shown, then open the path in Finder. If it isn't, then do the default action for the item.
+						if !showingPath {
+							// If the item is a web search item, then do then check if the item takes its name as an argument.
+							if let webSearchItem = selectedItem as? WebSearchItem {
+								if webSearchItem.takesNameAsArgument {
+									webSearchItem.action(selectedItem.name)
+									return
+								}
+							}
+							
+							// If the item is an application item, then display the view.
+							if let applicationItem = selectedItem as? ApplicationSearchItem {
+								application = applicationItem
+								return
+							}
+							
+							// If another application will be activated, deactivate Snap.
+							snap.deactivate()
+							
+							// Execute the item's action.
+							selectedItem.action(currentSearchArguments)
+						} else {
+							// Open the URL in Finder.
+							NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: selectedItem.path)])
+						}
+					}
 				}
-			}
-		}
-		.onReceive(notificationCenter.publisher(for: .UpArrowKeyWasPressed)) { _ in
-			let newIndex = selectedItemIndex - 1
-			
-			// Update the selected item.
-			updateSelectedItemIndex(to: newIndex)
-		}
-		.onReceive(notificationCenter.publisher(for: .DownArrowKeyWasPressed)) { _ in
-			let newIndex = selectedItemIndex + 1
-			
-			// Update the selected item.
-			updateSelectedItemIndex(to: newIndex)
-		}
-		.onReceive(notificationCenter.publisher(for: .TabKeyWasPressed)) { _ in
-			// If the search result contains the currently selected item, Complete the current search item.
-			if search.results.indices.contains(0) {
-				text = search.results[selectedItemIndex].name
-				
-				// If the currently selected item accepts arguments, then append a space at the end, so the user can start typing arguments immediately.
-				if search.results[selectedItemIndex].acceptsArguments {
-					text += " "
+				.onReceive(notificationCenter.publisher(for: .UpArrowKeyWasPressed)) { _ in
+					let newIndex = selectedItemIndex - 1
+					
+					// Update the selected item.
+					updateSelectedItemIndex(to: newIndex)
 				}
+				.onReceive(notificationCenter.publisher(for: .DownArrowKeyWasPressed)) { _ in
+					let newIndex = selectedItemIndex + 1
+					
+					// Update the selected item.
+					updateSelectedItemIndex(to: newIndex)
+				}
+				.onReceive(notificationCenter.publisher(for: .TabKeyWasPressed)) { _ in
+					// If the search result contains the currently selected item, Complete the current search item.
+					if search.results.indices.contains(0) {
+						text = search.results[selectedItemIndex].name
+						
+						// If the currently selected item accepts arguments, then append a space at the end, so the user can start typing arguments immediately.
+						if search.results[selectedItemIndex].acceptsArguments {
+							text += " "
+						}
+					}
+				}
+				.onReceive(notificationCenter.publisher(for: .ShouldPresentQuickLook), perform: { _ in
+					// Open a preview panel.
+					quickLook.filePath = selectedItem.path
+					quickLook.present()
+				})
+				.onReceive(notificationCenter.publisher(for: QuickLook.panelWillCloseNotification), perform: { _ in
+					// Stop listening for notifications.
+					quickLook.stopObserving()
+					
+					// Activate the search window.
+					snap.activate()
+				})
 			}
+			
+			application?.view
 		}
+		.frame(height: !search.results.isEmpty ? configuration.maximumHeight : configuration.searchBarHeight)
+		.frame(maxWidth: .infinity, maxHeight: search.results.isEmpty ? configuration.searchBarHeight : .infinity)
 		.onReceive(notificationCenter.publisher(for: .ApplicationShouldExit), perform: { _ in
 			// When the current application should exit, then set it to nil.
 			application = nil
-		})
-		.onReceive(notificationCenter.publisher(for: .ShouldPresentQuickLook), perform: { _ in
-			// Open a preview panel.
-			quickLook.filePath = selectedItem.path
-			quickLook.present()
-		})
-		.onReceive(notificationCenter.publisher(for: QuickLook.panelWillCloseNotification), perform: { _ in
-			// Stop listening for notifications.
-			quickLook.stopObserving()
-			
-			// Activate the search window.
-			snap.activate()
 		})
 		.onAppear(perform: {
 			// Add a monitor for key events to get notified when certain keys get pressed.

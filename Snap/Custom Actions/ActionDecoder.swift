@@ -13,7 +13,7 @@ struct ActionDecoder {
 		
 		// The urls where actions are stored.
 		let defaultActionsURL = Bundle.main.url(forResource: "Actions", withExtension: "json")!
-		let userDefinedActionsURL = URL(fileURLWithPath: Configuration.applicationSupportURL.path + "Actions.json")
+		let userDefinedActionsURL = URL(fileURLWithPath: Snap.applicationSupportURL.path + "Actions.json")
 		
 		var result = [ActionSearchItem]()
 		

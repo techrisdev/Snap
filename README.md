@@ -1,5 +1,5 @@
 <p align="center">
-	<img width="256" height="256" src="https://github.com/techrisdev/Snap/raw/main/Snap/Assets.xcassets/AppIcon.appiconset/Icon-256.png">
+	<img width="256" height="256" src="https://github.com/techrisdev/Snap/raw/main/Snap/Assets.xcassets/AppIcon.appiconset/Icon-512.png">
 </p>
 
 <h1 align="center">Snap</h1>
@@ -7,7 +7,7 @@
 
 ## Introduction
 
-Snap is an application which searches your Files, Contacts and Calendar events using Spotlight Metadata. It has many customization options as well as the ability to speed up your workflow by providing features like music control and system commands like sleeping, restarting and shutting down the computer. It is inspired by [Alfred](https://alfredapp.com).
+Snap is an application which searches your Files, Contacts and Calendar events using Spotlight Metadata. It has many customization options as well as the ability to speed up your workflow by providing features like music control, clipboard history and system commands like sleeping, restarting and shutting down the computer. It is inspired by [Alfred](https://alfredapp.com).
 
 ## Features
 
@@ -17,6 +17,7 @@ Snap is an application which searches your Files, Contacts and Calendar events u
 * Generally faster than Spotlight
 * Customizable
 * Custom applications like a Music Controller
+* Clipboard History
 * Actions like restarting the computer
 * Web search
 * Quick Look previews

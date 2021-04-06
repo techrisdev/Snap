@@ -7,8 +7,6 @@ import SwiftUI
 struct Configuration: Codable {
 	static let decoded = decodeConfigurationFile()
 	
-	static let applicationSupportURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("Snap/")
-	
 	// General Settings
 	var backgroundColor: String
 	var textColor: String
@@ -36,6 +34,7 @@ struct Configuration: Codable {
 		let decoder = JSONDecoder()
 		let defaultConfigurationURL = Bundle.main.url(forResource: "DefaultConfiguration", withExtension: "json")!
 		
+		let applicationSupportURL = Snap.applicationSupportURL
 		do {
 			let fileManager = FileManager.default
 
@@ -85,7 +84,7 @@ struct Configuration: Codable {
 			let jsonData = try encoder.encode(self)
 			
 			// Write the data.
-			try jsonData.write(to: Configuration.applicationSupportURL.appendingPathComponent("/Configuration.json"))
+			try jsonData.write(to: Snap.applicationSupportURL.appendingPathComponent("/Configuration.json"))
 		} catch {
 			fatalError("Failed to write the configuration. Error: \n\(error)")
 		}

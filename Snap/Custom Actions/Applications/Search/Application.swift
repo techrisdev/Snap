@@ -6,4 +6,5 @@ import Foundation
 
 enum Application: String, CaseIterable {
 	case music = "Music Controller"
+	case clipboardHistory = "Clipboard History"
 }

@@ -17,9 +17,7 @@ struct MusicControllerApp: ApplicationSearchItem {
 	
 	var name = "Music Controller"
 	
-	var view: ApplicationView {
-		return ApplicationView(content: AnyView(MusicControllerView()))
-	}
+	let view = ApplicationView(content: AnyView(MusicControllerView()))
 	
 	struct MusicControllerView: View {
 		@State private var currentSong = Song()
@@ -34,15 +32,15 @@ struct MusicControllerApp: ApplicationSearchItem {
 				Text(currentSong.name)
 					.font(.title)
 					.fontWeight(.semibold)
-					.foregroundColor(Color.fromHexString(configuration.textColor))
+					.foregroundColor(configuration.textColor.color)
 				Text(currentSong.artist + " - " + currentSong.album)
 					.font(.title3)
-					.foregroundColor(Color.fromHexString(configuration.textColor))
+					.foregroundColor(configuration.textColor.color)
 				HStack {
-					ApplicationButton(action: { currentSong.backward() }) { Image(systemName: "backward") }
-					ApplicationButton(action: { currentSong.playpause() } ) { Image(systemName: "playpause") }
-						.padding(2)
-					ApplicationButton(action: { currentSong.forward() }) { Image(systemName: "forward") }
+					ApplicationButton(action: { currentSong.nextTrack() }) { Image(systemName: "backward") }
+					ApplicationButton(action: { currentSong.playpause() }) { Image(systemName: "playpause") }
+						.padding(2.5)
+					ApplicationButton(action: { currentSong.previousTrack() }) { Image(systemName: "forward") }
 				}
 				Spacer()
 			}
@@ -87,11 +85,11 @@ struct MusicControllerApp: ApplicationSearchItem {
 			AppleScript.executeByTellingSystemEvents(string: "tell application \"Music\" to playpause")
 		}
 		
-		func forward() {
+		func nextTrack() {
 			AppleScript.executeByTellingSystemEvents(string: "tell application \"Music\" to next track")
 		}
 		
-		func backward() {
+		func previousTrack() {
 			AppleScript.executeByTellingSystemEvents(string: "tell application \"Music\" to previous track")
 		}
 	}

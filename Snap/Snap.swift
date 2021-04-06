@@ -7,7 +7,13 @@ import SwiftUI
 
 class Snap {
 	/// The app delegate's snap instance.
-	static let standard = (NSApp.delegate as! AppDelegate).snap
+	static let `default` = (NSApp.delegate as! AppDelegate).snap
+	
+	/// The URL to the application support directory for Snap.
+	static let applicationSupportURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("Snap/")
+	
+	/// The clipboard manager.
+	private let clipboardManager = ClipboardManager()
 	
 	/// The menu bar status item.
 	private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
@@ -33,6 +39,9 @@ class Snap {
 		
 		// Setup the keyboard shortcuts.
 		setupKeyboardShortcuts()
+		
+		// Start the clipboard manager.
+		clipboardManager.start()
 	}
 	
 	let notificationCenter = NotificationCenter.default
@@ -81,10 +90,9 @@ class Snap {
 	}
 	
 	private func openSearchWindow() {
-		// Create the SwiftUI view that provides the window contents.
-		let searchView = SearchView()
+		let contentView = SearchView()
 		
-		// Create the window and set the content view.
+		// Create the window and set the content view as the window's view.
 		window = NSWindow(
 			contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
 			styleMask: [.fullSizeContentView],
@@ -94,7 +102,7 @@ class Snap {
 		window.backgroundColor = .clear
 		window.hasShadow = false
 		window.level = .floating
-		window.contentView = NSHostingView(rootView: searchView)
+		window.contentView = NSHostingView(rootView: contentView)
 		
 		// Open the window and activate the application.
 		activate()
@@ -168,7 +176,7 @@ class Snap {
 	
 	/// A monitor which recognizes specific key events and sends notifications.
 	func addKeyboardMonitor() {
-		monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { [self] event in
+		monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { [notificationCenter] event in
 			// The Up-Arrow key was pressed.
 			if event.keyCode == 126 {
 				// Post a notification.

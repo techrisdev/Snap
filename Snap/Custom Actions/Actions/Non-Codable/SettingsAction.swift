@@ -12,6 +12,6 @@ struct SettingsAction: SearchItem {
 	var acceptsArguments = false
 	
 	var action: (String) -> Void = { _ in
-		Snap.standard.showSettingsWindow()
+		Snap.default.showSettingsWindow()
 	}
 }

@@ -10,12 +10,6 @@ protocol ApplicationSearchItem: SearchItem {
 }
 
 extension ApplicationSearchItem {
-	var view: ApplicationView {
-		get {
-			return ApplicationView(content: AnyView(Text("Generic Application.")))
-		}
-	}
-	
 	var action: (String) -> Void {
 		get {
 			return { _ in }

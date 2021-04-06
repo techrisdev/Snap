@@ -12,38 +12,20 @@ struct SearchItemView: View {
 	let configuration = Configuration.decoded
 	var body: some View {
 		ZStack {
-			// If the item is the selected item, give it a background.
-			if isSelectedItem {
-				Color.fromHexString(configuration.selectedItemBackgroundColor)
-					.frame(maxHeight: configuration.resultItemHeight)
+			ItemView(icon: item.icon, isSelectedItem: isSelectedItem) {
+				Text(item.name)
 			}
 			
-			VStack {
+			if isSelectedItem, isShowingPath, let item = item as? SpotlightSearchItem {
+				configuration.selectedItemBackgroundColor.color
 				HStack {
-					if configuration.showingIcons {
-						Image(nsImage: item.icon.image)
-					}
-					
-					Spacer()
-					Text(item.name)
-						.font(.init(configuration.resultItemFont.nsFont))
-						.foregroundColor(Color.fromHexString(configuration.textColor))
+					Text(item.path)
+						.font(configuration.resultItemFont.font)
+						.foregroundColor(configuration.textColor.color)
 					Spacer()
 				}
-				
-				if isShowingPath {
-					if let item = (item as? SpotlightSearchItem) {
-						HStack {
-							Text(item.path)
-								.font(.system(size: 12))
-								.foregroundColor(Color.fromHexString(configuration.textColor))
-							Spacer()
-						}
-						.padding(.bottom, 3.5)
-					}
-				}
+				.padding([.leading, .trailing], 5)
 			}
-			.padding()
 		}
 	}
 }
