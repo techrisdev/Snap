@@ -8,38 +8,37 @@ struct ClipboardHistoryItem: Codable {
 	let id = UUID()
 	var data: Data
 	
-	// MARK: TODO: Only strings work right now.
 	/// Get an image from the item's data.
 	var image: NSImage? {
-		if let path = String(data: data, encoding: .utf8), let image = NSImage(contentsOf: URL(fileURLWithPath: path)) {
+		if let string = String(data: data, encoding: .utf8), let url = URL(string: string), let image = NSImage(contentsOf: url) {
 			// The item is an image, return it.
+			return image
+		} else if let image = NSImage(data: data) {
+			// If the image accepts the data directly (tiff or png format), then return it.
 			return image
 		}
 		
 		return nil
 	}
 	
-	// MARK: TODO: Only strings work right now.
 	/// Get file contents from the item's data.
 	var file: String? {
-		if let path = String(data: data, encoding: .utf8), let file = try? String(contentsOfFile: path) {
+		if let path = String(data: data, encoding: .utf8), let url = URL(string: path), let file = try? String(contentsOf: url) {
 			return file
 		}
 		
 		return nil
 	}
 	
+	/// Get a string from the item's data.
 	var string: String? {
-		// Check if the data is a string.
-		guard let string = String(data: data, encoding: .utf8) else { return nil }
-		return string
-	}
-	
-	var type: NSPasteboard.PasteboardType {
-		if image != nil {
-			return .png
+		// Normally, if a string gets copied, the first type in the types array is Rich Text format. That means, we need to convert the data to normal format so it gets displayed properly.
+		if let attributedString = NSAttributedString(rtf: data, documentAttributes: nil) {
+			return attributedString.string
 		} else {
-			return .string
+			// If the attributed string is nil, then return a normal string.
+			let string = String(data: data, encoding: .utf8)
+			return string
 		}
 	}
 	

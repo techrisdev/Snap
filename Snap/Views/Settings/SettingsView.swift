@@ -30,11 +30,11 @@ struct SettingsView: View {
 	@State private var selectedItemBackgroundColor = configuration.selectedItemBackgroundColor.color
 	@State private var quickLookKeyboardShortcut = configuration.quickLookKeyboardShortcut
 	
+	// Clipboard history settings
+	@State private var historyItemLimit = configuration.historyItemLimit
+	
 	// The state of the "Blocked Paths" popover.
 	@State private var showingBlockedPaths = false
-	
-	// The font picker, it will be set later.
-	//@State private var fontPicker: FontPicker!
 	
 	var body: some View {
 		VStack {
@@ -130,6 +130,9 @@ struct SettingsView: View {
 						}
 					}
 				}
+				SettingsSection(text: "Clipboard History") {
+					Stepper("Item Limit: \(historyItemLimit)", value: $historyItemLimit)
+				}
 			}
 			
 			Spacer()
@@ -137,7 +140,7 @@ struct SettingsView: View {
 				Spacer()
 				Button("Save") {
 					// Create a configuration with all settings.
-					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, maximumHeight: maximumHeight, searchBarFont: searchBarFont, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, showingIcons: showingIcons, blockedPaths: blockedPaths, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, resultItemFont: resultItemFont, resultItemHeight: resultItemHeight, itemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString, quickLookKeyboardShortcut: quickLookKeyboardShortcut)
+					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, maximumHeight: maximumHeight, searchBarFont: searchBarFont, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, showingIcons: showingIcons, blockedPaths: blockedPaths, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, resultItemFont: resultItemFont, resultItemHeight: resultItemHeight, itemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString, quickLookKeyboardShortcut: quickLookKeyboardShortcut, historyItemLimit: historyItemLimit)
 					
 					// Write the new configuration to the configuration path.
 					newConfiguration.write()

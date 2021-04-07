@@ -29,6 +29,9 @@ struct Configuration: Codable {
 	var shouldAnimateNavigation: Bool
 	var selectedItemBackgroundColor: String
 	var quickLookKeyboardShortcut: KeyboardShortcut
+	
+	// Clipboard History
+	var historyItemLimit: Int
 
 	static private func decodeConfigurationFile() -> Configuration {
 		let decoder = JSONDecoder()

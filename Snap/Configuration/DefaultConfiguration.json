@@ -33,5 +33,6 @@
 		"keyCode": 0,
 		"carbonModifiers": 256,
 		"events": ["keyDown"]
-	}
+	},
+	"historyItemLimit": 10
 }

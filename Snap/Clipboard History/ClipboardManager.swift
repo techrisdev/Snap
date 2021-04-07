@@ -2,7 +2,7 @@
 //
 // Created by TeChris on 05.04.21.
 
-import AppKit
+import AppKit.NSPasteboard
 
 class ClipboardManager {
 	/// Start listening for changes in the clipboard.
@@ -12,29 +12,38 @@ class ClipboardManager {
 	
 	private let pasteboard = NSPasteboard.general
 	
-	private var currentData = ClipboardHistory.decoded.items.last?.data ?? Data()
-	
-	private var history = ClipboardHistory.decoded
+	private var currentItem = ClipboardHistory.decoded.items.last
 	
 	private func listenToClipboardChanges() {
-		DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 1.75, execute: { [pasteboard, updateHistory, listenToClipboardChanges] in
+		DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 1.75, execute: { [pasteboard, listenToClipboardChanges] in
 			// Check for changes.
-			
-			if let data = pasteboard.data(forType: .string) {
-				if self.currentData != data {
-					// Update the data.
-					self.currentData = data
-					
-					// Update the history.
-					self.history.items.insert(ClipboardHistoryItem(data: self.currentData), at: 0)
-					updateHistory()
+			if let types = pasteboard.types, types.count > 0 {
+				// The first type from the types array should be the default type.
+				let type = types[0]
+				if let data = pasteboard.data(forType: type) {
+					let newItem = ClipboardHistoryItem(data: data)
+					if self.currentItem?.data != newItem.data {
+						// Update the item.
+						self.currentItem = newItem
+						
+						// Update the history.
+						self.updateClipboardHistory(with: newItem)
+					}
 				}
 			}
 			listenToClipboardChanges()
 		})
 	}
 	
-	private func updateHistory() {
+	private func updateClipboardHistory(with item: ClipboardHistoryItem) {
+		// Create a new history with the item.
+		var history = ClipboardHistory.decoded
+		history.items.insert(item, at: 0)
+		
+		if history.items.count >= Configuration.decoded.historyItemLimit {
+			history.items.removeLast()
+		}
+		
 		// Write the new clipboard history to the default path.
 		history.write()
 	}

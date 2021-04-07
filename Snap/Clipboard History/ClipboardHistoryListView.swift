@@ -16,49 +16,74 @@ struct ClipboardHistoryListView: View {
 			Text("Your history is empty!")
 				.font(configuration.resultItemFont.font)
 		}
-		ScrollView {
-			ScrollViewReader { value in
-				ForEach(items, id: \.id) { item in
-					Button(action: {
-						// Copy the data to the clipboard.
-						copySelectedItemToClipboard()
-					}) {
-						// MARK: TODO: Only strings work right now.
-						ItemView(icon: nil, isSelectedItem: item.id == selectedItem.id) {
-							if item.image != nil {
-								Image(nsImage: item.image!)
-							} else if item.file != nil {
-								Text(item.file!)
-							} else if item.string != nil {
-								Text(item.string!)
+		HStack {
+			ScrollView {
+				ScrollViewReader { value in
+					ForEach(items, id: \.id) { item in
+						Button(action: {
+							// Copy the data to the clipboard.
+							copySelectedItemToClipboard()
+						}) {
+							// MARK: TODO: Only strings work right now.
+							ItemView(icon: nil, isSelectedItem: item.id == selectedItem.id) {
+								if item.image != nil {
+									Image(nsImage: item.image!)
+										.resizable()
+										.scaledToFit()
+								} else if item.file != nil {
+									Text(item.file!)
+								} else if item.string != nil {
+									Text(item.string!)
+								}
 							}
 						}
+						.id(item.id)
+						.frame(height: configuration.resultItemHeight)
+						.buttonStyle(PlainButtonStyle())
+						
 					}
-					.id(item.id)
-					.frame(height: configuration.resultItemHeight)
-					.buttonStyle(PlainButtonStyle())
-					
-				}
-				.onChange(of: selectedItemIndex) { _ in
-					// Check if the selected item exists; If it does, then scroll down to the item.
-					if items.indices.contains(selectedItemIndex) {
-						value.scrollTo(items[selectedItemIndex].id, anchor: .center)
+					.onChange(of: selectedItemIndex) { _ in
+						// Check if the selected item exists; If it does, then scroll down to the item.
+						if items.indices.contains(selectedItemIndex) {
+							value.scrollTo(items[selectedItemIndex].id, anchor: .center)
+						}
 					}
 				}
 			}
+			.onReceive(notificationCenter.publisher(for: .ReturnKeyWasPressed), perform: { _ in
+				// When the return key was pressed, then copy the selected item's data to the clipboard.
+				copySelectedItemToClipboard()
+			})
+			.onReceive(notificationCenter.publisher(for: .UpArrowKeyWasPressed), perform: { _ in
+				// Update the index.
+				updateSelectedItemIndex(selectedItemIndex - 1)
+			})
+			.onReceive(notificationCenter.publisher(for: .DownArrowKeyWasPressed), perform: { _ in
+				// Update the index.
+				updateSelectedItemIndex(selectedItemIndex + 1)
+			})
+			if items.count > 0 {
+				VStack {
+					if selectedItem.image != nil {
+						Image(nsImage: selectedItem.image!)
+							.resizable()
+							.scaledToFit()
+					} else if selectedItem.file != nil {
+						Text(selectedItem.file!)
+							.font(configuration.resultItemFont.font)
+							.foregroundColor(configuration.textColor.color)
+					} else if selectedItem.string != nil {
+						HStack {
+							Spacer()
+							Text(selectedItem.string!)
+								.font(configuration.resultItemFont.font)
+								.foregroundColor(configuration.textColor.color)
+						}
+					}
+				}
+				.frame(maxWidth: 240)
+			}
 		}
-		.onReceive(notificationCenter.publisher(for: .ReturnKeyWasPressed), perform: { _ in
-			// When the return key was pressed, then copy the selected item's data to the clipboard.
-			copySelectedItemToClipboard()
-		})
-		.onReceive(notificationCenter.publisher(for: .UpArrowKeyWasPressed), perform: { _ in
-			// Update the index.
-			updateSelectedItemIndex(selectedItemIndex - 1)
-		})
-		.onReceive(notificationCenter.publisher(for: .DownArrowKeyWasPressed), perform: { _ in
-			// Update the index.
-			updateSelectedItemIndex(selectedItemIndex + 1)
-		})
 	}
 	
 	func updateSelectedItemIndex(_ index: Int) {
@@ -72,8 +97,17 @@ struct ClipboardHistoryListView: View {
 	func copySelectedItemToClipboard() {
 		// Copy the selected item's data to the clipboard.
 		let pasteboard = NSPasteboard.general
-		pasteboard.declareTypes([selectedItem.type], owner: nil)
-		pasteboard.setData(selectedItem.data, forType: selectedItem.type)
+		if let image = selectedItem.image {
+			pasteboard.declareTypes([.tiff], owner: nil)
+			pasteboard.setData(image.tiffRepresentation, forType: .tiff)
+		} else {
+			pasteboard.declareTypes([.string], owner: nil)
+			if let file = selectedItem.file {
+				pasteboard.setData(file.data(using: .utf8), forType: .string)
+			} else {
+				pasteboard.setData(selectedItem.string?.data(using: .utf8), forType: .string)
+			}
+		}
 	}
 	
 	var selectedItem: ClipboardHistoryItem {
