@@ -15,7 +15,7 @@ struct ApplicationView: View {
 				HStack {
 					// A button for closing the application.
 					ApplicationButton(action: {
-						NotificationCenter.default.post(name: .ApplicationShouldExit, object: nil)
+						close()
 					}) { Text("􀁡") }
 					.padding()
 					Spacer()
@@ -24,5 +24,13 @@ struct ApplicationView: View {
 				Spacer()
 			}
 		}
+		.onReceive(NotificationCenter.default.publisher(for: .EscapeKeyWasPressed), perform: { _ in
+			// When the escape key gets pressed, close the application.
+			close()
+		})
+	}
+	
+	func close() {
+		NotificationCenter.default.post(name: .ApplicationShouldExit, object: nil)
 	}
 }

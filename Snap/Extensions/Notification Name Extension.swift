@@ -10,6 +10,7 @@ extension Notification.Name {
 	static let UpArrowKeyWasPressed = NSNotification.Name("UpArrowKeyWasPressed")
 	static let DownArrowKeyWasPressed = NSNotification.Name("DownArrowKeyWasPressed")
 	static let TabKeyWasPressed = NSNotification.Name("TabKeyWasPressed")
+	static let EscapeKeyWasPressed = NSNotification.Name("EscapeKeyWasPressed")
 	static let CommandKeyPressed = NSNotification.Name("CommandKeyPressed")
 	static let CommandKeyReleased = NSNotification.Name("CommandKeyReleased")
 	static let ApplicationShouldExit = NSNotification.Name("ApplicationShouldExit")

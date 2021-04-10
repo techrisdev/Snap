@@ -2,8 +2,8 @@
 //
 // Created by TeChris on 20.03.21.
 
-import Cocoa
 import SwiftUI
+import Carbon.HIToolbox
 
 class Snap {
 	/// The app delegate's snap instance.
@@ -27,6 +27,8 @@ class Snap {
 	/// The app's settings window.
 	var settingsWindow: NSWindow?
 	
+	private let configuration = Configuration.decoded
+	
 	func start() {
 		// Request needed permissions
 		Permissions.requestPermissions()
@@ -40,8 +42,10 @@ class Snap {
 		// Setup the keyboard shortcuts.
 		setupKeyboardShortcuts()
 		
-		// Start the clipboard manager.
-		clipboardManager.start()
+		// If the clipboard history is enabled, start the clipboard manager.
+		if configuration.clipboardHistoryEnabled {
+			clipboardManager.start()
+		}
 	}
 	
 	let notificationCenter = NotificationCenter.default
@@ -94,7 +98,7 @@ class Snap {
 		
 		// Create the window and set the content view as the window's view.
 		window = NSWindow(
-			contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
+			contentRect: NSRect(x: 0, y: 0, width: configuration.maximumWidth, height: 300),
 			styleMask: [.fullSizeContentView],
 			backing: .buffered, defer: false)
 		window.isReleasedWhenClosed = false
@@ -110,7 +114,7 @@ class Snap {
 	
 	private func setupKeyboardShortcuts() {
 		// Setup the shortcut for hiding and showing the search bar.
-		KeyboardShortcutManager(keyboardShortcut: Configuration.decoded.activationKeyboardShortcut).startListeningForEvents { [self] _ in
+		KeyboardShortcutManager(keyboardShortcut: configuration.activationKeyboardShortcut).startListeningForEvents { [self] _ in
 			if window.isVisible {
 				// Before closing the window, exit out of all running custom applications.
 				notificationCenter.post(name: .ApplicationShouldExit, object: nil)
@@ -176,9 +180,9 @@ class Snap {
 	
 	/// A monitor which recognizes specific key events and sends notifications.
 	func addKeyboardMonitor() {
-		monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { [notificationCenter] event in
+		monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { [configuration, notificationCenter] event in
 			// The Up-Arrow key was pressed.
-			if event.keyCode == 126 {
+			if event.keyCode == kVK_UpArrow {
 				// Post a notification.
 				notificationCenter.post(name: .UpArrowKeyWasPressed, object: nil)
 				
@@ -187,7 +191,7 @@ class Snap {
 			}
 			
 			// The Down-Arrow key was pressed.
-			if event.keyCode == 125 {
+			if event.keyCode == kVK_DownArrow {
 				// Post a notification.
 				notificationCenter.post(name: .DownArrowKeyWasPressed, object: nil)
 				
@@ -196,7 +200,7 @@ class Snap {
 			}
 			
 			// The tab key was pressed.
-			if event.keyCode == 48 {
+			if event.keyCode == kVK_Tab {
 				// Post a notification.
 				notificationCenter.post(name: .TabKeyWasPressed, object: nil)
 				
@@ -204,9 +208,18 @@ class Snap {
 				return nil
 			}
 			
+			// The escape key was pressed.
+			if event.keyCode == kVK_Escape {
+				// Post a notification.
+				notificationCenter.post(name: .EscapeKeyWasPressed, object: nil)
+				
+				// Return from the closure.
+				return nil
+			}
+			
 			// Check if the key combination for Quick Look was pressed.
 			// Get the keyboard shortcut.
-			let quickLookKeyboardShortcut = Configuration.decoded.quickLookKeyboardShortcut
+			let quickLookKeyboardShortcut = configuration.quickLookKeyboardShortcut
 			
 			// Get the carbon modifier flags from the NSEvent.
 			let modifierFlags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)

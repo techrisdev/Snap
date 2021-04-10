@@ -10,17 +10,18 @@
 		"/usr/"
 	],
 	"resultItemHeight": 70,
-	"itemLimit": 25,
+	"resultItemLimit": 25,
 	"searchBarFont": {
-		"name": "Arial",
+		"name": "SF Pro",
 		"size": 24
 	},
 	"searchBarHeight": 50,
 	"insertionPointColor": "#FFFFFF",
+	"maximumWidth": 320,
 	"maximumHeight": 450,
 	"shouldAnimateNavigation": true,
 	"resultItemFont": {
-		"name": "Arial",
+		"name": "SF Pro",
 		"size": 18
 	},
 	"selectedItemBackgroundColor": "#0000FF",
@@ -34,5 +35,6 @@
 		"carbonModifiers": 256,
 		"events": ["keyDown"]
 	},
+	"clipboardHistoryEnabled": true,
 	"historyItemLimit": 10
 }

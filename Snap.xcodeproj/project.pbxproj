@@ -31,6 +31,7 @@
 		6C344FDD25FBF6C70042CC05 /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C344FDC25FBF6C70042CC05 /* KeyEvent.swift */; };
 		6C344FE825FCB5E40042CC05 /* MusicControllerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C344FE725FCB5E40042CC05 /* MusicControllerApp.swift */; };
 		6C344FED25FCC7C60042CC05 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C344FEC25FCC7C60042CC05 /* Bookmark.swift */; };
+		6C3E3CB4262193A6001A512C /* WebSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3E3CB3262193A6001A512C /* WebSearch.swift */; };
 		6C4B3E13260766D100632AFF /* QuickLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4B3E12260766D100632AFF /* QuickLook.swift */; };
 		6C4DF3DB25FA7E10003B6D90 /* KeyboardShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4DF3DA25FA7E10003B6D90 /* KeyboardShortcutManager.swift */; };
 		6C5B517325F7FE38000B004A /* ActionSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5B517225F7FE38000B004A /* ActionSearch.swift */; };
@@ -106,6 +107,7 @@
 		6C344FDC25FBF6C70042CC05 /* KeyEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEvent.swift; sourceTree = "<group>"; };
 		6C344FE725FCB5E40042CC05 /* MusicControllerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicControllerApp.swift; sourceTree = "<group>"; };
 		6C344FEC25FCC7C60042CC05 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
+		6C3E3CB3262193A6001A512C /* WebSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSearch.swift; sourceTree = "<group>"; };
 		6C4B3E12260766D100632AFF /* QuickLook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLook.swift; sourceTree = "<group>"; };
 		6C4DF3DA25FA7E10003B6D90 /* KeyboardShortcutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcutManager.swift; sourceTree = "<group>"; };
 		6C5B517225F7FE38000B004A /* ActionSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSearch.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 		6CB6017725FE2E7400613136 /* Web Search */ = {
 			isa = PBXGroup;
 			children = (
+				6C3E3CB3262193A6001A512C /* WebSearch.swift */,
 				6C5B51A425F915E2000B004A /* WebSearchItem.swift */,
 				6C344FD825FBBEE80042CC05 /* WebSearchType.swift */,
 			);
@@ -522,6 +525,7 @@
 				6C106F7E25F655EB0047E0B0 /* Search.swift in Sources */,
 				6C344FE825FCB5E40042CC05 /* MusicControllerApp.swift in Sources */,
 				6C5B518E25F80E15000B004A /* SpotlightSearchItem.swift in Sources */,
+				6C3E3CB4262193A6001A512C /* WebSearch.swift in Sources */,
 				6C0723D22604DE69009F0E63 /* Icon.swift in Sources */,
 				6C106F4B25F655BB0047E0B0 /* SearchView.swift in Sources */,
 				6C7873F02618C07B002D48FE /* VerticallyCenteredTextFieldCell.swift in Sources */,

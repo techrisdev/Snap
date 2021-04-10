@@ -12,20 +12,19 @@ class ClipboardManager {
 	
 	private let pasteboard = NSPasteboard.general
 	
-	private var currentItem = ClipboardHistory.decoded.items.last
+	private var currentData: Data? {
+		ClipboardHistory.decoded.items.first?.data
+	}
 	
 	private func listenToClipboardChanges() {
-		DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 1.75, execute: { [pasteboard, listenToClipboardChanges] in
+		DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 2, execute: { [pasteboard, listenToClipboardChanges] in
 			// Check for changes.
 			if let types = pasteboard.types, types.count > 0 {
 				// The first type from the types array should be the default type.
 				let type = types[0]
 				if let data = pasteboard.data(forType: type) {
 					let newItem = ClipboardHistoryItem(data: data)
-					if self.currentItem?.data != newItem.data {
-						// Update the item.
-						self.currentItem = newItem
-						
+					if self.currentData != newItem.data {
 						// Update the history.
 						self.updateClipboardHistory(with: newItem)
 					}

@@ -5,26 +5,22 @@
 import Cocoa
 
 struct WebSearchItem: SearchItem {
-	init(searchString: String, searchType: WebSearchType, name: String? = nil, acceptsArguments: Bool = false, takesNameAsArgument: Bool = false) {
-		self.searchString = searchString
+	init(searchType: WebSearchType, name: String? = nil, acceptsArguments: Bool = false, takesNameAsArgument: Bool = false) {
 		self.searchType = searchType
 		self.takesNameAsArgument = takesNameAsArgument
-		
-		let name = name ?? searchType.rawValue
+		self.acceptsArguments = acceptsArguments
+		var name = "Web Search"
 
-		switch searchType {
-		case .google:
-			self.action = googleSearch
+		if searchType != .url {
 			self.name = name
-			self.acceptsArguments = acceptsArguments
-		case .duckduckgo:
-			self.action = duckDuckGoSearch
+			// Set the action to nothing so it can be used.
+			action = { _ in }
+			
+			action = search
+		} else {
+			name = "URL"
 			self.name = name
-			self.acceptsArguments = acceptsArguments
-		case .url:
-			self.action = openURL
-			self.name = name
-			self.acceptsArguments = acceptsArguments
+			action = openURL
 		}
 	}
 	
@@ -36,30 +32,50 @@ struct WebSearchItem: SearchItem {
 	
 	var action: (String) -> Void
 	
-	var icon: Icon {
-		return Icon(path: "")
-	}
-	
 	var takesNameAsArgument: Bool
 	
 	private var searchType: WebSearchType
 	
-	private var searchString: String
-	
-	private var googleSearch: (String) -> Void = { search in
-		if let url = URL(string: "https://google.com/search?q=\(search.replacingOccurrences(of: " ", with: "+"))") {
-			NSWorkspace.shared.open(url)
+	private var search: (String) -> Void {
+		return { search in
+			let search = search.replacingOccurrences(of: " ", with: "+")
+			var url: URL?
+			switch searchType {
+			case .google:
+				url = URL(string: "https://google.com/search?q=\(search)")
+			case .duckduckgo:
+				url = URL(string: "https://duckduckgo.com/?q=\(search)")
+			case .bing:
+				url = URL(string: "https://www.bing.com/search?q=\(search)")
+			case .yahoo:
+				url = URL(string: "https://www.yahoo.com/search?q=\(search)")
+			case .ecosia:
+				url = URL(string: "https://www.ecosia.org/search?q=\(search)")
+			default:
+				fatalError("The search type is \(searchType). This should never happen.")
+			}
+			
+			// Check if the URL isn't nil.
+			if url != nil {
+				NSWorkspace.shared.open(url!)
+			}
 		}
 	}
-	
-	private var duckDuckGoSearch: (String) -> Void = { search in
-		if let url = URL(string: "https://duckduckgo.com/?q=\(search.replacingOccurrences(of: " ", with: "+"))") {
-			NSWorkspace.shared.open(url)
-		}
-	}
+ 
+//	private var googleSearch: (String) -> Void = { search in
+//		if let url = URL(string: "https://google.com/search?q=\(search.replacingOccurrences(of: " ", with: "+"))") {
+//
+//		}
+//	}
+//
+//	private var duckDuckGoSearch: (String) -> Void = { search in
+//		if let url = URL(string: "https://duckduckgo.com/?q=\(search.replacingOccurrences(of: " ", with: "+"))") {
+//			NSWorkspace.shared.open(url)
+//		}
+//	}
 	
 	/// Open an URL safely by appending "https://" if necessary.
-	private var openURL: (String) -> Void = { string in
+	private let openURL: (String) -> Void = { string in
 		var urlString = string
 		if !string.contains("https://") {
 			if !string.contains("http://") {

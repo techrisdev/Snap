@@ -4,8 +4,11 @@
 
 import Foundation
 
-enum WebSearchType: String, CaseIterable {
-	case google = "Google"
-	case duckduckgo = "DuckDuckGo"
-	case url = "URL"
+enum WebSearchType: CaseIterable {
+	case google
+	case duckduckgo
+	case yahoo
+	case bing
+	case ecosia
+	case url
 }

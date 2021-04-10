@@ -6,14 +6,20 @@ import SwiftUI
 
 struct KeyboardShortcutView<Label> : View where Label : View {
 	@Binding var keyboardShortcut: KeyboardShortcut
-	
 	var label: () -> Label
+	
+	init(keyboardShortcut: Binding<KeyboardShortcut>, @ViewBuilder label: @escaping () -> Label) {
+		_keyboardShortcut = keyboardShortcut
+		self.label = label
+	}
 	
 	@State private var buttonText = "Click to record"
 	@State private var monitor: Any!
 	var body: some View {
 		HStack {
-			label()
+			VStack(alignment: .leading) {
+				label()
+			}
 			Button(action: {
 				buttonText = ""
 				
@@ -22,7 +28,7 @@ struct KeyboardShortcutView<Label> : View where Label : View {
 					
 					keyboardShortcut = KeyboardShortcut(keyCode: Int(event.keyCode), modifierFlags: modifierFlags, events: keyboardShortcut.events)
 					
-					buttonText.append(getCharactersForModifiers(modifierFlags))
+					buttonText.append(getCharactersForModifiers(modifierFlags) + " ")
 					// The event's characters. They are uppercased for a better look.
 					let characters = (event.charactersIgnoringModifiers ?? "").uppercased()
 					if characters != "" {
@@ -37,25 +43,28 @@ struct KeyboardShortcutView<Label> : View where Label : View {
 			}
 			.buttonStyle(BorderlessButtonStyle())
 		}
+		.onAppear {
+			print(keyboardShortcut)
+		}
 	}
 	
 	private func getCharactersForModifiers(_ modifiers: NSEvent.ModifierFlags) -> String {
 		var result = ""
 		
 		if modifiers.contains(.command) {
-			result.append("􀆔 ")
+			result.append("􀆔")
 		}
 		
 		if modifiers.contains(.option) {
-			result.append("􀆕 ")
+			result.append("􀆕")
 		}
 		
 		if modifiers.contains(.control) {
-			result.append("􀆍 ")
+			result.append("􀆍")
 		}
 		
 		if modifiers.contains(.shift) {
-			result.append("􀆝 ")
+			result.append("􀆝")
 		}
 		
 		return result

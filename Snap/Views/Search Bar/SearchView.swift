@@ -10,7 +10,7 @@ struct SearchView: View {
 	@State private var selectedItemIndex = 0
 	@State private var text = ""
 	@State private var showingPath = false
-	@State var application: ApplicationSearchItem? = nil
+	@State private var application: ApplicationSearchItem? = nil
 	
 	private let configuration = Configuration.decoded
 	private let notificationCenter = NotificationCenter.default
@@ -32,21 +32,21 @@ struct SearchView: View {
 						// Stop the search.
 						search.stopSearch()
 						
-						// Empty the results so no results get displayed.
+						// Clear the results array so no results get displayed.
 						search.results = [SearchItem]()
 						
 						// Return from the Closure.
 						return
 					}
 					
-					// If there are more than 0 characters, then search for the string.
-					search.startSearchForString(text)
-					
 					// Reset the application.
 					application = nil
 					
 					// Reset the selected item.
 					selectedItemIndex = 0
+					
+					// If there are more than 0 characters, then search for the string.
+					search.searchForString(text)
 				})
 				.onReceive(notificationCenter.publisher(for: .ReturnKeyWasPressed)) { _ in
 					// When the return key was pressed, then open the selected item.
@@ -73,8 +73,10 @@ struct SearchView: View {
 							// If another application will be activated, deactivate Snap.
 							snap.deactivate()
 							
-							// Execute the item's action.
-							selectedItem.action(currentSearchArguments)
+							// Execute the item's action on another thread.
+							DispatchQueue.global(qos: .userInteractive).async { [selectedItem] in
+								selectedItem.action(currentSearchArguments)
+							}
 						} else {
 							// Open the URL in Finder.
 							NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: selectedItem.path)])
@@ -120,12 +122,12 @@ struct SearchView: View {
 			
 			application?.view
 		}
-		.frame(height: !search.results.isEmpty ? configuration.maximumHeight : configuration.searchBarHeight)
-		.frame(maxWidth: .infinity, maxHeight: search.results.isEmpty ? configuration.searchBarHeight : .infinity)
 		.onReceive(notificationCenter.publisher(for: .ApplicationShouldExit), perform: { _ in
 			// When the current application should exit, then set it to nil.
 			application = nil
 		})
+		.frame(height: !search.results.isEmpty ? configuration.maximumHeight : configuration.searchBarHeight)
+		.frame(maxWidth: .infinity, maxHeight: search.results.isEmpty ? configuration.searchBarHeight : .infinity)
 		.onAppear(perform: {
 			// Add a monitor for key events to get notified when certain keys get pressed.
 			snap.addKeyboardMonitor()

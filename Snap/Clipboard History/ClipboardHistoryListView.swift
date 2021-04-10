@@ -24,7 +24,6 @@ struct ClipboardHistoryListView: View {
 							// Copy the data to the clipboard.
 							copySelectedItemToClipboard()
 						}) {
-							// MARK: TODO: Only strings work right now.
 							ItemView(icon: nil, isSelectedItem: item.id == selectedItem.id) {
 								if item.image != nil {
 									Image(nsImage: item.image!)
@@ -55,33 +54,37 @@ struct ClipboardHistoryListView: View {
 				copySelectedItemToClipboard()
 			})
 			.onReceive(notificationCenter.publisher(for: .UpArrowKeyWasPressed), perform: { _ in
-				// Update the index.
+				// Update the index with an animation..
 				updateSelectedItemIndex(selectedItemIndex - 1)
 			})
 			.onReceive(notificationCenter.publisher(for: .DownArrowKeyWasPressed), perform: { _ in
-				// Update the index.
+				// Update the index with an animation..
 				updateSelectedItemIndex(selectedItemIndex + 1)
 			})
 			if items.count > 0 {
 				VStack {
-					if selectedItem.image != nil {
-						Image(nsImage: selectedItem.image!)
-							.resizable()
-							.scaledToFit()
-					} else if selectedItem.file != nil {
-						Text(selectedItem.file!)
-							.font(configuration.resultItemFont.font)
-							.foregroundColor(configuration.textColor.color)
-					} else if selectedItem.string != nil {
-						HStack {
-							Spacer()
-							Text(selectedItem.string!)
+					HStack {
+						Spacer()
+						if selectedItem.image != nil {
+							Image(nsImage: selectedItem.image!)
+								.resizable()
+								.scaledToFit()
+						} else if selectedItem.file != nil {
+							Text(selectedItem.file!)
 								.font(configuration.resultItemFont.font)
 								.foregroundColor(configuration.textColor.color)
+						} else if selectedItem.string != nil {
+							HStack {
+								Text(selectedItem.string!)
+									.font(configuration.resultItemFont.font)
+									.foregroundColor(configuration.textColor.color)
+							}
 						}
+						Spacer()
 					}
+					.frame(maxWidth: configuration.maximumWidth / 2)
+					Spacer()
 				}
-				.frame(maxWidth: 240)
 			}
 		}
 	}
@@ -89,8 +92,10 @@ struct ClipboardHistoryListView: View {
 	func updateSelectedItemIndex(_ index: Int) {
 		// Check if an item with the new index is available.
 		if items.indices.contains(index) {
-			// Update the selected item.
-			self.selectedItemIndex = index
+			// Update the selected item with an animation..
+			withAnimation(configuration.shouldAnimateNavigation ? .default : .none) {
+				selectedItemIndex = index
+			}
 		}
 	}
 	
@@ -108,6 +113,10 @@ struct ClipboardHistoryListView: View {
 				pasteboard.setData(selectedItem.string?.data(using: .utf8), forType: .string)
 			}
 		}
+		
+		
+		// Deactivate the application.
+		Snap.default.deactivate()
 	}
 	
 	var selectedItem: ClipboardHistoryItem {
