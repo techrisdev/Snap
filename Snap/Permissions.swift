@@ -39,9 +39,9 @@ struct Permissions {
 	static func requestContactAccess() -> Bool {
 		// Request access for Contacts.
 		var authorizationStatus = false
-		CNContactStore().requestAccess(for: .contacts, completionHandler: { result, _ in
+		CNContactStore().requestAccess(for: .contacts) { result, _ in
 			authorizationStatus = result
-		})
+		}
 		
 		// Return the authorization status for contacts.
 		return authorizationStatus
@@ -50,9 +50,9 @@ struct Permissions {
 	static func requestCalendarAccess() -> Bool {
 		// Request access for Calendar.
 		var authorizationStatus = false
-		EKEventStore().requestAccess(to: .event, completion: { result, _ in
+		EKEventStore().requestAccess(to: .event) { result, _ in
 			authorizationStatus = result
-		})
+		}
 		
 		// Return the authorization status for calendar events.
 		return authorizationStatus

@@ -50,23 +50,23 @@ struct ClipboardHistoryView: View {
 					}
 				}
 			}
-			.onReceive(notificationCenter.publisher(for: .ReturnKeyWasPressed), perform: { _ in
+			.onReceive(notificationCenter.publisher(for: .ReturnKeyWasPressed)) { _ in
 				// When the return key was pressed, then copy the selected item's data to the clipboard.
 				copySelectedItemToClipboard()
-			})
-			.onReceive(notificationCenter.publisher(for: .UpArrowKeyWasPressed), perform: { _ in
+			}
+			.onReceive(notificationCenter.publisher(for: .UpArrowKeyWasPressed)) { _ in
 				// Update the index with an animation..
 				updateSelectedItemIndex(selectedItemIndex - 1)
-			})
-			.onReceive(notificationCenter.publisher(for: .DownArrowKeyWasPressed), perform: { _ in
+			}
+			.onReceive(notificationCenter.publisher(for: .DownArrowKeyWasPressed)) { _ in
 				// Update the index with an animation..
 				updateSelectedItemIndex(selectedItemIndex + 1)
-			})
-			.onReceive(notificationCenter.publisher(for: .ShouldDeleteClipboardHistoryItem), perform: { _ in
+			}
+			.onReceive(notificationCenter.publisher(for: .ShouldDeleteClipboardHistoryItem)) { _ in
 				// Delete the currently selected item.
 				deleteSelectedItem()
-			})
-			.onReceive(notificationCenter.publisher(for: .ShouldDeleteClipboardHistory), perform: { _ in
+			}
+			.onReceive(notificationCenter.publisher(for: .ShouldDeleteClipboardHistory)) { _ in
 				// Delete the clipboard history.
 				// Create a new history without items.
 				let newHistory = ClipboardHistory(items: [ClipboardHistoryItem]())
@@ -76,7 +76,7 @@ struct ClipboardHistoryView: View {
 				
 				// Update the views items.
 				items = newHistory.items
-			})
+			}
 			if items.count > 0 {
 				ScrollView {
 					VStack {
@@ -110,7 +110,7 @@ struct ClipboardHistoryView: View {
 			items = ClipboardHistory.decoded.items
 			
 			// Add a event monitor to check if the delete key was pressed.
-			deleteKeyMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { event in
+			deleteKeyMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
 				if event.keyCode == kVK_Delete {
 					// If the delete key was pressed, delete the currently selected item.
 					self.deleteSelectedItem()
@@ -118,7 +118,7 @@ struct ClipboardHistoryView: View {
 				}
 				
 				return event
-			})
+			}
 		}
 		.onDisappear {
 			// When the view disappears, remove the delete key event monitor.

@@ -39,7 +39,7 @@ class KeyboardShortcutManager {
 		}, 2, &eventSpecification, nil, &eventHandler)
 		
 		// Do the given action when a notification with the ID comes in.
-		NotificationCenter.default.addObserver(forName: Notification.Name("HotKeyWithID\(eventHotKeyID.id)"), object: nil, queue: nil, using: { [self] _ in
+		NotificationCenter.default.addObserver(forName: Notification.Name("HotKeyWithID\(eventHotKeyID.id)"), object: nil, queue: nil) { [self] _ in
 			// Set the current event.
 			if currentEvent == .keyUp {
 				currentEvent = .keyDown
@@ -51,6 +51,6 @@ class KeyboardShortcutManager {
 			if keyboardShortcut.events.contains(currentEvent) {
 				actionOnEvent(currentEvent)
 			}
-		})
+		}
 	}
 }

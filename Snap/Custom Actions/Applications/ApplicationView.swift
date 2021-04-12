@@ -26,10 +26,10 @@ struct ApplicationView: View {
 				Spacer()
 			}
 		}
-		.onReceive(NotificationCenter.default.publisher(for: .EscapeKeyWasPressed), perform: { _ in
+		.onReceive(NotificationCenter.default.publisher(for: .EscapeKeyWasPressed)) { _ in
 			// When the escape key gets pressed, close the application.
 			close()
-		})
+		}
 	}
 	
 	func close() {

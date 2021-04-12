@@ -178,7 +178,7 @@ class Snap {
 	
 	/// A monitor which recognizes specific key events and sends notifications.
 	func addKeyboardMonitor() {
-		monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { [configuration, notificationCenter] event in
+		monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [configuration, notificationCenter] event in
 			// The Up-Arrow key was pressed.
 			if event.keyCode == kVK_UpArrow {
 				// Post a notification.
@@ -243,7 +243,7 @@ class Snap {
 			}
 			
 			return event
-		})
+		}
 	}
 	
 	/// Stop listening for keyboard events.

@@ -15,7 +15,7 @@ class ClipboardManager {
 	private var currentData: Data? = ClipboardHistory.decoded.items.first?.data
 	
 	private func listenToClipboardChanges() {
-		DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 2, execute: { [pasteboard, listenToClipboardChanges] in
+		DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 2) { [pasteboard, listenToClipboardChanges] in
 			// Check for changes.
 			if let types = pasteboard.types, types.count > 0 {
 				// The first type from the types array should be the default type.
@@ -29,7 +29,7 @@ class ClipboardManager {
 				}
 			}
 			listenToClipboardChanges()
-		})
+		}
 	}
 	
 	private func updateClipboardHistory(with item: ClipboardHistoryItem) {

@@ -44,9 +44,9 @@ struct MusicControllerApp: ApplicationSearchItem {
 				}
 				Spacer()
 			}
-			.onReceive(timer, perform: { _ in
+			.onReceive(timer) { _ in
 				currentSong = Song()
-			})
+			}
 			
 			Spacer()
 		}

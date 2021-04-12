@@ -25,7 +25,7 @@ class SnapTests: XCTestCase {
 		measure {
 			// Measure the time of Searching for a String in Spotlight.
 			let search = Search()
-			search.startSearchForString("st")
+			search.searchForString("test")
 			
 			// Wait until the Metadata Query has finished gathering.
 			expectation(forNotification: .NSMetadataQueryDidFinishGathering, object: nil, handler: nil)

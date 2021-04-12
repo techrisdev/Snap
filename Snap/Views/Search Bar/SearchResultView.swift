@@ -38,7 +38,7 @@ struct SearchResultView: View {
 		}
 		.onAppear {
 			// Listen for an event (keyboard shortcut) to show the path and show the file in Finder (later) instead of opening the file.
-			NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .keyUp], handler: { event in
+			NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .keyUp]) { event in
 				let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
 				if modifiers == .command && event.keyCode == kVK_ANSI_F {
 					if event.type == .keyDown {
@@ -51,7 +51,7 @@ struct SearchResultView: View {
 				}
 				
 				return event
-			})
+			}
 		}
 	}
 }

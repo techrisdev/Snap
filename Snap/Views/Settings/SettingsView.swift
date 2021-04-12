@@ -104,7 +104,7 @@ struct SettingsView: View {
 							let openPanel = NSOpenPanel()
 							openPanel.canChooseDirectories = true
 							openPanel.allowsMultipleSelection = true
-							openPanel.begin(completionHandler: { response in
+							openPanel.begin { response in
 								if response == .OK {
 									// Get the selected urls.
 									let urls = openPanel.urls
@@ -113,7 +113,7 @@ struct SettingsView: View {
 										blockedPaths.append(url.path)
 									}
 								}
-							})
+							}
 						}) {
 							Image(systemName: "plus")
 						}
@@ -159,7 +159,7 @@ struct SettingsView: View {
 					guard let settingsWindow = Snap.default.settingsWindow else { return }
 					
 					// Show the alert.
-					alert.beginSheetModal(for: settingsWindow, completionHandler: { response in
+					alert.beginSheetModal(for: settingsWindow) { response in
 						// If the user want's to restart the application, then...
 						if response == .alertFirstButtonReturn {
 							// Restart the application.
@@ -178,7 +178,7 @@ struct SettingsView: View {
 							// Close the settings window.
 							settingsWindow.close()
 						}
-					})
+					}
 				}
 				.padding()
 			}

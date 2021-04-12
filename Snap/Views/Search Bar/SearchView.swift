@@ -27,7 +27,7 @@ struct SearchView: View {
 					SearchBarView(text: $text)
 					SearchResultView(results: search.results, itemAction: itemAction, selectedItemIndex: selectedItemIndex, showingPath: $showingPath)
 				}
-				.onChange(of: text, perform: { _ in
+				.onChange(of: text) { _ in
 					// If the text doesn't contain any characters, then...
 					if text.count == 0 {
 						// Stop the search.
@@ -48,7 +48,7 @@ struct SearchView: View {
 					
 					// If there are more than 0 characters, then search for the string.
 					search.searchForString(text)
-				})
+				}
 				.onReceive(notificationCenter.publisher(for: .ReturnKeyWasPressed)) { _ in
 					// Execute the selected item's action.
 					if search.results.indices.contains(selectedItemIndex) {
@@ -78,29 +78,29 @@ struct SearchView: View {
 						}
 					}
 				}
-				.onReceive(notificationCenter.publisher(for: .ShouldPresentQuickLook), perform: { _ in
+				.onReceive(notificationCenter.publisher(for: .ShouldPresentQuickLook)) { _ in
 					// Open a preview panel.
 					quickLook.filePath = selectedItem.path
 					quickLook.present()
-				})
-				.onReceive(notificationCenter.publisher(for: QuickLook.panelWillCloseNotification), perform: { _ in
+				}
+				.onReceive(notificationCenter.publisher(for: QuickLook.panelWillCloseNotification)) { _ in
 					// Stop listening for notifications.
 					quickLook.stopObserving()
 					
 					// Activate the search window.
 					snap.activate()
-				})
+				}
 			}
 			
 			application?.view
 		}
-		.onReceive(notificationCenter.publisher(for: .ApplicationShouldExit), perform: { _ in
+		.onReceive(notificationCenter.publisher(for: .ApplicationShouldExit)) { _ in
 			// When the current application should exit, then set it to nil.
 			application = nil
-		})
+		}
 		.frame(height: !search.results.isEmpty ? configuration.maximumHeight : configuration.searchBarHeight)
 		.frame(maxWidth: .infinity, maxHeight: search.results.isEmpty ? configuration.searchBarHeight : .infinity)
-		.onAppear(perform: {
+		.onAppear {
 			// Add a monitor for key events to get notified when certain keys get pressed.
 			snap.addKeyboardMonitor()
 			
@@ -134,7 +134,7 @@ struct SearchView: View {
 					NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: item.path)])
 				}
 			}
-		})
+		}
 	}
 	
 	// The currently selected item.

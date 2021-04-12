@@ -23,7 +23,7 @@ struct KeyboardShortcutView<Label> : View where Label : View {
 			Button(action: {
 				buttonText = ""
 				
-				monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { [self] event in
+				monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [self] event in
 					let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask).keyboardShortcutModifiers
 					
 					keyboardShortcut = KeyboardShortcut(key: Key(keyCode: UInt32(event.keyCode)), modifiers: modifiers, events: keyboardShortcut.events)
@@ -37,7 +37,7 @@ struct KeyboardShortcutView<Label> : View where Label : View {
 					}
 					
 					return nil
-				})
+				}
 			}) {
 				Text(buttonText)
 			}
