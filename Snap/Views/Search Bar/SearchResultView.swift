@@ -7,9 +7,8 @@ import Carbon.HIToolbox.Events
 
 struct SearchResultView: View {
 	var results: [SearchItem]
+	var itemAction: (SearchItem) -> Void
 	var selectedItemIndex: Int
-	var text: String
-	var currentSearchArguments: String
 	
 	@Binding var showingPath: Bool
 	
@@ -19,8 +18,8 @@ struct SearchResultView: View {
 			ScrollViewReader { value in
 				ForEach(results, id: \.id) { item in
 					Button(action: {
-						let currentSearchArguments = item.acceptsArguments ? self.currentSearchArguments : text
-						item.action(currentSearchArguments)
+						// Execute the action.
+						itemAction(item)
 					}) {
 						SearchItemView(item: item, isSelectedItem: item.firstIndexInArray(results) == selectedItemIndex, isShowingPath: showingPath)
 					}

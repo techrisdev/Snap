@@ -11,6 +11,7 @@ struct SearchView: View {
 	@State private var text = ""
 	@State private var showingPath = false
 	@State private var application: ApplicationSearchItem? = nil
+	@State private var itemAction: (SearchItem) -> Void = { _ in }
 	
 	private let configuration = Configuration.decoded
 	private let notificationCenter = NotificationCenter.default
@@ -24,7 +25,7 @@ struct SearchView: View {
 			if application == nil {
 				VStack {
 					SearchBarView(text: $text)
-					SearchResultView(results: search.results, selectedItemIndex: selectedItemIndex, text: text, currentSearchArguments: currentSearchArguments, showingPath: $showingPath)
+					SearchResultView(results: search.results, itemAction: itemAction, selectedItemIndex: selectedItemIndex, showingPath: $showingPath)
 				}
 				.onChange(of: text, perform: { _ in
 					// If the text doesn't contain any characters, then...
@@ -49,34 +50,9 @@ struct SearchView: View {
 					search.searchForString(text)
 				})
 				.onReceive(notificationCenter.publisher(for: .ReturnKeyWasPressed)) { _ in
-					// When the return key was pressed, then open the selected item.
+					// Execute the selected item's action.
 					if search.results.indices.contains(selectedItemIndex) {
-						// If the item doesn't accept arguments, then give it the whole string.
-						let currentSearchArguments = selectedItem.acceptsArguments ? self.currentSearchArguments : text
-						
-						// If the path is shown, then open the path in Finder. If it isn't, then do the default action for the item.
-						if !showingPath {
-							// If the item is an application item, then display the view.
-							if let applicationItem = selectedItem as? ApplicationSearchItem {
-								application = applicationItem
-								return
-							}
-							
-							// If another application will be activated, deactivate Snap.
-							snap.deactivate()
-							
-							// If the item is a Spotlight Search Item, execute the item's action on another thread.
-							if selectedItem as? SpotlightSearchItem != nil {
-								DispatchQueue.global(qos: .userInteractive).async { [selectedItem] in
-									selectedItem.action(currentSearchArguments)
-								}
-							} else {
-								selectedItem.action(currentSearchArguments)
-							}
-						} else {
-							// Open the URL in Finder.
-							NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: selectedItem.path)])
-						}
+						itemAction(selectedItem)
 					}
 				}
 				.onReceive(notificationCenter.publisher(for: .UpArrowKeyWasPressed)) { _ in
@@ -127,7 +103,43 @@ struct SearchView: View {
 		.onAppear(perform: {
 			// Add a monitor for key events to get notified when certain keys get pressed.
 			snap.addKeyboardMonitor()
+			
+			// Create the item action.
+			itemAction = { item in
+				// If the item doesn't accept arguments, then give it the whole string.
+				let currentSearchArguments = item.acceptsArguments ? self.currentSearchArguments : text
+				
+				// If the path is shown, then open the path in Finder. If it isn't, then do the default action for the item.
+				if !showingPath {
+					// If the item is an application item, then display the view.
+					if let applicationItem = item as? ApplicationSearchItem {
+						application = applicationItem
+						return
+					}
+					
+					// If another application will be activated, deactivate Snap.
+					snap.deactivate()
+					
+					// If the item is a Spotlight Search Item, execute the item's action on another thread.
+					if item as? SpotlightSearchItem != nil {
+						DispatchQueue.global(qos: .userInteractive).async {
+							item.action(currentSearchArguments)
+						}
+					} else {
+						// Execute the item's action.
+						item.action(currentSearchArguments)
+					}
+				} else {
+					// Open the URL in Finder.
+					NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: item.path)])
+				}
+			}
 		})
+	}
+	
+	// The currently selected item.
+	private var selectedItem: SearchItem {
+		search.results[selectedItemIndex]
 	}
 	
 	private var currentSearchArguments: String {
@@ -155,11 +167,6 @@ struct SearchView: View {
 		
 		// If the search doesn't contain an argument, then return an empty string.
 		return ""
-	}
-	
-	// The currently selected item.
-	private var selectedItem: SearchItem {
-		search.results[selectedItemIndex]
 	}
 	
 	private func updateSelectedItemIndex(to index: Int) {

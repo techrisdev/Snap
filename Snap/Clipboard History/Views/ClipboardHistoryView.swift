@@ -78,28 +78,30 @@ struct ClipboardHistoryView: View {
 				items = newHistory.items
 			})
 			if items.count > 0 {
-				VStack {
-					HStack {
-						Spacer()
-						if selectedItem.image != nil {
-							Image(nsImage: selectedItem.image!)
-								.resizable()
-								.scaledToFit()
-						} else if selectedItem.file != nil {
-							Text(selectedItem.file!)
-								.font(configuration.resultItemFont.font)
-								.foregroundColor(configuration.textColor.color)
-						} else if selectedItem.string != nil {
-							HStack {
-								Text(selectedItem.string!)
+				ScrollView {
+					VStack {
+						HStack {
+							Spacer()
+							if selectedItem.image != nil {
+								Image(nsImage: selectedItem.image!)
+									.resizable()
+									.scaledToFit()
+							} else if selectedItem.file != nil {
+								Text(selectedItem.file!)
 									.font(configuration.resultItemFont.font)
 									.foregroundColor(configuration.textColor.color)
+							} else if selectedItem.string != nil {
+								HStack {
+									Text(selectedItem.string!)
+										.font(configuration.resultItemFont.font)
+										.foregroundColor(configuration.textColor.color)
+								}
 							}
+							Spacer()
 						}
+						.frame(maxWidth: configuration.maximumWidth / 2)
 						Spacer()
 					}
-					.frame(maxWidth: configuration.maximumWidth / 2)
-					Spacer()
 				}
 			}
 		}
@@ -158,17 +160,16 @@ struct ClipboardHistoryView: View {
 	}
 	
 	func deleteSelectedItem() {
-		// Check if the index is out of range.
-		if !items.indices.contains(selectedItemIndex) {
-			return
-		}
-		
 		// Create a updated history.
+		var items = self.items
 		items.remove(at: selectedItemIndex)
-		updateSelectedItemIndex(selectedItemIndex - 1)
 		let newHistory = ClipboardHistory(items: items)
 		
 		// Write the new history to disk.
 		newHistory.write()
+		
+		// Update the view.
+		updateSelectedItemIndex(selectedItemIndex - 1)
+		self.items = items
 	}
 }

@@ -22,6 +22,7 @@ Snap is an application which searches your Files, Contacts and Calendar events u
 * Web search
 * Quick Look previews
 * Uses SwiftUI
+* Completely open source
 
 ## Building
 
