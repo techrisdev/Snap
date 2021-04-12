@@ -11,13 +11,5 @@ struct ClipboardHistoryApp: ApplicationSearchItem {
 	
 	var acceptsArguments = false
 	
-	let view = ApplicationView(content: AnyView(ClipboardHistoryView()))
-	
-	struct ClipboardHistoryView: View {
-		let items = ClipboardHistory.decoded.items
-		let configuration = Configuration.decoded
-		var body: some View {
-			ClipboardHistoryListView(items: items)
-		}
-	}
+	let view = ApplicationView(content: AnyView(ClipboardHistoryView()), barView: AnyView(ClipboardHistoryBarView()))
 }

@@ -2,7 +2,7 @@
 //
 // Created by TeChris on 08.03.21.
 
-import Cocoa
+import Foundation.NSMetadata
 
 extension NSMetadataItem {
 	// This function makes the code look cleaner, if you already know the type of the value.

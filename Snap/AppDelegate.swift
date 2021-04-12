@@ -14,7 +14,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	func applicationDidResignActive(_ notification: Notification) {
-		// When the application loses focus, then deactivate the application.
-		snap.deactivate()
+		// When the application loses focus, and the settings window isn't visible, then deactivate the application.
+		if snap.settingsWindow == nil || !snap.settingsWindow!.isVisible {
+			snap.deactivate()
+		}
 	}
 }

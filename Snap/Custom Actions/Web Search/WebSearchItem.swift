@@ -2,7 +2,7 @@
 //
 // Created by TeChris on 10.03.21.
 
-import Cocoa
+import AppKit
 
 struct WebSearchItem: SearchItem {
 	init(searchType: WebSearchType, name: String? = nil, acceptsArguments: Bool = false, takesNameAsArgument: Bool = false) {
@@ -38,7 +38,7 @@ struct WebSearchItem: SearchItem {
 	
 	private var search: (String) -> Void {
 		return { search in
-			let search = search.replacingOccurrences(of: " ", with: "+")
+			let search = search.replacingOccurrences(of: " ", with: "+").replacingOccurrences(of: "\\", with: "%5C")
 			var url: URL?
 			switch searchType {
 			case .google:

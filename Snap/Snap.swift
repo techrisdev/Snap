@@ -3,7 +3,7 @@
 // Created by TeChris on 20.03.21.
 
 import SwiftUI
-import Carbon.HIToolbox
+import Carbon.HIToolbox.Events
 
 class Snap {
 	/// The app delegate's snap instance.
@@ -54,6 +54,10 @@ class Snap {
 		// Deactivate the application.
 		notificationCenter.post(name: .ApplicationShouldExit, object: nil)
 		window.close()
+		
+		// Deactivate the application and activate the application behind Snap (it should be the menu bar owning application).
+		NSApp.deactivate()
+		NSWorkspace.shared.menuBarOwningApplication?.activate(options: .activateIgnoringOtherApps)
 		
 		// Remove the listener for keyboard events.
 		removeKeyboardMonitor()
@@ -116,14 +120,8 @@ class Snap {
 		// Setup the shortcut for hiding and showing the search bar.
 		KeyboardShortcutManager(keyboardShortcut: configuration.activationKeyboardShortcut).startListeningForEvents { [self] _ in
 			if window.isVisible {
-				// Before closing the window, exit out of all running custom applications.
-				notificationCenter.post(name: .ApplicationShouldExit, object: nil)
-				
-				// Close the window.
-				window.close()
-				
-				// Hide the application so the application in the background activates automatically.
-				NSApp.hide(nil)
+				// Deactivate the application.
+				deactivate()
 			} else {
 				// Activate the application and the search bar window.
 				activate()
@@ -221,11 +219,10 @@ class Snap {
 			// Get the keyboard shortcut.
 			let quickLookKeyboardShortcut = configuration.quickLookKeyboardShortcut
 			
-			// Get the carbon modifier flags from the NSEvent.
-			let modifierFlags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
-			let carbonModifierFlags = KeyboardShortcut.getCarbonModifiers(for: modifierFlags)
+			// Get the keyboard shortcut modifiers.
+			let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask).keyboardShortcutModifiers
 			
-			if event.keyCode == quickLookKeyboardShortcut.keyCode && quickLookKeyboardShortcut.carbonModifiers == carbonModifierFlags {
+			if event.keyCode == quickLookKeyboardShortcut.key.keyCode && quickLookKeyboardShortcut.modifiers == modifiers {
 				// Post a notification.
 				notificationCenter.post(name: .ShouldPresentQuickLook, object: nil)
 				

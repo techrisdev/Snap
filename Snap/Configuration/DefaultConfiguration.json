@@ -26,13 +26,13 @@
 	},
 	"selectedItemBackgroundColor": "#0000FF",
 	"activationKeyboardShortcut": {
-		"keyCode": 49,
-		"carbonModifiers": 2048,
+		"key": {"keyCode": 49},
+		"modifiers": ["option"],
 		"events": ["keyDown"]
 	},
 	"quickLookKeyboardShortcut": {
-		"keyCode": 0,
-		"carbonModifiers": 256,
+		"key": {"keyCode": 0},
+		"modifiers": ["shift"],
 		"events": ["keyDown"]
 	},
 	"clipboardHistoryEnabled": true,

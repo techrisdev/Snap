@@ -1,13 +1,14 @@
-// ClipboardHistoryListView.swift
+// ClipboardHistoryView.swift
 //
 // Created by TeChris on 05.04.21.
 
 import SwiftUI
+import Carbon.HIToolbox.Events
 
-struct ClipboardHistoryListView: View {
-	var items: [ClipboardHistoryItem]
-	
+struct ClipboardHistoryView: View {
 	@State private var selectedItemIndex = 0
+	@State private var items = [ClipboardHistoryItem]()
+	@State private var deleteKeyMonitor: Any!
 	
 	private let configuration = Configuration.decoded
 	private let notificationCenter = NotificationCenter.default
@@ -61,6 +62,21 @@ struct ClipboardHistoryListView: View {
 				// Update the index with an animation..
 				updateSelectedItemIndex(selectedItemIndex + 1)
 			})
+			.onReceive(notificationCenter.publisher(for: .ShouldDeleteClipboardHistoryItem), perform: { _ in
+				// Delete the currently selected item.
+				deleteSelectedItem()
+			})
+			.onReceive(notificationCenter.publisher(for: .ShouldDeleteClipboardHistory), perform: { _ in
+				// Delete the clipboard history.
+				// Create a new history without items.
+				let newHistory = ClipboardHistory(items: [ClipboardHistoryItem]())
+				
+				// Write the new history to disk.
+				newHistory.write()
+				
+				// Update the views items.
+				items = newHistory.items
+			})
 			if items.count > 0 {
 				VStack {
 					HStack {
@@ -87,6 +103,29 @@ struct ClipboardHistoryListView: View {
 				}
 			}
 		}
+		.onAppear {
+			// Update the items. This is necessary, because for some reason, when the Application (ClipboardHistoryApp) gets deinitialized, and the user activates the history app again without updating the text, the items are still the old items from before.
+			items = ClipboardHistory.decoded.items
+			
+			// Add a event monitor to check if the delete key was pressed.
+			deleteKeyMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { event in
+				if event.keyCode == kVK_Delete {
+					// If the delete key was pressed, delete the currently selected item.
+					self.deleteSelectedItem()
+					return nil
+				}
+				
+				return event
+			})
+		}
+		.onDisappear {
+			// When the view disappears, remove the delete key event monitor.
+			NSEvent.removeMonitor(deleteKeyMonitor!)
+		}
+	}
+	
+	var selectedItem: ClipboardHistoryItem {
+		return items[selectedItemIndex]
 	}
 	
 	func updateSelectedItemIndex(_ index: Int) {
@@ -114,13 +153,22 @@ struct ClipboardHistoryListView: View {
 			}
 		}
 		
-		
 		// Deactivate the application.
 		Snap.default.deactivate()
 	}
 	
-	var selectedItem: ClipboardHistoryItem {
-		return items[selectedItemIndex]
+	func deleteSelectedItem() {
+		// Check if the index is out of range.
+		if !items.indices.contains(selectedItemIndex) {
+			return
+		}
+		
+		// Create a updated history.
+		updateSelectedItemIndex(selectedItemIndex - 1)
+		items.remove(at: selectedItemIndex)
+		let newHistory = ClipboardHistory(items: items)
+		
+		// Write the new history to disk.
+		newHistory.write()
 	}
 }
-

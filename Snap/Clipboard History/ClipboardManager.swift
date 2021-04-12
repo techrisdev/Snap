@@ -12,9 +12,7 @@ class ClipboardManager {
 	
 	private let pasteboard = NSPasteboard.general
 	
-	private var currentData: Data? {
-		ClipboardHistory.decoded.items.first?.data
-	}
+	private var currentData: Data? = ClipboardHistory.decoded.items.last?.data
 	
 	private func listenToClipboardChanges() {
 		DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 2, execute: { [pasteboard, listenToClipboardChanges] in
@@ -45,5 +43,8 @@ class ClipboardManager {
 		
 		// Write the new clipboard history to the default path.
 		history.write()
+		
+		// Update the current data.
+		currentData = item.data
 	}
 }

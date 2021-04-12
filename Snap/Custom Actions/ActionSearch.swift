@@ -2,7 +2,7 @@
 //
 // Created by TeChris on 09.03.21.
 
-import Cocoa
+import Foundation.NSPredicate
 
 struct ActionSearch {
 	private let actions = ActionDecoder.actions + SnapAction.allItems
@@ -20,7 +20,7 @@ struct ActionSearch {
 			}
 		
 			// Create a NSPredicate with the format.
-			let predicate = NSPredicate(format: "'\(action.name)' like[cd] '\(string)\\*'")
+			let predicate = NSPredicate(format: "'\(action.name)' like[cd] '\(string.replacingOccurrences(of: "'", with: "\\'"))\\*'")
 			
 			// Check if the predicate returned true.
 			if predicate.evaluate(with: nil) {

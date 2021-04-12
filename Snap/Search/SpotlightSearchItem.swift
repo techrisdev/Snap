@@ -2,7 +2,7 @@
 //
 // Created by TeChris on 09.03.21.
 
-import Cocoa
+import AppKit.NSWorkspace
 
 struct SpotlightSearchItem: SearchItem {
 	private var item: NSMetadataItem

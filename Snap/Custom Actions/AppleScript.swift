@@ -43,7 +43,6 @@ class AppleScript {
 	private var failureAlert: NSAlert {
 		// If error is nil, then throw a fatal error.
 		guard let errorInfo = errorInfo else { fatalError("There is no error.") }
-
 		let alert = NSAlert()
 		alert.messageText = "Apple Script failure"
 		alert.informativeText = "Something went wrong :(\n\nError: \(errorInfo)"

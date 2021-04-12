@@ -13,7 +13,7 @@ struct KeyboardShortcutView<Label> : View where Label : View {
 		self.label = label
 	}
 	
-	@State private var buttonText = "Click to record"
+	@State private var buttonText = ""
 	@State private var monitor: Any!
 	var body: some View {
 		HStack {
@@ -24,11 +24,11 @@ struct KeyboardShortcutView<Label> : View where Label : View {
 				buttonText = ""
 				
 				monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown, handler: { [self] event in
-					let modifierFlags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+					let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask).keyboardShortcutModifiers
 					
-					keyboardShortcut = KeyboardShortcut(keyCode: Int(event.keyCode), modifierFlags: modifierFlags, events: keyboardShortcut.events)
+					keyboardShortcut = KeyboardShortcut(key: Key(keyCode: UInt32(event.keyCode)), modifiers: modifiers, events: keyboardShortcut.events)
 					
-					buttonText.append(getCharactersForModifiers(modifierFlags) + " ")
+					buttonText.append(charactersForModifiers(modifiers) + " ")
 					// The event's characters. They are uppercased for a better look.
 					let characters = (event.charactersIgnoringModifiers ?? "").uppercased()
 					if characters != "" {
@@ -44,11 +44,17 @@ struct KeyboardShortcutView<Label> : View where Label : View {
 			.buttonStyle(BorderlessButtonStyle())
 		}
 		.onAppear {
-			print(keyboardShortcut)
+			buttonText.append(charactersForModifiers(keyboardShortcut.modifiers) + " ")
+			if keyboardShortcut.key.character == " " {
+				// Replace the space character with a string.
+				buttonText.append("Space")
+			} else {
+				buttonText.append(keyboardShortcut.key.character.uppercased())
+			}
 		}
 	}
 	
-	private func getCharactersForModifiers(_ modifiers: NSEvent.ModifierFlags) -> String {
+	private func charactersForModifiers(_ modifiers: [KeyboardShortcutModifier]) -> String {
 		var result = ""
 		
 		if modifiers.contains(.command) {

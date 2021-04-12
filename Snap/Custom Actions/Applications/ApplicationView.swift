@@ -6,6 +6,7 @@ import SwiftUI
 
 struct ApplicationView: View {
 	var content: AnyView
+	var barView: AnyView?
 	
 	let configuration = Configuration.decoded
 	var body: some View {
@@ -19,6 +20,7 @@ struct ApplicationView: View {
 					}) { Text("􀁡") }
 					.padding()
 					Spacer()
+					barView
 				}
 				content
 				Spacer()

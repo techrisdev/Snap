@@ -75,7 +75,7 @@ struct Configuration: Codable {
 		// If the decoding process failed, return the decoded default configuration.
 		// The default configuration must contain data, that's why it is force unwrapped. If the file doesn't contain any data, then something is really wrong!
 		let data = try! Data(contentsOf: defaultConfigurationURL)
-		guard let defaultConfiguration = try? decoder.decode(Configuration.self, from: data) else { fatalError("Failed to decode default configuration!") }
+		guard let defaultConfiguration = try? decoder.decode(Configuration.self, from: data) else { fatalError("Failed to decode the default configuration.") }
 		
 		// Return the default configuration.
 		return defaultConfiguration

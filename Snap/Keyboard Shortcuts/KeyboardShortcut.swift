@@ -2,32 +2,20 @@
 //
 // Created by TeChris on 11.03.21.
 
-import Cocoa
 import Carbon.HIToolbox.Events
 
 struct KeyboardShortcut: Codable {
-	/// The shortcut's key code.
-	var keyCode: UInt32
+	/// The shortcut's key.
+	var key: Key
 	
-	/// The shortcut's modifiers.
-	var carbonModifiers: UInt32
+	/// The keyboard shortcut modifiers.
+	var modifiers: [KeyboardShortcutModifier]
 	
-	/// The events the shortcut is recognizing.
+	/// The events the shortcut is listening to.
 	var events: [KeyEvent]
 	
-	private init(keyCode: Int, carbonModifiers: Int, events: [KeyEvent]) {
-		self.keyCode = UInt32(keyCode)
-		self.carbonModifiers = UInt32(carbonModifiers)
-		self.events = events
-	}
-	
-	init(keyCode: Int, modifierFlags: NSEvent.ModifierFlags, events: [KeyEvent]) {
-		let carbonModifiers = KeyboardShortcut.getCarbonModifiers(for: modifierFlags)
-		self.init(keyCode: keyCode, carbonModifiers: carbonModifiers, events: events)
-	}
-	
-	/// Convert NSEvent modifier flags to carbon modifiers.
-	static func getCarbonModifiers(for modifiers: NSEvent.ModifierFlags) -> Int {
+	/// The shortcut's modifiers as carbon modifiers.
+	var carbonModifiers: UInt32 {
 		var result = 0
 		
 		if modifiers.contains(.command) {
@@ -46,13 +34,13 @@ struct KeyboardShortcut: Codable {
 			result += shiftKey
 		}
 		
-		return result
+		return UInt32(result)
 	}
 	
 	/// The shortcut's ID.
 	var id: UInt32 {
 		// Create an ID from the key code and modifiers.
-		let id = keyCode + carbonModifiers
+		let id = key.keyCode + carbonModifiers
 		return id
 	}
 }

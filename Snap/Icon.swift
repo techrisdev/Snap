@@ -2,7 +2,7 @@
 //
 // Created by TeChris on 19.03.21.
 
-import Cocoa
+import AppKit.NSImage
 
 struct Icon: Codable {
 	/// The path to the image.

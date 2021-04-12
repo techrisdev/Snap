@@ -2,7 +2,7 @@
 //
 // Created by TeChris on 08.03.21.
 
-import Cocoa
+import Foundation
 
 /// A Search Item for Spotlight Searches.
 protocol SearchItem {

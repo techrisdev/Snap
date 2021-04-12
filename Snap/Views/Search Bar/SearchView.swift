@@ -56,14 +56,6 @@ struct SearchView: View {
 						
 						// If the path is shown, then open the path in Finder. If it isn't, then do the default action for the item.
 						if !showingPath {
-							// If the item is a web search item, then do then check if the item takes its name as an argument.
-							if let webSearchItem = selectedItem as? WebSearchItem {
-								if webSearchItem.takesNameAsArgument {
-									webSearchItem.action(selectedItem.name)
-									return
-								}
-							}
-							
 							// If the item is an application item, then display the view.
 							if let applicationItem = selectedItem as? ApplicationSearchItem {
 								application = applicationItem
@@ -73,8 +65,12 @@ struct SearchView: View {
 							// If another application will be activated, deactivate Snap.
 							snap.deactivate()
 							
-							// Execute the item's action on another thread.
-							DispatchQueue.global(qos: .userInteractive).async { [selectedItem] in
+							// If the item is a Spotlight Search Item, execute the item's action on another thread.
+							if selectedItem as? SpotlightSearchItem != nil {
+								DispatchQueue.global(qos: .userInteractive).async { [selectedItem] in
+									selectedItem.action(currentSearchArguments)
+								}
+							} else {
 								selectedItem.action(currentSearchArguments)
 							}
 						} else {

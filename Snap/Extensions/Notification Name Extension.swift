@@ -6,13 +6,14 @@ import Foundation
 
 extension Notification.Name {
 	static let TextChanged = Notification.Name("TextChanged")
-	static let ReturnKeyWasPressed = NSNotification.Name("ReturnKeyWasPressed")
-	static let UpArrowKeyWasPressed = NSNotification.Name("UpArrowKeyWasPressed")
-	static let DownArrowKeyWasPressed = NSNotification.Name("DownArrowKeyWasPressed")
-	static let TabKeyWasPressed = NSNotification.Name("TabKeyWasPressed")
-	static let EscapeKeyWasPressed = NSNotification.Name("EscapeKeyWasPressed")
-	static let CommandKeyPressed = NSNotification.Name("CommandKeyPressed")
-	static let CommandKeyReleased = NSNotification.Name("CommandKeyReleased")
-	static let ApplicationShouldExit = NSNotification.Name("ApplicationShouldExit")
-	static let ShouldPresentQuickLook = NSNotification.Name("ShouldPresentQuickLook")
+	static let ReturnKeyWasPressed = Notification.Name("ReturnKeyWasPressed")
+	static let UpArrowKeyWasPressed = Notification.Name("UpArrowKeyWasPressed")
+	static let DownArrowKeyWasPressed = Notification.Name("DownArrowKeyWasPressed")
+	static let TabKeyWasPressed = Notification.Name("TabKeyWasPressed")
+	static let EscapeKeyWasPressed = Notification.Name("EscapeKeyWasPressed")
+	static let CommandKeyWasPressed = Notification.Name("CommandKeyWasPressed")
+	static let ApplicationShouldExit = Notification.Name("ApplicationShouldExit")
+	static let ShouldPresentQuickLook = Notification.Name("ShouldPresentQuickLook")
+	static let ShouldDeleteClipboardHistoryItem = Notification.Name("ShouldDeleteClipboardHistoryItem")
+	static let ShouldDeleteClipboardHistory = Notification.Name("ShouldDeleteClipboardHistory")
 }
