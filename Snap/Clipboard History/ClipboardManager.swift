@@ -12,7 +12,7 @@ class ClipboardManager {
 	
 	private let pasteboard = NSPasteboard.general
 	
-	private var currentData: Data? = ClipboardHistory.decoded.items.last?.data
+	private var currentData: Data? = ClipboardHistory.decoded.items.first?.data
 	
 	private func listenToClipboardChanges() {
 		DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 2, execute: { [pasteboard, listenToClipboardChanges] in

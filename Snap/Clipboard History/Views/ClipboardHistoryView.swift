@@ -164,8 +164,8 @@ struct ClipboardHistoryView: View {
 		}
 		
 		// Create a updated history.
-		updateSelectedItemIndex(selectedItemIndex - 1)
 		items.remove(at: selectedItemIndex)
+		updateSelectedItemIndex(selectedItemIndex - 1)
 		let newHistory = ClipboardHistory(items: items)
 		
 		// Write the new history to disk.
