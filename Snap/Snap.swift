@@ -33,14 +33,14 @@ class Snap {
 		// Request needed permissions
 		Permissions.requestPermissions()
 		
-		// Setup the status item.
-		setupStatusItem()
+		// Set up the status item.
+		setUpStatusItem()
 		
 		// Open the search bar.
 		openSearchWindow()
 		
-		// Setup the keyboard shortcuts.
-		setupKeyboardShortcuts()
+		// Set up the keyboard shortcuts.
+		setUpKeyboardShortcuts()
 		
 		// If the clipboard history is enabled, start the clipboard manager.
 		if configuration.clipboardHistoryEnabled {
@@ -63,7 +63,7 @@ class Snap {
 		removeKeyboardMonitor()
 	}
 
-	private func setupStatusItem() {
+	private func setUpStatusItem() {
 		// If the status item doesn't have a button, then return.
 		guard let button = statusItem.button else { return }
 		
@@ -116,8 +116,8 @@ class Snap {
 		activate()
 	}
 	
-	private func setupKeyboardShortcuts() {
-		// Setup the shortcut for hiding and showing the search bar.
+	private func setUpKeyboardShortcuts() {
+		// Set up the shortcut for hiding and showing the search bar.
 		KeyboardShortcutManager(keyboardShortcut: configuration.activationKeyboardShortcut).startListeningForEvents { [self] _ in
 			if window.isVisible {
 				// Deactivate the application.

@@ -15,22 +15,8 @@ class Search: ObservableObject {
 	private var currentString = ""
 	
 	init() {
-		// Register a notification for updates on the NSMetadataQuery gathering process.
-		NotificationCenter.default.addObserver(self, selector: #selector(metadataQueryDidFinishGathering), name: .NSMetadataQueryDidFinishGathering, object: nil)
-		
-		// Configure the metadata query.
-		// Set the search scope to the whole Computer.
-		metadataQuery.searchScopes = [NSMetadataQueryLocalComputerScope]
-		
-		// Sort by the item's relevance.
-		metadataQuery.sortDescriptors = [NSSortDescriptor(key: kMDQueryResultContentRelevance as String, ascending: false)]
-		
-		// Configure an operation queue to improve performance.
-		let operationQueue = OperationQueue()
-		operationQueue.qualityOfService = .userInteractive
-		
-		// Set the metadata query's operation queue to the new operation queue.
-		metadataQuery.operationQueue = operationQueue
+		// Set up the search.
+		setUp()
 	}
 	
 	/// Search for a string in the Spotlight Database.
@@ -108,5 +94,25 @@ class Search: ObservableObject {
 			//				results.append(WebSearchItem(searchString: bookmark.URLString ?? "", searchType: .url, name: bookmark.URLString ?? "", takesNameAsArgument: true))
 			//			}
 		}
+	}
+	
+	/// Set up the NSMetadataQuery and notifications.
+	private func setUp() {
+		// Configure the metadata query.
+		// Set the search scope to the whole Computer.
+		metadataQuery.searchScopes = [NSMetadataQueryLocalComputerScope]
+		
+		// Sort by the item's relevance.
+		metadataQuery.sortDescriptors = [NSSortDescriptor(key: kMDQueryResultContentRelevance as String, ascending: false)]
+		
+		// Configure an operation queue to improve performance.
+		let operationQueue = OperationQueue()
+		operationQueue.qualityOfService = .userInteractive
+		
+		// Set the metadata query's operation queue to the new operation queue.
+		metadataQuery.operationQueue = operationQueue
+		
+		// Register a notification for updates on the NSMetadataQuery gathering process.
+		NotificationCenter.default.addObserver(self, selector: #selector(metadataQueryDidFinishGathering), name: .NSMetadataQueryDidFinishGathering, object: nil)
 	}
 }
