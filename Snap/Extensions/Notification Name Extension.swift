@@ -5,7 +5,6 @@
 import Foundation
 
 extension Notification.Name {
-	static let TextChanged = Notification.Name("TextChanged")
 	static let ReturnKeyWasPressed = Notification.Name("ReturnKeyWasPressed")
 	static let UpArrowKeyWasPressed = Notification.Name("UpArrowKeyWasPressed")
 	static let DownArrowKeyWasPressed = Notification.Name("DownArrowKeyWasPressed")

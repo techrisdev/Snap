@@ -175,7 +175,7 @@ struct SearchView: View {
 			return
 		}
 		
-		// If the Array contains the new index, then set the index to the new index.
+		// If the item exists, update the selected item.
 		withAnimation(configuration.shouldAnimateNavigation ? .default : .none) {
 			selectedItemIndex = index
 		}

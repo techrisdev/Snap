@@ -4,7 +4,7 @@
 
 import AppKit.NSWorkspace
 
-// MARK: TODO: The app crashes if the item is displayed but deleted.
+// MARK: EDIT: It seems like the bug doesn't appear anymore. | TODO: The app crashes if the item is displayed but deleted.
 struct SpotlightSearchItem: SearchItem {
 	private var item: NSMetadataItem
 	

@@ -6,6 +6,8 @@ import SwiftUI
 import Carbon.HIToolbox.Events
 
 struct SearchResultView: View {
+	@State private var scrollViewID = UUID()
+	
 	var results: [SearchItem]
 	var itemAction: (SearchItem) -> Void
 	var selectedItemIndex: Int
@@ -28,6 +30,10 @@ struct SearchResultView: View {
 					.buttonStyle(PlainButtonStyle())
 					
 				}
+				.onChange(of: results.first?.id) { _ in
+					// When the results change, Scroll to the top.
+					scrollViewID = UUID()
+				}
 				.onChange(of: selectedItemIndex) { _ in
 					// Check if the selected item exists; If it does, then scroll down to the item.
 					if results.indices.contains(selectedItemIndex) {
@@ -36,6 +42,7 @@ struct SearchResultView: View {
 				}
 			}
 		}
+		.id(scrollViewID)
 		.onAppear {
 			// Listen for an event (keyboard shortcut) to show the path and show the file in Finder (later) instead of opening the file.
 			NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .keyUp]) { event in
