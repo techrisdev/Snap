@@ -1,5 +1,5 @@
 <p align="center">
-	<img width="256" height="256" src="https://github.com/techrisdev/Snap/raw/main/Snap/Assets.xcassets/AppIcon.appiconset/Icon-512.png">
+	<img width="256" height="256" src="https://github.com/techrisdev/Snap/raw/main/Snap/Assets/Assets.xcassets/AppIcon.appiconset/Icon-512.png">
 </p>
 
 <h1 align="center">Snap</h1>
