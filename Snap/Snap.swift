@@ -24,6 +24,9 @@ class Snap {
 	/// The application's search window.
 	private var window: NSWindow!
 	
+	/// Indicates if the app is running.
+	private var isStarted = false
+	
 	/// The app's settings window.
 	var settingsWindow: NSWindow?
 	
@@ -46,18 +49,25 @@ class Snap {
 		if configuration.clipboardHistoryEnabled {
 			clipboardManager.start()
 		}
+		
+		// The app is started now.
+		isStarted = true
 	}
 	
 	let notificationCenter = NotificationCenter.default
 	
 	func deactivate() {
+		// If the app isn't started yet, return from the function.
+		if !isStarted {
+			return
+		}
+		
 		// Deactivate the application.
 		notificationCenter.post(name: .ApplicationShouldExit, object: nil)
 		window.close()
 		
-		// Deactivate the application and activate the application behind Snap (it should be the menu bar owning application).
-		NSApp.deactivate()
-		NSWorkspace.shared.menuBarOwningApplication?.activate(options: .activateIgnoringOtherApps)
+		// Hide the application so the application behind Snap gets active.
+		NSApp.hide(nil)
 		
 		// Remove the listener for keyboard events.
 		removeKeyboardMonitor()
@@ -135,6 +145,9 @@ class Snap {
 		
 		// Make the application the main application.
 		NSApp.activate(ignoringOtherApps: true)
+		
+		// Center the window.
+		window.center()
 		
 		// Open the search bar window.
 		window.makeKeyAndOrderFront(nil)

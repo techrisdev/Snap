@@ -32,6 +32,7 @@
 		6C344FDD25FBF6C70042CC05 /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C344FDC25FBF6C70042CC05 /* KeyEvent.swift */; };
 		6C344FE825FCB5E40042CC05 /* MusicControllerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C344FE725FCB5E40042CC05 /* MusicControllerApp.swift */; };
 		6C344FED25FCC7C60042CC05 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C344FEC25FCC7C60042CC05 /* Bookmark.swift */; };
+		6C3B16CF2626FCCB00CAC6A6 /* Allow Full Disk Access.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6C3B16CA2626FA4000CAC6A6 /* Allow Full Disk Access.mp4 */; };
 		6C3E3CB4262193A6001A512C /* WebSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3E3CB3262193A6001A512C /* WebSearch.swift */; };
 		6C4B3E13260766D100632AFF /* QuickLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4B3E12260766D100632AFF /* QuickLook.swift */; };
 		6C4DF3DB25FA7E10003B6D90 /* KeyboardShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4DF3DA25FA7E10003B6D90 /* KeyboardShortcutManager.swift */; };
@@ -112,6 +113,7 @@
 		6C344FDC25FBF6C70042CC05 /* KeyEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEvent.swift; sourceTree = "<group>"; };
 		6C344FE725FCB5E40042CC05 /* MusicControllerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicControllerApp.swift; sourceTree = "<group>"; };
 		6C344FEC25FCC7C60042CC05 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
+		6C3B16CA2626FA4000CAC6A6 /* Allow Full Disk Access.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Allow Full Disk Access.mp4"; sourceTree = "<group>"; };
 		6C3E3CB3262193A6001A512C /* WebSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSearch.swift; sourceTree = "<group>"; };
 		6C4B3E12260766D100632AFF /* QuickLook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLook.swift; sourceTree = "<group>"; };
 		6C4DF3DA25FA7E10003B6D90 /* KeyboardShortcutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcutManager.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 		6C106F4725F655BB0047E0B0 /* Snap */ = {
 			isa = PBXGroup;
 			children = (
+				6C3B16C32626F8AB00CAC6A6 /* Assets */,
 				6C106F4825F655BB0047E0B0 /* AppDelegate.swift */,
 				6C07246C2605F9ED009F0E63 /* Snap.swift */,
 				6C12A5D225F79C320029FBD7 /* Permissions.swift */,
@@ -203,7 +206,6 @@
 				6C12A5F525F7D78F0029FBD7 /* Search */,
 				6C12A5F125F7D7020029FBD7 /* Views */,
 				6C82999825F699BB00A25064 /* Extensions */,
-				6C106F4C25F655BC0047E0B0 /* Assets.xcassets */,
 				6C106F5125F655BC0047E0B0 /* Main.storyboard */,
 				6C106F5425F655BC0047E0B0 /* Info.plist */,
 				6CC0353125FFD6E60075E970 /* Snap.entitlements */,
@@ -255,6 +257,15 @@
 				6C344FEC25FCC7C60042CC05 /* Bookmark.swift */,
 			);
 			path = "Safari Bookmarks";
+			sourceTree = "<group>";
+		};
+		6C3B16C32626F8AB00CAC6A6 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				6C106F4C25F655BC0047E0B0 /* Assets.xcassets */,
+				6C3B16CA2626FA4000CAC6A6 /* Allow Full Disk Access.mp4 */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		6C5B519D25F90418000B004A /* Custom Actions */ = {
@@ -495,6 +506,7 @@
 			files = (
 				6C106F5325F655BC0047E0B0 /* Main.storyboard in Resources */,
 				6C106F5025F655BC0047E0B0 /* Preview Assets.xcassets in Resources */,
+				6C3B16CF2626FCCB00CAC6A6 /* Allow Full Disk Access.mp4 in Resources */,
 				6CE3BE3D25FF9755001636F5 /* DefaultConfiguration.json in Resources */,
 				6C106F4D25F655BC0047E0B0 /* Assets.xcassets in Resources */,
 				6C07242F260527F0009F0E63 /* Actions.json in Resources */,
