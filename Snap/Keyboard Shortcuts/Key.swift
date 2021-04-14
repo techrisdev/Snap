@@ -8,7 +8,7 @@ struct Key: Codable {
 	var keyCode: UInt32
 	
 	// Reference: https://stackoverflow.com/a/35138823 https://gist.github.com/ArthurYidi/3af4ccd7edc87739530476fc80a22e12
-	/// Convert the key cdoe to a character.
+	/// Convert the key code to a character.
 	var character: Character {
 		let keyboard = TISCopyCurrentKeyboardInputSource().takeRetainedValue()
 		guard let layoutPointer = TISGetInputSourceProperty(keyboard, kTISPropertyUnicodeKeyLayoutData) else { fatalError("Failed to get layout data.") }

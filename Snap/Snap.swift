@@ -30,9 +30,22 @@ class Snap {
 	/// The app's settings window.
 	var settingsWindow: NSWindow?
 	
+	/// The application's icon.
+	var icon: Image {
+		let iconImage = NSApp.applicationIconImage!
+		iconImage.size = NSSize(width: 250, height: 250)
+		return Image(nsImage: iconImage)
+	}
+	
 	private let configuration = Configuration.decoded
 	
 	func start() {
+		// If the app hasn't been started before, show the Getting Started window.
+		if !UserDefaults.standard.bool(forKey: "StartedBefore") {
+			showGettingStartedWindow()
+			return
+		}
+		
 		// Request needed permissions
 		Permissions.requestPermissions()
 		
@@ -181,7 +194,7 @@ class Snap {
 		removeKeyboardMonitor()
 	}
 	
-	@objc func quit() {
+	@objc private func quit() {
 		// Terminate the application.
 		NSApp.terminate(nil)
 	}
@@ -269,5 +282,21 @@ class Snap {
 		
 		// Set the monitor to nil to avoid crashing if the app deactivates for a reason not related to the search bar.
 		self.monitor = nil
+	}
+	
+	var gettingStartedWindow: NSWindow!
+	
+	/// Show the Getting Started screen that gets displayed the fist time Snap is started.
+	private func showGettingStartedWindow() {
+		gettingStartedWindow = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 520),
+								  styleMask: [.titled, .closable, .fullSizeContentView],
+								  backing: .buffered,
+								  defer: false)
+		gettingStartedWindow.title = "Getting Started"
+		gettingStartedWindow.isReleasedWhenClosed = false
+		gettingStartedWindow.center()
+		gettingStartedWindow.contentView = NSHostingView(rootView: GettingStartedView())
+		NSApp.activate(ignoringOtherApps: true)
+		gettingStartedWindow.makeKeyAndOrderFront(nil)
 	}
 }
