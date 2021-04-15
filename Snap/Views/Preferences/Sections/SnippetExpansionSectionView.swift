@@ -13,7 +13,6 @@ struct SnippetExpansionSectionView: View {
 	var body: some View {
 		PreferencesSection(text: "Snippet Expansion") {
 			Toggle("Enabled", isOn: $snippetExpansionEnabled)
-				.padding(.bottom)
 			HStack {
 				Spacer()
 				Text("Snippets")
@@ -56,17 +55,21 @@ struct SnippetExpansionSectionView: View {
 					Image(systemName: "plus")
 				}
 				.popover(isPresented: $showingPopover) {
-					AddSnippetExpansionView(snippet: $newSnippet)
-					Button("OK") {
-						// Append the new snippet to the array.
-						snippets.append(newSnippet)
-						
-						// Reset the new snippet.
-						newSnippet = Snippet(keyword: "", snippet: "")
-						
-						// Close the popover.
-						showingPopover = false
+					VStack {
+						AddSnippetExpansionView(snippet: $newSnippet)
+						Button("OK") {
+							// Append the new snippet to the array.
+							snippets.append(newSnippet)
+							
+							// Reset the new snippet.
+							newSnippet = Snippet(keyword: "", snippet: "")
+							
+							// Close the popover.
+							showingPopover = false
+						}
 					}
+					.padding()
+					.frame(minWidth: 150, minHeight: 100)
 				}
 				Spacer()
 			}

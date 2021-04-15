@@ -50,16 +50,16 @@ struct PreferencesView: View {
 					Label("General", systemImage: "gearshape")
 				}
 				NavigationLink(destination: SearchBarSectionView(searchBarFont: $searchBarFont, searchBarHeight: $searchBarHeight, insertionPointColor: $insertionPointColor)) {
-					Label("Search Bar", systemImage: "gearshape")
+					Label("Search Bar", systemImage: "textformat")
 				}
 				NavigationLink(destination: SearchResultsSectionView(showingIcons: $showingIcons, blockedPaths: $blockedPaths, iconWidth: $iconWidth, iconHeight: $iconHeight, resultItemFont: $resultItemFont, resultItemHeight: $resultItemHeight, resultItemLimit: $resultItemLimit, shouldAnimateNavigation: $shouldAnimateNavigation, selectedItemBackgroundColor: $selectedItemBackgroundColor, showPathKeyboardShortcut: $showPathKeyboardShortcut, quickLookKeyboardShortcut: $quickLookKeyboardShortcut)) {
-					Label("Search Results", systemImage: "gearshape")
+					Label("Search Results", systemImage: "magnifyingglass")
 				}
 				NavigationLink(destination: ClipboardHistorySectionView(clipboardHistoryEnabled: $clipboardHistoryEnabled, historyItemLimit: $historyItemLimit)) {
-					Label("Clipboard History", systemImage: "gearshape")
+					Label("Clipboard History", systemImage: "bookmark")
 				}
 				NavigationLink(destination: SnippetExpansionSectionView(snippetExpansionEnabled: $snippetExpansionEnabled, snippets: $snippets)) {
-					Label("Snippet Expansion", systemImage: "gearshape")
+					Label("Snippet Expansion", systemImage: "bolt")
 				}
 			}
 			.listStyle(SidebarListStyle())
