@@ -17,8 +17,8 @@
 	},
 	"searchBarHeight": 50,
 	"insertionPointColor": "#FFFFFF",
-	"maximumWidth": 320,
-	"maximumHeight": 450,
+	"maximumWidth": 675,
+	"maximumHeight": 600,
 	"shouldAnimateNavigation": true,
 	"resultItemFont": {
 		"name": "SF Pro",
@@ -28,6 +28,11 @@
 	"activationKeyboardShortcut": {
 		"key": {"keyCode": 49},
 		"modifiers": ["option"],
+		"events": ["keyDown"]
+	},
+	"showPathKeyboardShortcut": {
+		"key": {"keyCode": 5},
+		"modifiers": ["command"],
 		"events": ["keyDown"]
 	},
 	"quickLookKeyboardShortcut": {

@@ -29,6 +29,7 @@ struct SettingsView: View {
 	@State private var resultItemLimit = configuration.resultItemLimit
 	@State private var shouldAnimateNavigation = configuration.shouldAnimateNavigation
 	@State private var selectedItemBackgroundColor = configuration.selectedItemBackgroundColor.color
+	@State private var showPathKeyboardShortcut = configuration.showPathKeyboardShortcut
 	@State private var quickLookKeyboardShortcut = configuration.quickLookKeyboardShortcut
 	
 	// Clipboard history settings
@@ -73,61 +74,66 @@ struct SettingsView: View {
 				}
 				
 				SettingsSection(text: "Results") {
-					Toggle("Showing Icons", isOn: $showingIcons)
-					Button(action: {
-						showingBlockedPaths.toggle()
-					}) {
-						Text("Blocked Paths")
-					}
-					.popover(isPresented: $showingBlockedPaths) {
-						ScrollView {
-							
-							ForEach(blockedPaths, id: \.self) { path in
-								HStack {
-									Text(path)
-									Spacer()
-									Button(action: {
-										if let index = blockedPaths.firstIndex(of: path) {
-											blockedPaths.remove(at: index)
-										}
-									}) {
-										Image(systemName: "minus")
-									}
-								}
-							}
-							
-						}
-						.padding()
-						
+					Group {
+						Toggle("Showing Icons", isOn: $showingIcons)
 						Button(action: {
-							// Set up the open panel.
-							let openPanel = NSOpenPanel()
-							openPanel.canChooseDirectories = true
-							openPanel.allowsMultipleSelection = true
-							openPanel.begin { response in
-								if response == .OK {
-									// Get the selected urls.
-									let urls = openPanel.urls
-									for url in urls {
-										// Append the URL's path.
-										blockedPaths.append(url.path)
+							showingBlockedPaths.toggle()
+						}) {
+							Text("Blocked Paths")
+						}
+						.popover(isPresented: $showingBlockedPaths) {
+							ScrollView {
+								
+								ForEach(blockedPaths, id: \.self) { path in
+									HStack {
+										Text(path)
+										Spacer()
+										Button(action: {
+											if let index = blockedPaths.firstIndex(of: path) {
+												blockedPaths.remove(at: index)
+											}
+										}) {
+											Image(systemName: "minus")
+										}
 									}
 								}
+								
 							}
-						}) {
-							Image(systemName: "plus")
+							.padding()
+							
+							Button(action: {
+								// Set up the open panel.
+								let openPanel = NSOpenPanel()
+								openPanel.canChooseDirectories = true
+								openPanel.allowsMultipleSelection = true
+								openPanel.begin { response in
+									if response == .OK {
+										// Get the selected urls.
+										let urls = openPanel.urls
+										for url in urls {
+											// Append the URL's path.
+											blockedPaths.append(url.path)
+										}
+									}
+								}
+							}) {
+								Image(systemName: "plus")
+							}
+							.padding([.bottom, .leading, .trailing])
 						}
-						.padding([.bottom, .leading, .trailing])
+						Stepper("Icon Width: \(iconWidth)", value: $iconWidth)
+						Stepper("Icon Height: \(iconHeight)", value: $iconHeight)
+						FontPickerView(font: $resultItemFont)
+						Stepper("Result Item Height: \(resultItemHeight, specifier: "%g")", value: $resultItemHeight)
+						Stepper("Result Item Limit: \(resultItemLimit)", value: $resultItemLimit)
+						Toggle("Animated Navigation", isOn: $shouldAnimateNavigation)
+						ColorPicker("Selected Item Background Color", selection: $selectedItemBackgroundColor)
+						KeyboardShortcutView(keyboardShortcut: $quickLookKeyboardShortcut) {
+							Text("Quick Look Shortcut:")
+						}
 					}
-					Stepper("Icon Width: \(iconWidth)", value: $iconWidth)
-					Stepper("Icon Height: \(iconHeight)", value: $iconHeight)
-					FontPickerView(font: $resultItemFont)
-					Stepper("Result Item Height: \(resultItemHeight, specifier: "%g")", value: $resultItemHeight)
-					Stepper("Result Item Limit: \(resultItemLimit)", value: $resultItemLimit)
-					Toggle("Animated Navigation", isOn: $shouldAnimateNavigation)
-					ColorPicker("Selected Item Background Color", selection: $selectedItemBackgroundColor)
-					KeyboardShortcutView(keyboardShortcut: $quickLookKeyboardShortcut) {
-						Text("Quick Look Shortcut:")
+					KeyboardShortcutView(keyboardShortcut: $showPathKeyboardShortcut) {
+						Text("Show Path Shortcut:")
 					}
 				}
 				SettingsSection(text: "Clipboard History") {
@@ -141,7 +147,7 @@ struct SettingsView: View {
 				Spacer()
 				Button("Save") {
 					// Create a configuration with all settings.
-					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, maximumWidth: maximumWdith, maximumHeight: maximumHeight, searchBarFont: searchBarFont, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, showingIcons: showingIcons, blockedPaths: blockedPaths, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, resultItemFont: resultItemFont, resultItemHeight: resultItemHeight, resultItemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString, quickLookKeyboardShortcut: quickLookKeyboardShortcut, clipboardHistoryEnabled: clipboardHistoryEnabled, historyItemLimit: historyItemLimit)
+					let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, maximumWidth: maximumWdith, maximumHeight: maximumHeight, searchBarFont: searchBarFont, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, showingIcons: showingIcons, blockedPaths: blockedPaths, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, resultItemFont: resultItemFont, resultItemHeight: resultItemHeight, resultItemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString, showPathKeyboardShortcut: showPathKeyboardShortcut, quickLookKeyboardShortcut: quickLookKeyboardShortcut, clipboardHistoryEnabled: clipboardHistoryEnabled, historyItemLimit: historyItemLimit)
 					
 					// Write the new configuration to the configuration path.
 					newConfiguration.write()

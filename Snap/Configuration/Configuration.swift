@@ -29,6 +29,7 @@ struct Configuration: Codable {
 	var resultItemLimit: Int
 	var shouldAnimateNavigation: Bool
 	var selectedItemBackgroundColor: String
+	var showPathKeyboardShortcut: KeyboardShortcut
 	var quickLookKeyboardShortcut: KeyboardShortcut
 	
 	// Clipboard History
