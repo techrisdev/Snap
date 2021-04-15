@@ -27,8 +27,8 @@ class Snap {
 	/// Indicates if the app is running.
 	private var isStarted = false
 	
-	/// The app's settings window.
-	var settingsWindow: NSWindow?
+	/// The app's preferences window.
+	var preferencesWindow: PreferencesWindow?
 	
 	/// The application's icon.
 	var icon: Image {
@@ -99,8 +99,8 @@ class Snap {
 			NSMenuItem(title: "Show Search Bar",
 					   action: #selector(activate),
 					   keyEquivalent: ""),
-			NSMenuItem(title: "Show Settings",
-					   action: #selector(showSettingsWindow),
+			NSMenuItem(title: "Show Preferences",
+					   action: #selector(showPreferencesWindow),
 					   keyEquivalent: ","),
 			NSMenuItem.separator(),
 			NSMenuItem(title: "Quit",
@@ -169,33 +169,33 @@ class Snap {
 		window.styleMask.remove(.titled)
 	}
 	
-	@objc func showSettingsWindow() {
+	@objc func showPreferencesWindow() {
 		// Close the search bar.
 		window.close()
 		
-		// If the settings window is already on the screen, then return.
-		if settingsWindow?.isVisible == true {
+		// If the preferences window is already on the screen, then return.
+		if preferencesWindow?.isVisible == true {
 			return
 		}
 		
-		// Configure the settings window.
-		settingsWindow = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 520, height: 400),
+		// Configure the preferences window.
+		preferencesWindow = PreferencesWindow(contentRect: NSRect(x: 0, y: 0, width: 520, height: 400),
 								  styleMask: [.titled, .closable, .resizable, .fullSizeContentView],
 								  backing: .buffered,
 								  defer: false)
-		settingsWindow?.title = "Settings"
-		settingsWindow?.isReleasedWhenClosed = false
-		settingsWindow?.center()
-		settingsWindow?.contentView = NSHostingView(rootView: SettingsView())
+		preferencesWindow?.title = "Preferences"
+		preferencesWindow?.isReleasedWhenClosed = false
+		preferencesWindow?.center()
+		preferencesWindow?.contentView = NSHostingView(rootView: PreferencesView())
 		NSApp.activate(ignoringOtherApps: true)
-		settingsWindow?.makeKeyAndOrderFront(nil)
+		preferencesWindow?.makeKeyAndOrderFront(nil)
 		
-		// Stop listening for events, they aren't relevant for the settings window.
+		// Stop listening for events, they aren't relevant for the preferences window.
 		removeKeyboardMonitor()
 	}
 	
+	/// Terminate the application.
 	@objc private func quit() {
-		// Terminate the application.
 		NSApp.terminate(nil)
 	}
 	

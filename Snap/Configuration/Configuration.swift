@@ -7,19 +7,19 @@ import SwiftUI
 struct Configuration: Codable {
 	static let decoded = decodeConfigurationFile()
 	
-	// General Settings
+	// General preferences
 	var backgroundColor: String
 	var textColor: String
 	var activationKeyboardShortcut: KeyboardShortcut
 	var maximumWidth: CGFloat
 	var maximumHeight: CGFloat
 	
-	// Search bar settings
+	// Search bar preferences
 	var searchBarFont: Font
 	var searchBarHeight: CGFloat
 	var insertionPointColor: String
 	
-	// Result settings
+	// Result preferences
 	var showingIcons: Bool
 	var blockedPaths: [String]
 	var iconSizeWidth: Int

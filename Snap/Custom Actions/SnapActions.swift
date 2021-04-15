@@ -6,7 +6,7 @@ import Foundation
 
 /// Non-codable actions.
 enum SnapAction: CaseIterable {
-	case openSettings
+	case openPreferences
 	
 	/// All actions converted to search items.
 	static var allItems: [SearchItem] = {
@@ -14,8 +14,8 @@ enum SnapAction: CaseIterable {
 		
 		for action in SnapAction.allCases {
 			switch action {
-			case .openSettings:
-				result.append(SettingsAction())
+			case .openPreferences:
+				result.append(PreferencesAction())
 			}
 		}
 		

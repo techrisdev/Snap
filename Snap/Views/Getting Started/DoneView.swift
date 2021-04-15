@@ -14,7 +14,7 @@ struct DoneView: View {
 			snap.icon
 				.frame(maxWidth: .infinity, maxHeight: .infinity)
 			Spacer()
-			Text("You can start using Snap. To activate Snap, hit 􀆕 + Space on your keyboard. For configuration options, you can click on the Menu Item -> Settings.")
+			Text("You can start using Snap. To activate Snap, hit 􀆕 + Space on your keyboard. For configuration options, you can click on the 􀊫 Menu Item and then the \"Preferences\" Button.")
 				.padding()
 			HighlightedButton("Start Snap") {
 				UserDefaults.standard.setValue(true, forKey: "StartedBefore")
