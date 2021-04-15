@@ -45,9 +45,9 @@ struct SearchResultView: View {
 		.id(scrollViewID)
 		.onAppear {
 			// Listen for an event (keyboard shortcut) to show the path and show the file in Finder (later) instead of opening the file.
-			NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .keyUp]) { event in
+			NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .keyUp]) { [configuration] event in
 				let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
-				if modifiers == .command && event.keyCode == kVK_ANSI_F {
+				if modifiers.keyboardShortcutModifiers == configuration.showPathKeyboardShortcut.modifiers && event.keyCode == configuration.showPathKeyboardShortcut.key.keyCode {
 					if event.type == .keyDown {
 						showingPath = true
 					} else {
