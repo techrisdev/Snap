@@ -31,7 +31,6 @@ struct SearchResultsSectionView: View {
 				}
 				.popover(isPresented: $showingBlockedPaths) {
 					ScrollView {
-						
 						ForEach(blockedPaths, id: \.self) { path in
 							HStack {
 								Text(path)

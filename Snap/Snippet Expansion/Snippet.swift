@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct Snippet: Codable {
+struct Snippet: Codable, Hashable {
 	var keyword: String
 	var snippet: String
 }

@@ -58,8 +58,12 @@ struct PreferencesView: View {
 				NavigationLink(destination: ClipboardHistorySectionView(clipboardHistoryEnabled: $clipboardHistoryEnabled, historyItemLimit: $historyItemLimit)) {
 					Label("Clipboard History", systemImage: "gearshape")
 				}
+				NavigationLink(destination: SnippetExpansionSectionView(snippetExpansionEnabled: $snippetExpansionEnabled, snippets: $snippets)) {
+					Label("Snippet Expansion", systemImage: "gearshape")
+				}
 			}
 			.listStyle(SidebarListStyle())
+			.frame(minWidth: 175)
 		}
 		.onReceive(NotificationCenter.default.publisher(for: PreferencesWindow.preferencesWindowWillCloseNotification)) { _ in
 			// Save the new configuration.

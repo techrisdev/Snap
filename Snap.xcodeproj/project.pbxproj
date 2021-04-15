@@ -75,6 +75,8 @@
 		6CB9DEA0262886AE0071A06B /* Grant Accessibility Permissions.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6CB9DE9F262886AE0071A06B /* Grant Accessibility Permissions.mp4 */; };
 		6CB9DEA6262886FF0071A06B /* AccessibilityPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9DEA5262886FF0071A06B /* AccessibilityPermissionsView.swift */; };
 		6CB9DEAC262887200071A06B /* LoopVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9DEAB262887200071A06B /* LoopVideoPlayer.swift */; };
+		6CB9DEB62628A36D0071A06B /* SnippetExpansionSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9DEB52628A36D0071A06B /* SnippetExpansionSectionView.swift */; };
+		6CB9DEBA2628A9F90071A06B /* AddSnippetExpansionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9DEB92628A9F90071A06B /* AddSnippetExpansionView.swift */; };
 		6CD5F52026242821001E4F18 /* ClipboardHistoryBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD5F51F26242821001E4F18 /* ClipboardHistoryBarView.swift */; };
 		6CDFBFD725FE404700100171 /* ApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDFBFD625FE404700100171 /* ApplicationView.swift */; };
 		6CE3BE3D25FF9755001636F5 /* DefaultConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CE3BE3C25FF9755001636F5 /* DefaultConfiguration.json */; };
@@ -172,6 +174,8 @@
 		6CB9DE9F262886AE0071A06B /* Grant Accessibility Permissions.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Grant Accessibility Permissions.mp4"; sourceTree = "<group>"; };
 		6CB9DEA5262886FF0071A06B /* AccessibilityPermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityPermissionsView.swift; sourceTree = "<group>"; };
 		6CB9DEAB262887200071A06B /* LoopVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopVideoPlayer.swift; sourceTree = "<group>"; };
+		6CB9DEB52628A36D0071A06B /* SnippetExpansionSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetExpansionSectionView.swift; sourceTree = "<group>"; };
+		6CB9DEB92628A9F90071A06B /* AddSnippetExpansionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSnippetExpansionView.swift; sourceTree = "<group>"; };
 		6CC0353125FFD6E60075E970 /* Snap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Snap.entitlements; sourceTree = "<group>"; };
 		6CD5F51F26242821001E4F18 /* ClipboardHistoryBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistoryBarView.swift; sourceTree = "<group>"; };
 		6CDFBFD625FE404700100171 /* ApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationView.swift; sourceTree = "<group>"; };
@@ -433,6 +437,8 @@
 				6CB9DE30262845560071A06B /* SearchBarSectionView.swift */,
 				6CB9DE34262845C30071A06B /* SearchResultsSectionView.swift */,
 				6CB9DE382628480F0071A06B /* ClipboardHistorySectionView.swift */,
+				6CB9DEB52628A36D0071A06B /* SnippetExpansionSectionView.swift */,
+				6CB9DEB92628A9F90071A06B /* AddSnippetExpansionView.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -618,7 +624,9 @@
 				6C7873D726179C39002D48FE /* FontPickerView.swift in Sources */,
 				6C12A5EA25F7D59A0029FBD7 /* SearchItemView.swift in Sources */,
 				6CB6017B25FE2EB200613136 /* Application.swift in Sources */,
+				6CB9DEBA2628A9F90071A06B /* AddSnippetExpansionView.swift in Sources */,
 				6CB9DE392628480F0071A06B /* ClipboardHistorySectionView.swift in Sources */,
+				6CB9DEB62628A36D0071A06B /* SnippetExpansionSectionView.swift in Sources */,
 				6CE420A8261B5C04002F0769 /* ClipboardHistoryView.swift in Sources */,
 				6C106F8325F658670047E0B0 /* SearchItem.swift in Sources */,
 				6C344FED25FCC7C60042CC05 /* Bookmark.swift in Sources */,

@@ -7,7 +7,7 @@
 
 ## Introduction
 
-Snap is an application which searches your Files, Contacts and Calendar events using Spotlight Metadata. It has many customization options as well as the ability to speed up your workflow by providing features like music control, clipboard history and system commands like sleeping, restarting and shutting down the computer. It is inspired by [Alfred](https://alfredapp.com).
+Snap is an application which searches your Files, Contacts and Calendar events using Spotlight Metadata. It has many customization options as well as the ability to speed up your workflow by providing features like music control, clipboard history, snippet expansion and system commands like sleeping, restarting and shutting down the computer. It is inspired by [Alfred](https://alfredapp.com).
 
 ## Features
 
@@ -18,6 +18,7 @@ Snap is an application which searches your Files, Contacts and Calendar events u
 * Customizable
 * Custom applications like a Music Controller
 * Clipboard History
+* Snippet Expansion
 * Actions like restarting the computer
 * Web search
 * Quick Look previews
