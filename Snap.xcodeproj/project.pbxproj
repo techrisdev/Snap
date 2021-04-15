@@ -70,6 +70,11 @@
 		6CB9DE35262845C30071A06B /* SearchResultsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9DE34262845C30071A06B /* SearchResultsSectionView.swift */; };
 		6CB9DE392628480F0071A06B /* ClipboardHistorySectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9DE382628480F0071A06B /* ClipboardHistorySectionView.swift */; };
 		6CB9DE7F26285F800071A06B /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9DE7E26285F800071A06B /* PreferencesWindow.swift */; };
+		6CB9DE9926287A0D0071A06B /* SnippetExpansionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9DE9726287A0D0071A06B /* SnippetExpansionManager.swift */; };
+		6CB9DE9A26287A0D0071A06B /* Snippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9DE9826287A0D0071A06B /* Snippet.swift */; };
+		6CB9DEA0262886AE0071A06B /* Grant Accessibility Permissions.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6CB9DE9F262886AE0071A06B /* Grant Accessibility Permissions.mp4 */; };
+		6CB9DEA6262886FF0071A06B /* AccessibilityPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9DEA5262886FF0071A06B /* AccessibilityPermissionsView.swift */; };
+		6CB9DEAC262887200071A06B /* LoopVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9DEAB262887200071A06B /* LoopVideoPlayer.swift */; };
 		6CD5F52026242821001E4F18 /* ClipboardHistoryBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD5F51F26242821001E4F18 /* ClipboardHistoryBarView.swift */; };
 		6CDFBFD725FE404700100171 /* ApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDFBFD625FE404700100171 /* ApplicationView.swift */; };
 		6CE3BE3D25FF9755001636F5 /* DefaultConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CE3BE3C25FF9755001636F5 /* DefaultConfiguration.json */; };
@@ -162,6 +167,11 @@
 		6CB9DE34262845C30071A06B /* SearchResultsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsSectionView.swift; sourceTree = "<group>"; };
 		6CB9DE382628480F0071A06B /* ClipboardHistorySectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistorySectionView.swift; sourceTree = "<group>"; };
 		6CB9DE7E26285F800071A06B /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
+		6CB9DE9726287A0D0071A06B /* SnippetExpansionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnippetExpansionManager.swift; sourceTree = "<group>"; };
+		6CB9DE9826287A0D0071A06B /* Snippet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snippet.swift; sourceTree = "<group>"; };
+		6CB9DE9F262886AE0071A06B /* Grant Accessibility Permissions.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Grant Accessibility Permissions.mp4"; sourceTree = "<group>"; };
+		6CB9DEA5262886FF0071A06B /* AccessibilityPermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityPermissionsView.swift; sourceTree = "<group>"; };
+		6CB9DEAB262887200071A06B /* LoopVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopVideoPlayer.swift; sourceTree = "<group>"; };
 		6CC0353125FFD6E60075E970 /* Snap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Snap.entitlements; sourceTree = "<group>"; };
 		6CD5F51F26242821001E4F18 /* ClipboardHistoryBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistoryBarView.swift; sourceTree = "<group>"; };
 		6CDFBFD625FE404700100171 /* ApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationView.swift; sourceTree = "<group>"; };
@@ -223,6 +233,7 @@
 				6C0723D12604DE69009F0E63 /* Icon.swift */,
 				6C3B16C32626F8AB00CAC6A6 /* Assets */,
 				6CE42085261B0A36002F0769 /* Clipboard History */,
+				6CB9DE96262879F70071A06B /* Snippet Expansion */,
 				6CE3BE3B25FF9737001636F5 /* Configuration */,
 				6CED3B0225FAA03900E61388 /* Keyboard Shortcuts */,
 				6C5B519D25F90418000B004A /* Custom Actions */,
@@ -288,6 +299,7 @@
 			children = (
 				6C106F4C25F655BC0047E0B0 /* Assets.xcassets */,
 				6C3B16CA2626FA4000CAC6A6 /* Allow Full Disk Access.mp4 */,
+				6CB9DE9F262886AE0071A06B /* Grant Accessibility Permissions.mp4 */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -299,8 +311,10 @@
 				6C3B16D32627310E00CAC6A6 /* GettingStartedView.swift */,
 				6C3B16DB26273CFC00CAC6A6 /* WelcomeView.swift */,
 				6C3B16E52627500800CAC6A6 /* FullDiskAccessView.swift */,
+				6CB9DEA5262886FF0071A06B /* AccessibilityPermissionsView.swift */,
 				6C3B16EB262752A400CAC6A6 /* DoneView.swift */,
 				6C3B16D72627339800CAC6A6 /* HighlightedButton.swift */,
+				6CB9DEAB262887200071A06B /* LoopVideoPlayer.swift */,
 			);
 			path = "Getting Started";
 			sourceTree = "<group>";
@@ -421,6 +435,15 @@
 				6CB9DE382628480F0071A06B /* ClipboardHistorySectionView.swift */,
 			);
 			path = Sections;
+			sourceTree = "<group>";
+		};
+		6CB9DE96262879F70071A06B /* Snippet Expansion */ = {
+			isa = PBXGroup;
+			children = (
+				6CB9DE9726287A0D0071A06B /* SnippetExpansionManager.swift */,
+				6CB9DE9826287A0D0071A06B /* Snippet.swift */,
+			);
+			path = "Snippet Expansion";
 			sourceTree = "<group>";
 		};
 		6CD5F5232624282A001E4F18 /* Views */ = {
@@ -559,6 +582,7 @@
 				6CE3BE3D25FF9755001636F5 /* DefaultConfiguration.json in Resources */,
 				6C106F4D25F655BC0047E0B0 /* Assets.xcassets in Resources */,
 				6C07242F260527F0009F0E63 /* Actions.json in Resources */,
+				6CB9DEA0262886AE0071A06B /* Grant Accessibility Permissions.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +609,7 @@
 				6C7873F426199E3D002D48FE /* ApplicationButton.swift in Sources */,
 				6C3B16D42627310E00CAC6A6 /* GettingStartedView.swift in Sources */,
 				6C4DF3DB25FA7E10003B6D90 /* KeyboardShortcutManager.swift in Sources */,
+				6CB9DE9926287A0D0071A06B /* SnippetExpansionManager.swift in Sources */,
 				6C75A0392603967B0074DF40 /* SettingsSection.swift in Sources */,
 				6C072421260509CC009F0E63 /* SearchTextField.swift in Sources */,
 				6C5B51A525F915E2000B004A /* WebSearchItem.swift in Sources */,
@@ -613,6 +638,7 @@
 				6C106F7E25F655EB0047E0B0 /* Search.swift in Sources */,
 				6CB9DE2D262844580071A06B /* GeneralSectionView.swift in Sources */,
 				6C344FE825FCB5E40042CC05 /* MusicControllerApp.swift in Sources */,
+				6CB9DEAC262887200071A06B /* LoopVideoPlayer.swift in Sources */,
 				6C5B518E25F80E15000B004A /* SpotlightSearchItem.swift in Sources */,
 				6CB9DE35262845C30071A06B /* SearchResultsSectionView.swift in Sources */,
 				6C3E3CB4262193A6001A512C /* WebSearch.swift in Sources */,
@@ -632,9 +658,11 @@
 				6C75A007260279460074DF40 /* PreferencesView.swift in Sources */,
 				6C82999425F699B600A25064 /* Notification Name Extension.swift in Sources */,
 				6CE42087261B0A52002F0769 /* ClipboardHistoryItem.swift in Sources */,
+				6CB9DE9A26287A0D0071A06B /* Snippet.swift in Sources */,
 				6CE42098261B0C96002F0769 /* ClipboardManager.swift in Sources */,
 				6CED3B0425FAA04D00E61388 /* KeyboardShortcut.swift in Sources */,
 				6C7873EC2618BFE5002D48FE /* NSSearchTextField.swift in Sources */,
+				6CB9DEA6262886FF0071A06B /* AccessibilityPermissionsView.swift in Sources */,
 				6C344FDD25FBF6C70042CC05 /* KeyEvent.swift in Sources */,
 				6C7873E82618BF9C002D48FE /* SearchTextFieldViewController.swift in Sources */,
 				6C0723D82604FD40009F0E63 /* SearchItem Extension.swift in Sources */,

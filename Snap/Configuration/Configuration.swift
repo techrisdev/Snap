@@ -35,6 +35,10 @@ struct Configuration: Codable {
 	// Clipboard History
 	var clipboardHistoryEnabled: Bool
 	var historyItemLimit: Int
+	
+	// Snippet Expansion
+	var snippetExpansionEnabled: Bool
+	var snippets: [Snippet]
 
 	static private func decodeConfigurationFile() -> Configuration {
 		let decoder = JSONDecoder()

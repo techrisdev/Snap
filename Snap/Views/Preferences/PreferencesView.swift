@@ -19,7 +19,7 @@ struct PreferencesView: View {
 	@State private var searchBarHeight = configuration.searchBarHeight
 	@State private var insertionPointColor = configuration.insertionPointColor.color
 	
-	// Result preferences
+	// Search Result preferences
 	@State private var showingIcons = configuration.showingIcons
 	@State private var blockedPaths = configuration.blockedPaths
 	@State private var iconWidth = configuration.iconSizeWidth
@@ -32,9 +32,13 @@ struct PreferencesView: View {
 	@State private var showPathKeyboardShortcut = configuration.showPathKeyboardShortcut
 	@State private var quickLookKeyboardShortcut = configuration.quickLookKeyboardShortcut
 	
-	// Clipboard history preferences
+	// Clipboard History preferences
 	@State private var clipboardHistoryEnabled = configuration.clipboardHistoryEnabled
 	@State private var historyItemLimit = configuration.historyItemLimit
+	
+	// Snippet Expansion preferences
+	@State private var snippetExpansionEnabled = configuration.snippetExpansionEnabled
+	@State private var snippets = configuration.snippets
 	
 	@State private var selectedView: Int? = 0
 	
@@ -74,7 +78,7 @@ struct PreferencesView: View {
 	
 	func save() {
 		// Create a configuration with all preferences.
-		let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, maximumWidth: maximumWdith, maximumHeight: maximumHeight, searchBarFont: searchBarFont, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, showingIcons: showingIcons, blockedPaths: blockedPaths, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, resultItemFont: resultItemFont, resultItemHeight: resultItemHeight, resultItemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString, showPathKeyboardShortcut: showPathKeyboardShortcut, quickLookKeyboardShortcut: quickLookKeyboardShortcut, clipboardHistoryEnabled: clipboardHistoryEnabled, historyItemLimit: historyItemLimit)
+		let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, maximumWidth: maximumWdith, maximumHeight: maximumHeight, searchBarFont: searchBarFont, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, showingIcons: showingIcons, blockedPaths: blockedPaths, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, resultItemFont: resultItemFont, resultItemHeight: resultItemHeight, resultItemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString, showPathKeyboardShortcut: showPathKeyboardShortcut, quickLookKeyboardShortcut: quickLookKeyboardShortcut, clipboardHistoryEnabled: clipboardHistoryEnabled, historyItemLimit: historyItemLimit, snippetExpansionEnabled: snippetExpansionEnabled, snippets: snippets)
 		
 		// Write the new configuration to the configuration path.
 		newConfiguration.write()

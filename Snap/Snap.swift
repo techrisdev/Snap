@@ -15,6 +15,9 @@ class Snap {
 	/// The clipboard manager.
 	private let clipboardManager = ClipboardManager()
 	
+	/// The snippet expansion manager.
+	private let snippetExpansionManager = SnippetExpansionManager()
+	
 	/// The menu bar status item.
 	private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 	
@@ -61,6 +64,11 @@ class Snap {
 		// If the clipboard history is enabled, start the clipboard manager.
 		if configuration.clipboardHistoryEnabled {
 			clipboardManager.start()
+		}
+		
+		// If snippet expansion is enbaled, start the snippet expansion manager.
+		if configuration.snippetExpansionEnabled {
+			snippetExpansionManager.start()
 		}
 		
 		// The app is started now.
@@ -179,7 +187,7 @@ class Snap {
 		}
 		
 		// Configure the preferences window.
-		preferencesWindow = PreferencesWindow(contentRect: NSRect(x: 0, y: 0, width: 520, height: 400),
+		preferencesWindow = PreferencesWindow(contentRect: NSRect(x: 0, y: 0, width: 575, height: 450),
 								  styleMask: [.titled, .closable, .resizable, .fullSizeContentView],
 								  backing: .buffered,
 								  defer: false)
@@ -288,7 +296,7 @@ class Snap {
 	
 	/// Show the Getting Started screen that gets displayed the fist time Snap is started.
 	private func showGettingStartedWindow() {
-		gettingStartedWindow = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 520),
+		gettingStartedWindow = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 535),
 								  styleMask: [.titled, .closable, .fullSizeContentView],
 								  backing: .buffered,
 								  defer: false)

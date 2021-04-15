@@ -16,7 +16,7 @@ struct DoneView: View {
 			Spacer()
 			Text("You can start using Snap. To activate Snap, hit 􀆕 + Space on your keyboard. For configuration options, you can click on the 􀊫 Menu Item and then the \"Preferences\" Button.")
 				.padding()
-			HighlightedButton("Start Snap") {
+			HighlightedButton("Start Using Snap") {
 				UserDefaults.standard.setValue(true, forKey: "StartedBefore")
 				snap.gettingStartedWindow.close()
 				snap.start()

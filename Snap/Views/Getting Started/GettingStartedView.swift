@@ -13,6 +13,8 @@ struct GettingStartedView: View {
 				WelcomeView(screen: $currentScreen)
 			case .fullDiskAccess:
 				FullDiskAccessView(screen: $currentScreen)
+			case .accessibility:
+				 AccessibilityPermissionsView(screen: $currentScreen)
 			case .done:
 				DoneView()
 			}

@@ -41,5 +41,7 @@
 		"events": ["keyDown"]
 	},
 	"clipboardHistoryEnabled": true,
-	"historyItemLimit": 10
+	"historyItemLimit": 10,
+	"snippetExpansionEnabled": true,
+	"snippets": []
 }

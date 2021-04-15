@@ -7,5 +7,6 @@ import Foundation
 enum GettingStartedScreen {
 	case welcome
 	case fullDiskAccess
+	case accessibility
 	case done
 }
