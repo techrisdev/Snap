@@ -181,8 +181,9 @@ class Snap {
 		// Close the search bar.
 		window.close()
 		
-		// If the preferences window is already on the screen, then return.
+		// If the preferences window is already on the screen, then give it focus and return.
 		if preferencesWindow?.isVisible == true {
+			preferencesWindow?.makeKeyAndOrderFront(nil)
 			return
 		}
 		

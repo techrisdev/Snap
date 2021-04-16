@@ -103,19 +103,14 @@ struct PreferencesView: View {
 		alert.beginSheetModal(for: preferencesWindow) { response in
 			// If the user want's to restart the application, then...
 			if response == .alertFirstButtonReturn {
-				// Restart the application.
-				guard let applicationURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.techris.Snap") else {
-					// If the application url doesn't exist, then return. This should never happen.
-					return
-				}
+				// Relaunch the app.
+				let path = Bundle.main.bundlePath
+				let process = Process()
+				process.launchPath = "/usr/bin/open"
+				process.arguments = [path]
+				process.launch()
 				
-				// Restart the app.
-				let task = Process()
-				task.launchPath = "/usr/bin/open"
-				task.arguments = [applicationURL.path]
-				task.launch()
-				
-				NSApp.terminate(nil)
+				exit(0)
 			} else {
 				// Close the preferences window.
 				preferencesWindow.closeWindow()
