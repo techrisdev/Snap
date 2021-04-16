@@ -71,7 +71,7 @@ struct SearchView: View {
 				.onReceive(notificationCenter.publisher(for: .TabKeyWasPressed)) { _ in
 					// If the search result contains the currently selected item, Complete the current search item.
 					if search.results.indices.contains(0) {
-						text = search.results[selectedItemIndex].name
+						text = search.results[selectedItemIndex].title
 						
 						// If the currently selected item accepts arguments, then append a space at the end, so the user can start typing arguments immediately.
 						if search.results[selectedItemIndex].acceptsArguments {

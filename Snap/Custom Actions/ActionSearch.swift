@@ -18,14 +18,17 @@ struct ActionSearch {
 			if stringSplitByWhitespaces.indices.contains(1) {
 				string = stringSplitByWhitespaces[0]
 			}
-		
-			// Create a NSPredicate with the format.
-			let predicate = NSPredicate(format: "'\(action.name)' like[cd] '\(string.replacingOccurrences(of: "'", with: "\\'"))\\*'")
 			
-			// Check if the predicate returned true.
-			if predicate.evaluate(with: nil) {
-				// Append the new item.
-				result.append(action)
+			// Go through the keywords.
+			for keyword in action.keywords {
+				// Create a NSPredicate with the format.
+				let predicate = NSPredicate(format: "'\(keyword)' like[cd] '\(string.replacingOccurrences(of: "'", with: "\\'"))\\*'")
+				
+				// Check if the predicate returned true.
+				if predicate.evaluate(with: nil) {
+					// Append the new item.
+					result.append(action)
+				}
 			}
 		}
 		

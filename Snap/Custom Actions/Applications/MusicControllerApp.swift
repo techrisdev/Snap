@@ -13,9 +13,9 @@ import ScriptingBridge
 struct MusicControllerApp: ApplicationSearchItem {
 	let id = UUID()
 	
-	var acceptsArguments = false
+	let acceptsArguments = false
 	
-	var name = "Music Controller"
+	let title = "Music Controller"
 	
 	let view = ApplicationView(content: AnyView(MusicControllerView()))
 	

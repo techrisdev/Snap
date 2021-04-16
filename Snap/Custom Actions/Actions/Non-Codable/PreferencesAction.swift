@@ -7,11 +7,11 @@ import Foundation
 struct PreferencesAction: SearchItem {
 	let id = UUID()
 	
-	var name = "Preferences"
+	let title = "Preferences"
 	
-	var acceptsArguments = false
+	let acceptsArguments = false
 	
-	var action: (String) -> Void = { _ in
+	let action: (String) -> Void = { _ in
 		Snap.default.showPreferencesWindow()
 	}
 }

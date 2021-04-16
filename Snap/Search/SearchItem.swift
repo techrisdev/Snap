@@ -9,8 +9,11 @@ protocol SearchItem {
 	/// The item's UUID.
 	var id: UUID { get }
 	
-	/// The item's name.
-	var name: String { get }
+	/// The item's title.
+	var title: String { get }
+	
+	/// The item's keywords.
+	var keywords: [String] { get }
 	
 	/// The item's icon.
 	var icon: Icon { get }
@@ -23,4 +26,12 @@ protocol SearchItem {
 	
 	/// The item's action.
 	var action: (String) -> Void { get }
+}
+
+extension SearchItem {
+	var keywords: [String] {
+		get {
+			return [title]
+		}
+	}
 }

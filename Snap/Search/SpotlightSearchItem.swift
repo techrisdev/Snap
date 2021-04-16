@@ -22,7 +22,7 @@ struct SpotlightSearchItem: SearchItem {
 	}
 	
 	/// The Item's display name.
-	var name: String {
+	var title: String {
 		return item.valueForAttribute(kMDItemDisplayName, valueType: String.self)!
 	}
 	

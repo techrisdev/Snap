@@ -7,9 +7,9 @@ import SwiftUI
 struct ClipboardHistoryApp: ApplicationSearchItem {
 	let id = UUID()
 	
-	var name = "Clipboard History"
+	let title = "Clipboard History"
 	
-	var acceptsArguments = false
+	let acceptsArguments = false
 	
 	let view = ApplicationView(content: AnyView(ClipboardHistoryView()), barView: AnyView(ClipboardHistoryBarView()))
 }

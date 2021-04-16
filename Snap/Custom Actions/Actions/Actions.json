@@ -1,22 +1,22 @@
 [
 	{
-		"name": "Sleep",
+		"title": "Sleep",
 		"appleScript": "sleep"
 	},
 	{
-		"name": "Restart",
+		"title": "Restart",
 		"appleScript": "restart"
 	},
 	{
-		"name": "Shut down",
+		"title": "Shut down",
 		"appleScript": "tell application \"Finder\"\nshut down\nend tell"
 	},
 	{
-		"name": "Terminal",
+		"title": "Terminal",
 		"appleScript": "tell application \"Terminal\"\nactivate\ndo script (\"\\arguments\\\") in window 1\nend tell"
 	},
 	{
-		"name": "Quit",
+		"title": "Quit",
 		"appleScript": "tell application \"Snap\"\nquit\nend tell"
 	}
 ]

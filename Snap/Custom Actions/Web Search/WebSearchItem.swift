@@ -12,21 +12,21 @@ struct WebSearchItem: SearchItem {
 		var name = "Web Search"
 
 		if searchType != .url {
-			self.name = name
+			self.title = name
 			// Set the action to nothing so it can be used.
 			action = { _ in }
 			
 			action = search
 		} else {
 			name = "URL"
-			self.name = name
+			self.title = name
 			action = openURL
 		}
 	}
 	
 	let id = UUID()
 	
-	var name: String
+	var title: String
 	
 	var acceptsArguments: Bool
 	

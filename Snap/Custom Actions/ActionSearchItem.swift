@@ -7,7 +7,7 @@ import Foundation
 struct ActionSearchItem: SearchItem, Codable {
 	var id = UUID()
 	
-	var name: String
+	var title: String
 	
 	var appleScript: String
 	
@@ -21,7 +21,7 @@ struct ActionSearchItem: SearchItem, Codable {
 	var acceptsArguments = true
 	
 	private enum CodingKeys: CodingKey {
-		case name
+		case title
 		case appleScript
 	}
 }

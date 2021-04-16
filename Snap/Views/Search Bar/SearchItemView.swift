@@ -13,7 +13,7 @@ struct SearchItemView: View {
 	var body: some View {
 		ZStack {
 			ItemView(icon: item.icon, isSelectedItem: isSelectedItem) {
-				Text(item.name)
+				Text(item.title)
 			}
 			
 			if isSelectedItem, isShowingPath, let item = item as? SpotlightSearchItem {

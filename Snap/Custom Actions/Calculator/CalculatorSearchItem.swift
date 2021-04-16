@@ -8,7 +8,7 @@ import AppKit.NSWorkspace
 struct CalculatorSearchItem: SearchItem {
 	let id = UUID()
 	
-	var name: String {
+	var title: String {
 		var name = calculation
 		
 		let result = calculate()
