@@ -24,6 +24,18 @@ struct SnippetExpansionManager {
 			// Check if the event has a character.
 			guard let firstCharacter = event.charactersIgnoringModifiers?.first else { return }
 			
+			// Reference: https://stackoverflow.com/a/35539257
+			// Note: You probably could also use the key code here.
+			// If the delete key was pressed, remove the last character and return.
+			if firstCharacter == Character(UnicodeScalar(NSDeleteCharacter)!) {
+				// Check if the word doesn't contain any characters.
+				if !currentWord.isEmpty {
+					currentWord.removeLast()
+				}
+				
+				return
+			}
+			
 			// If the first character isn't a letter, a number, a symbol or a punctation, then reset the current word.
 			if !(firstCharacter.isLetter || firstCharacter.isNumber || firstCharacter.isSymbol || firstCharacter.isPunctuation) {
 				currentWord = ""
