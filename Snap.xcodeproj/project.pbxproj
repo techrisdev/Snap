@@ -89,6 +89,7 @@
 		6CE420A4261B5972002F0769 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE420A3261B5972002F0769 /* ItemView.swift */; };
 		6CE420A8261B5C04002F0769 /* ClipboardHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE420A7261B5C04002F0769 /* ClipboardHistoryView.swift */; };
 		6CED3B0425FAA04D00E61388 /* KeyboardShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CED3B0325FAA04D00E61388 /* KeyboardShortcut.swift */; };
+		6CEEC56A26298EB900703B45 /* CalculatorSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEEC56926298EB900703B45 /* CalculatorSearchItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +190,7 @@
 		6CE420A3261B5972002F0769 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		6CE420A7261B5C04002F0769 /* ClipboardHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistoryView.swift; sourceTree = "<group>"; };
 		6CED3B0325FAA04D00E61388 /* KeyboardShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcut.swift; sourceTree = "<group>"; };
+		6CEEC56926298EB900703B45 /* CalculatorSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorSearchItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,6 +333,7 @@
 				6C5B519325F90250000B004A /* ActionDecoder.swift */,
 				6C344FD225FB96550042CC05 /* AppleScript.swift */,
 				6CE420762619D1D1002F0769 /* SnapActions.swift */,
+				6CEEC56826298EA000703B45 /* Calculator */,
 				6CB6017625FE2E6300613136 /* Actions */,
 				6CB6017725FE2E7400613136 /* Web Search */,
 				6C344FEB25FCC6F30042CC05 /* Safari Bookmarks */,
@@ -502,6 +505,14 @@
 			path = "Keyboard Shortcuts";
 			sourceTree = "<group>";
 		};
+		6CEEC56826298EA000703B45 /* Calculator */ = {
+			isa = PBXGroup;
+			children = (
+				6CEEC56926298EB900703B45 /* CalculatorSearchItem.swift */,
+			);
+			path = Calculator;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -631,6 +642,7 @@
 				6C106F8325F658670047E0B0 /* SearchItem.swift in Sources */,
 				6C344FED25FCC7C60042CC05 /* Bookmark.swift in Sources */,
 				6CDFBFD725FE404700100171 /* ApplicationView.swift in Sources */,
+				6CEEC56A26298EB900703B45 /* CalculatorSearchItem.swift in Sources */,
 				6C83FE5925FF900000DAC7C1 /* Color Extension.swift in Sources */,
 				6CB6017025FE2AD200613136 /* ApplicationSearchItem.swift in Sources */,
 				6CE420772619D1D1002F0769 /* SnapActions.swift in Sources */,

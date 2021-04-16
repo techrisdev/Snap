@@ -25,7 +25,7 @@ struct SnippetExpansionManager {
 			guard let firstCharacter = event.charactersIgnoringModifiers?.first else { return }
 			
 			// Reference: https://stackoverflow.com/a/35539257
-			// Note: You probably could also use the key code here.
+			// Note: You probably could also use the key code here, but I'm not sure if that would be keyboard independent.
 			// If the delete key was pressed, remove the last character and return.
 			if firstCharacter == Character(UnicodeScalar(NSDeleteCharacter)!) {
 				// Check if the word doesn't contain any characters.
