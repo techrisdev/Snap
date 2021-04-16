@@ -47,6 +47,7 @@
 		"events":["keyDown"],
 		"modifiers":["command","option","control"]
 	},
+	"itemMergedSoundEnabled": true,
 	"snippetExpansionEnabled": true,
 	"snippets": []
 }

@@ -68,6 +68,11 @@ class ClipboardManager {
 		
 		// Write the history.
 		history.write()
+		
+		// If the option is enbled, play a sound.
+		if Configuration.decoded.itemMergedSoundEnabled {
+			NSSound(named: "Purr")?.play()
+		}
 	}
 	
 	private func listenToClipboardChanges() {
