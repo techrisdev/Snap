@@ -4,9 +4,14 @@
 
 import AppKit.NSPasteboard
 
-struct ClipboardHistoryItem: Codable {
+class ClipboardHistoryItem: Codable {
 	let id = UUID()
+	
 	var data: Data
+	
+	init(data: Data) {
+		self.data = data
+	}
 	
 	/// Get an image from the item's data.
 	var image: NSImage? {
@@ -34,6 +39,13 @@ struct ClipboardHistoryItem: Codable {
 	var string: String? {
 		// Normally, if a string gets copied, the first type in the types array is Rich Text format. That means, we need to convert the data to normal format so it gets displayed properly.
 		if let attributedString = NSAttributedString(rtf: data, documentAttributes: nil) {
+			let string = attributedString.string
+			
+			// Updte the data to use a normal string.
+			if let normalStringData = string.data(using: .utf8) {
+				data = normalStringData
+			}
+			
 			return attributedString.string
 		} else {
 			// If the attributed string is nil, then return a normal string.

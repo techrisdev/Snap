@@ -88,6 +88,14 @@ class Search: ObservableObject {
 			
 			// Append the web search items.
 			results += WebSearch.searchItemsFromString(currentString)
+			
+			// Check if the text has a first character.
+			if let firstCharacter = currentString.first {
+				// If the first character is a number, a minus or plus sign or a bracket, insert the calculator into the results.
+				if firstCharacter.isNumber || firstCharacter == "-" || firstCharacter == "+" || firstCharacter == "(" {
+					results.insert(CalculatorSearchItem(calculation: currentString), at: 0)
+				}
+			}
 			// MARK: The bookmark search isn't working properly right now.
 			//			let bookmarks = Bookmark.decodedBookmarks.searchForBookmarks(string)
 			//			for bookmark in bookmarks {

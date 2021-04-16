@@ -41,7 +41,12 @@
 		"events": ["keyDown"]
 	},
 	"clipboardHistoryEnabled": true,
-	"historyItemLimit": 10,
+	"clipboardHistoryItemLimit": 10,
+	"mergeClipboardHistoryItemKeyboardShortcut": {
+		"key": {"keyCode":8},
+		"events":["keyDown"],
+		"modifiers":["command","option","control"]
+	},
 	"snippetExpansionEnabled": true,
 	"snippets": []
 }

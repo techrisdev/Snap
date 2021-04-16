@@ -49,15 +49,6 @@ struct SearchView: View {
 					
 					// If there are more than 0 characters, then search for the string.
 					search.searchForString(text)
-					
-					// Check if the text has a first character.
-					if let firstCharacter = text.first {
-						// If the first character is a number, a minus or plus sign or a bracket, insert the calculator into the results.
-						if firstCharacter.isNumber || firstCharacter == "-" || firstCharacter == "+" || firstCharacter == "(" {
-							search.results.insert(CalculatorSearchItem(calculation: text), at: 0)
-							return
-						}
-					}
 				}
 				.onReceive(notificationCenter.publisher(for: .ReturnKeyWasPressed)) { _ in
 					// Execute the selected item's action.
