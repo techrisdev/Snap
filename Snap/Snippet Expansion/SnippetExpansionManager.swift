@@ -54,24 +54,24 @@ struct SnippetExpansionManager {
 					// Delete all typed characters (the keyword).
 					for _ in snippet.keyword {
 						// Delete the character.
-						let event = CGEvent(keyboardEventSource: nil, virtualKey: CGKeyCode(kVK_Delete), keyDown: true)
-						event!.post(tap: .cghidEventTap)
-						let event2 = CGEvent(keyboardEventSource: nil, virtualKey: CGKeyCode(kVK_Delete), keyDown: false)
-						event2!.post(tap: .cghidEventTap)
+						let deleteKeyDownEvent = CGEvent(keyboardEventSource: nil, virtualKey: CGKeyCode(kVK_Delete), keyDown: true)
+						deleteKeyDownEvent?.post(tap: .cghidEventTap)
+						let deleteKeyUpEvent = CGEvent(keyboardEventSource: nil, virtualKey: CGKeyCode(kVK_Delete), keyDown: false)
+						deleteKeyUpEvent?.post(tap: .cghidEventTap)
 					}
 					
 					// Get the UTF16 characters from the string.
-					let utf16Chars = Array(snippet.snippet.utf16)
+					let utf16Characters = Array(snippet.snippet.utf16)
 					
 					// Write the string.
-					let event1 = CGEvent(keyboardEventSource: nil, virtualKey: .zero, keyDown: true);
-					event1?.flags = .maskNonCoalesced
-					event1?.keyboardSetUnicodeString(stringLength: utf16Chars.count, unicodeString: utf16Chars)
-					event1?.post(tap: .cghidEventTap)
+					let charactersDownEvent = CGEvent(keyboardEventSource: nil, virtualKey: .zero, keyDown: true)
+					charactersDownEvent?.flags = .maskNonCoalesced
+					charactersDownEvent?.keyboardSetUnicodeString(stringLength: utf16Characters.count, unicodeString: utf16Characters)
+					charactersDownEvent?.post(tap: .cghidEventTap)
 
-					let event2 = CGEvent(keyboardEventSource: nil, virtualKey: .zero, keyDown: false);
-					event2?.flags = .maskNonCoalesced
-					event2?.post(tap: .cghidEventTap)
+					let charactersUpEvent = CGEvent(keyboardEventSource: nil, virtualKey: .zero, keyDown: false)
+					charactersUpEvent?.flags = .maskNonCoalesced
+					charactersUpEvent?.post(tap: .cghidEventTap)
 					
 					// Reset the current word.
 					currentWord = ""

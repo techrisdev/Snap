@@ -54,6 +54,22 @@ class ClipboardHistoryItem: Codable {
 		}
 	}
 	
+	func copyToClipboard() {
+		// Copy the selected item's data to the clipboard.
+		let pasteboard = NSPasteboard.general
+		if let image = image {
+			pasteboard.declareTypes([.tiff], owner: nil)
+			pasteboard.setData(image.tiffRepresentation, forType: .tiff)
+		} else {
+			pasteboard.declareTypes([.string], owner: nil)
+			if let file = file {
+				pasteboard.setData(file.data(using: .utf8), forType: .string)
+			} else {
+				pasteboard.setData(string?.data(using: .utf8), forType: .string)
+			}
+		}
+	}
+	
 	enum CodingKeys: CodingKey {
 		case data
 	}

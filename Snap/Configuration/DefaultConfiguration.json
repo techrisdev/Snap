@@ -42,6 +42,11 @@
 	},
 	"clipboardHistoryEnabled": true,
 	"clipboardHistoryItemLimit": 10,
+	"copyLastItemToClipboardKeyboardShortcut": {
+		"key": {"keyCode":9},
+		"events": ["keyDown"],
+		"modifiers": ["command","option","control"]
+	},
 	"mergeClipboardHistoryItemKeyboardShortcut": {
 		"key": {"keyCode":8},
 		"events":["keyDown"],

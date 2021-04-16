@@ -142,18 +142,7 @@ struct ClipboardHistoryView: View {
 	
 	func copySelectedItemToClipboard() {
 		// Copy the selected item's data to the clipboard.
-		let pasteboard = NSPasteboard.general
-		if let image = selectedItem.image {
-			pasteboard.declareTypes([.tiff], owner: nil)
-			pasteboard.setData(image.tiffRepresentation, forType: .tiff)
-		} else {
-			pasteboard.declareTypes([.string], owner: nil)
-			if let file = selectedItem.file {
-				pasteboard.setData(file.data(using: .utf8), forType: .string)
-			} else {
-				pasteboard.setData(selectedItem.string?.data(using: .utf8), forType: .string)
-			}
-		}
+		selectedItem.copyToClipboard()
 		
 		// Deactivate the application.
 		Snap.default.deactivate()

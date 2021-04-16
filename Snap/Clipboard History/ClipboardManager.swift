@@ -3,6 +3,7 @@
 // Created by TeChris on 05.04.21.
 
 import AppKit.NSPasteboard
+import Carbon.HIToolbox.Events
 
 class ClipboardManager {
 	/// Start listening for changes in the clipboard.
@@ -37,6 +38,14 @@ class ClipboardManager {
 			
 			if let text = selectedText as? String {
 				self.merge(text)
+			}
+		}
+		
+		// Set up the keyboard shortcut for copying the last item.
+		KeyboardShortcutManager(keyboardShortcut: Configuration.decoded.copyLastItemToClipboardKeyboardShortcut).startListeningForEvents { _ in
+			if let lastCopiedItem = ClipboardHistory.decoded.items.first {
+				// Copy the item to the clipboard.
+				lastCopiedItem.copyToClipboard()
 			}
 		}
 	}

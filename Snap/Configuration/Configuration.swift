@@ -35,6 +35,7 @@ struct Configuration: Codable {
 	// Clipboard History
 	var clipboardHistoryEnabled: Bool
 	var clipboardHistoryItemLimit: Int
+	var copyLastItemToClipboardKeyboardShortcut: KeyboardShortcut
 	var mergeClipboardHistoryItemKeyboardShortcut: KeyboardShortcut
 	var itemMergedSoundEnabled: Bool
 	
