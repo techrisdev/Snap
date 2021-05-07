@@ -55,8 +55,6 @@ struct SearchResultView: View {
 					}
 					
 					return nil
-				} else {
-					showingPath = false
 				}
 				
 				return event

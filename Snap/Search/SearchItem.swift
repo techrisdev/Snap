@@ -18,9 +18,6 @@ protocol SearchItem {
 	/// The item's icon.
 	var icon: Icon { get }
 	
-	/// The path to the item.
-	var path: String { get }
-
 	/// Indicates if the item accepts arguments.
 	var acceptsArguments: Bool { get }
 	
