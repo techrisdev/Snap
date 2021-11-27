@@ -50,21 +50,17 @@ struct Configuration: Codable {
 		let applicationSupportURL = Snap.applicationSupportURL
 		do {
 			let fileManager = FileManager.default
-
-			// Check if the Application Support directory for Snap exists; If it doesn't, then create it.
-			if !fileManager.fileExists(atPath: applicationSupportURL.path) {
-				try? fileManager.createDirectory(at: applicationSupportURL, withIntermediateDirectories: false, attributes: nil)
-			}
-			
 			let pathToConfiguration = applicationSupportURL.path + "/Configuration.json"
 			
 			// Check if the configuration file exists; If it doesn't, then copy the default configuration to the path.
 			if !fileManager.fileExists(atPath: pathToConfiguration) {
 				let path = defaultConfigurationURL.path
 				do {
+					print(defaultConfigurationURL)
 					try fileManager.copyItem(atPath: path, toPath: pathToConfiguration)
 				} catch {
 					// This should never happen, but if something goes wrong, then present an alert.
+					print("help")
 					NSAlert(error: error).runModal()
 				}
 			}

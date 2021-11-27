@@ -13,10 +13,10 @@ class Snap {
 	static let applicationSupportURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("Snap/")
 	
 	/// The clipboard manager.
-	private let clipboardManager = ClipboardManager()
+	private var clipboardManager: ClipboardManager!
 	
 	/// The snippet expansion manager.
-	private let snippetExpansionManager = SnippetExpansionManager()
+	private var snippetExpansionManager: SnippetExpansionManager!
 	
 	/// The menu bar status item.
 	private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
@@ -40,7 +40,7 @@ class Snap {
 		return Image(nsImage: iconImage)
 	}
 	
-	private let configuration = Configuration.decoded
+	private var configuration: Configuration!
 	
 	func start() {
 		// If the app hasn't been started before, show the Getting Started window.
@@ -48,6 +48,16 @@ class Snap {
 			showGettingStartedWindow()
 			return
 		}
+		
+		// Check if the Application Support directory for Snap exists; If it doesn't, then create it.
+		let fileManager = FileManager.default
+		if !fileManager.fileExists(atPath: Snap.applicationSupportURL.path) {
+			try? fileManager.createDirectory(at: Snap.applicationSupportURL, withIntermediateDirectories: false, attributes: nil)
+		}
+		
+		configuration = Configuration.decoded
+		clipboardManager = ClipboardManager()
+		snippetExpansionManager = SnippetExpansionManager()
 		
 		// Request needed permissions
 		Permissions.requestPermissions()
@@ -252,7 +262,7 @@ class Snap {
 			
 			// Check if the key combination for Quick Look was pressed.
 			// Get the keyboard shortcut.
-			let quickLookKeyboardShortcut = configuration.quickLookKeyboardShortcut
+			let quickLookKeyboardShortcut = configuration!.quickLookKeyboardShortcut
 			
 			// Get the keyboard shortcut modifiers.
 			let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask).keyboardShortcutModifiers
