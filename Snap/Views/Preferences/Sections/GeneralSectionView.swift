@@ -18,7 +18,7 @@ struct GeneralSectionView: View {
 				Text("Activation Shortcut:")
 			}
 			Slider(value: $maximumWdith, in: 20...1000) {
-				Text("Maximum Window Height: \(maximumWdith, specifier: "%.0f")")
+				Text("Maximum Window Width: \(maximumWdith, specifier: "%.0f")")
 					.padding(.trailing, 7.5)
 			}
 			.padding(.trailing, 12.5)
