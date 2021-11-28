@@ -83,8 +83,9 @@ class Permissions {
 		alert.icon = NSWorkspace.shared.icon(forFile: "/System/Library/PreferencePanes/Security.prefPane")
 		
 		// Add the buttons.
-		let okButton = alert.addButton(withTitle: "OK")
+		alert.addButton(withTitle: "OK")
 		// TODO: FIX OK BUTTON (It doesn't close the alert)
+		//let okButton = alert.addButton(withTitle: "OK")
 //		okButton.target = self
 //		okButton.action = #selector(showFullDiskAccessPreferences)
 		

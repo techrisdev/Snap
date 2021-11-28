@@ -17,14 +17,14 @@
 	},
 	"searchBarHeight": 50,
 	"insertionPointColor": "#FFFFFF",
-	"maximumWidth": 675,
+	"maximumWidth": 775,
 	"maximumHeight": 600,
 	"shouldAnimateNavigation": true,
 	"resultItemFont": {
 		"name": "SF Pro",
 		"size": 18
 	},
-	"selectedItemBackgroundColor": "#0000FF",
+	"selectedItemBackgroundColor": "#FE0470",
 	"activationKeyboardShortcut": {
 		"key": {"keyCode": 49},
 		"modifiers": ["option"],
