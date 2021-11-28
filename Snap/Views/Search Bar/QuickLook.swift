@@ -6,13 +6,13 @@ import Quartz
 
 class QuickLook: NSObject, QLPreviewPanelDataSource {
 	/// The path to the presented file.
-	var filePath: String?
+	var filePath: String
 	
 	// The preview panel.
 	private var panel = QLPreviewPanel.shared()
 	
 	/// Initialize the class with an optional URL.
-	init(filePath: String? = nil) {
+	init(filePath: String) {
 		self.filePath = filePath
 	}
 	
@@ -24,7 +24,7 @@ class QuickLook: NSObject, QLPreviewPanelDataSource {
 		panel?.updateController()
 		panel?.dataSource = self
 		panel?.makeKeyAndOrderFront(self)
-		
+
 		// Start listening for notifications.
 		startObserving()
 	}
@@ -54,10 +54,8 @@ class QuickLook: NSObject, QLPreviewPanelDataSource {
 	}
 	
 	func previewPanel(_ panel: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem! {
-		// Unwrap the file path.
-		guard let filePath = filePath else { return nil }
-		
 		// Present the file at the specified path.
 		return NSURL(fileURLWithPath: filePath)
 	}
 }
+

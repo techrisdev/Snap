@@ -17,7 +17,7 @@ struct SearchView: View {
 	private let configuration = Configuration.decoded
 	private let notificationCenter = NotificationCenter.default
 	private let snap = Snap.default
-	private let quickLook = QuickLook()
+	private let quickLook = QuickLook(filePath: "")
 	
 	var body: some View {
 		ZStack {
@@ -81,8 +81,10 @@ struct SearchView: View {
 				}
 				.onReceive(notificationCenter.publisher(for: .ShouldPresentQuickLook)) { _ in
 					// Open a preview panel.
-					quickLook.filePath = selectedItem.path
-					quickLook.present()
+					if let path = (selectedItem as? SpotlightSearchItem)?.path {
+						quickLook.filePath = path
+						quickLook.present()
+					}
 				}
 				.onReceive(notificationCenter.publisher(for: QuickLook.panelWillCloseNotification)) { _ in
 					// Stop listening for notifications.
