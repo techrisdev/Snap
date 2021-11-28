@@ -24,6 +24,11 @@ Snap is an application which searches your Files, Contacts and Calendar events u
 * Uses SwiftUI
 * Completely open source
 
+## Installation
+If you want to install a precompiled .app file, download and extract the zip file from the [Releases](https://github.com/techrisdev/Snap/releases) page.
+
+Be warned though: This app is in an alpha stage! Bugs will occur!
+
 ## Comparison
 |Feature|Snap|Spotlight|
 |:---|:---:|:---:|
