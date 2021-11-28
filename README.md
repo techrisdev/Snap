@@ -62,6 +62,7 @@ Please read [CONTRIBUTING.md](./CONTRIBUTING.md).
 * Quick Look Previews
 * Custom Names for Actions, for example "Reboot" for "Restart"
 * Make User Definded Actions easier (with a GUI and not only through a JSON file)
+* Fix Bookmark Search
 
 ## Known Bugs
 
