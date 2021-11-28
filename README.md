@@ -51,8 +51,8 @@ Be warned though: This app is in an alpha stage! Bugs will occur!
 |Free|✅|✅|✅||
 
 ## Screenshots
-<img src="https://github.com/techrisdev/Snap/raw/main/screenshots/Search.jpg" width="700" height="620" />
-<img src="https://github.com/techrisdev/Snap/raw/main/screenshots/Preferences.jpg" width="700" height="620" />
+<img src="https://github.com/techrisdev/Snap/raw/main/screenshots/Search.jpg" width="800" height="572" />
+<img src="https://github.com/techrisdev/Snap/raw/main/screenshots/Preferences.jpg" width="800" height="572" />
 
 ## Building
 
