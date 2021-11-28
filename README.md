@@ -27,19 +27,19 @@ Snap is an application which searches your Files, Contacts and Calendar events u
 
 ## Comparison
 |Feature|Snap|Spotlight|
-|---|---|---|
-|Searching Files| ✅| ✅|
-|Searching the Web| ✅| ✅|
-|Calendar Search| ✅| ✅|
-|Contact Search| ✅| ✅|
-|Restarting, Sleeping etc.| ✅| |
-|Clipboard History| ✅| |
-|Snippet Expansion| ✅| |
-|Music Controller| ✅| |
-|Completely Open Source| ✅| |
-|Free License| ✅| |
-|Customizable| ✅| |
-|Free| ✅| ✅|
+|:---:|:---:|:---:|
+|Searching Files|✅|✅|
+|Searching the Web|✅|✅|
+|Calendar Search|✅|✅|
+|Contact Search|✅|✅|
+|Restarting, Sleeping etc.|✅| |
+|Clipboard History|✅| |
+|Snippet Expansion|✅| |
+|Music Controller|✅| |
+|Completely Open Source|✅| |
+|Free License|✅| |
+|Customizable|✅| |
+|Free|✅|✅|
 
 ## Building
 
