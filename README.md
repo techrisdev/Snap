@@ -20,6 +20,7 @@ Snap is an application which searches your Files, Contacts and Calendar events u
 * Clipboard History
 * Snippet Expansion
 * Actions like restarting the computer
+* User Defined Actions (custom Apple Scripts)
 * Web search<!-- Not Working? * Quick Look previews -->
 * Uses SwiftUI
 * Completely open source
@@ -38,6 +39,7 @@ Be warned though: This app is in an alpha stage! Bugs will occur!
 |Contact Search|✅|✅|
 |Reminder Search||✅|
 |Restarting, Sleeping etc.|✅| |
+|User Definded Actions|✅| |
 |Clipboard History|✅| |
 |Snippet Expansion|✅| |
 |Music Controller|✅| |
@@ -59,6 +61,7 @@ Please read [CONTRIBUTING.md](./CONTRIBUTING.md).
 * Reminder Search
 * Quick Look Previews
 * Custom Names for Actions, for example "Reboot" for "Restart"
+* Make User Definded Actions easier (with a GUI and not only through a JSON file)
 
 ## Known Bugs
 
