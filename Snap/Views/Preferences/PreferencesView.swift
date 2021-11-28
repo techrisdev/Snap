@@ -48,6 +48,8 @@ struct PreferencesView: View {
 	
 	@State private var selectedView: Int? = 0
 	
+	@State private var showingResetPopover = false
+	
 	var body: some View {
 		NavigationView {
 			List {
@@ -80,6 +82,23 @@ struct PreferencesView: View {
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		HStack {
 			// MARK: TODO: Add a "Reset" button.
+			Button("Reset") {
+				showingResetPopover.toggle()
+			}
+			.popover(isPresented: $showingResetPopover) {
+				VStack {
+					Text("Do you really want to reset your configuration?")
+						.padding([.leading, .trailing, .bottom])
+					Spacer()
+					Button("Reset") {
+						Configuration.defaultConfiguration.write()
+						showingResetPopover = false
+						showApplyingChangesAlert()
+					}
+				}
+				.padding()
+			}
+			.padding([.bottom, .leading])
 			Spacer()
 			Button("Save") {
 				save()
@@ -95,6 +114,10 @@ struct PreferencesView: View {
 		// Write the new configuration to the configuration path.
 		newConfiguration.write()
 		
+		showApplyingChangesAlert()
+	}
+	
+	private func showApplyingChangesAlert() {
 		// Configure an alert.
 		// The alert should tell the user that the app needs to restart so the changes get applied.
 		let alert = NSAlert()

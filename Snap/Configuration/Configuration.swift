@@ -45,10 +45,18 @@ struct Configuration: Codable {
 	
 	// Actions
 	var blockedActions: [String]
+	
+	private static let defaultConfigurationURL = Bundle.main.url(forResource: "DefaultConfiguration", withExtension: "json")!
+	
+	static var defaultConfiguration: Configuration {
+		// The default configuration must contain data, that's why it is force unwrapped. If the file doesn't contain any data, then something is really wrong!
+		let data = try! Data(contentsOf: defaultConfigurationURL)
+		guard let defaultConfiguration = try? JSONDecoder().decode(Configuration.self, from: data) else { fatalError("Failed to decode the default configuration.") }
+		return defaultConfiguration
+	}
 
 	static private func decodeConfigurationFile() -> Configuration {
 		let decoder = JSONDecoder()
-		let defaultConfigurationURL = Bundle.main.url(forResource: "DefaultConfiguration", withExtension: "json")!
 		
 		let applicationSupportURL = Snap.applicationSupportURL
 		do {
@@ -57,9 +65,8 @@ struct Configuration: Codable {
 			
 			// Check if the configuration file exists; If it doesn't, then copy the default configuration to the path.
 			if !fileManager.fileExists(atPath: pathToConfiguration) {
-				let path = defaultConfigurationURL.path
+				let path = Configuration.defaultConfigurationURL.path
 				do {
-					print(defaultConfigurationURL)
 					try fileManager.copyItem(atPath: path, toPath: pathToConfiguration)
 				} catch {
 					// This should never happen, but if something goes wrong, then present an alert.
@@ -79,12 +86,7 @@ struct Configuration: Codable {
 		}
 		
 		// If the decoding process failed, return the decoded default configuration.
-		// The default configuration must contain data, that's why it is force unwrapped. If the file doesn't contain any data, then something is really wrong!
-		let data = try! Data(contentsOf: defaultConfigurationURL)
-		guard let defaultConfiguration = try? decoder.decode(Configuration.self, from: data) else { fatalError("Failed to decode the default configuration.") }
-		
-		// Return the default configuration.
-		return defaultConfiguration
+		return Configuration.defaultConfiguration
 	}
 	
 	/// Write a configuration file to the default path.
