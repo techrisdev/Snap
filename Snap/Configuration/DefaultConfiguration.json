@@ -12,7 +12,7 @@
 	"resultItemHeight": 70,
 	"resultItemLimit": 25,
 	"searchBarFont": {
-		"name": "SF Pro",
+		"name": "Menlo",
 		"size": 24
 	},
 	"searchBarHeight": 50,
@@ -21,7 +21,7 @@
 	"maximumHeight": 600,
 	"shouldAnimateNavigation": true,
 	"resultItemFont": {
-		"name": "SF Pro",
+		"name": "Menlo",
 		"size": 18
 	},
 	"selectedItemBackgroundColor": "#FF79C6",
