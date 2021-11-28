@@ -65,11 +65,6 @@ class ClipboardManager {
 		let newItem = lastCopiedItem
 		newItem.data.append(data)
 		
-		// If the new item isn't usable, return from the function.
-		if !newItem.isUsable {
-			return
-		}
-		
 		var history = ClipboardHistory.decoded
 		
 		// If the array isn't empty remove the first item.
@@ -108,11 +103,6 @@ class ClipboardManager {
 	}
 	
 	private func updateClipboardHistory(with item: ClipboardHistoryItem) {
-		// If the item can't be used, return from the function.
-		if !item.isUsable {
-			return
-		}
-		
 		// Create a new history with the item.
 		var history = ClipboardHistory.decoded
 		history.items.insert(item, at: 0)

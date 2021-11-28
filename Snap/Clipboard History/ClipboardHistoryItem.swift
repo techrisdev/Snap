@@ -13,10 +13,6 @@ class ClipboardHistoryItem: Codable {
 		self.data = data
 	}
 	
-	var isUsable: Bool {
-		return string != nil && image != nil && file != nil
-	}
-	
 	/// Get an image from the item's data.
 	var image: NSImage? {
 		if let string = String(data: data, encoding: .utf8), let url = URL(string: string), let image = NSImage(contentsOf: url) {

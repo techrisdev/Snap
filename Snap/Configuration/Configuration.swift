@@ -63,7 +63,6 @@ struct Configuration: Codable {
 					try fileManager.copyItem(atPath: path, toPath: pathToConfiguration)
 				} catch {
 					// This should never happen, but if something goes wrong, then present an alert.
-					print("help")
 					NSAlert(error: error).runModal()
 				}
 			}
