@@ -51,8 +51,8 @@ Be warned though: This app is in an alpha stage! Bugs will occur!
 |Free|✅|✅|✅||
 
 ## Screenshots
-![](screenshots/Search.jpg?raw=true)
-![](screenshots/Preferences.jpg?raw=true)
+![](screenshots/Search.jpg?raw=true =800x)
+![](screenshots/Preferences.jpg?raw=true =700x)
 
 ## Building
 
