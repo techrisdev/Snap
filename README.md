@@ -63,6 +63,7 @@ Please read [CONTRIBUTING.md](./CONTRIBUTING.md).
 * Custom Names for Actions, for example "Reboot" for "Restart"
 * Make User Definded Actions easier (with a GUI and not only through a JSON file)
 * Fix Bookmark Search
+* Importing Configuration File through GUI instead of copying it manually 
 
 ## Known Bugs
 
