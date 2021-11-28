@@ -73,5 +73,5 @@ Please read [CONTRIBUTING.md](./CONTRIBUTING.md).
 * Calculator not working sometimes
 
 ## Screenshots
-<img src="https://github.com/techrisdev/Snap/raw/main/screenshots/Search.jpg" width="800" height="572" />
-<img src="https://github.com/techrisdev/Snap/raw/main/screenshots/Preferences.jpg" width="800" height="572" />
+![](screenshots/Search.jpg?raw=true)
+![](screenshots/Preferences.jpg?raw=true)
