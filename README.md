@@ -58,3 +58,7 @@ Please read [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 * Reminder Search
 * Quick Look Previews
+
+## Known Bugs
+
+* The Full Disk Access Window on first startup doesn't close
