@@ -50,10 +50,6 @@ Be warned though: This app is in an alpha stage! Bugs will occur!
 |Customizable|✅||✅|✅|
 |Free|✅|✅|✅||
 
-## Screenshots
-<img src="https://github.com/techrisdev/Snap/raw/main/screenshots/Search.jpg" width="800" height="572" />
-<img src="https://github.com/techrisdev/Snap/raw/main/screenshots/Preferences.jpg" width="800" height="572" />
-
 ## Building
 
 Snap doesn't have any dependencies, you can just build the project in Xcode.
@@ -75,3 +71,7 @@ Please read [CONTRIBUTING.md](./CONTRIBUTING.md).
 * The Full Disk Access Window on first startup doesn't close
 * Sometimes, the Snippet Expansion doesn't work (for example, if you press the 'o' key in Vim to create a new line)
 * Calculator not working sometimes
+
+## Screenshots
+<img src="https://github.com/techrisdev/Snap/raw/main/screenshots/Search.jpg" width="800" height="572" />
+<img src="https://github.com/techrisdev/Snap/raw/main/screenshots/Preferences.jpg" width="800" height="572" />
