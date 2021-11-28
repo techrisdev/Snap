@@ -31,6 +31,7 @@ Snap is an application which searches your Files, Contacts and Calendar events u
 |Searching the Web|✅|✅|
 |Calendar Search|✅|✅|
 |Contact Search|✅|✅|
+|Reminder Search||✅|
 |Restarting, Sleeping etc.|✅| |
 |Clipboard History|✅| |
 |Snippet Expansion|✅| |
