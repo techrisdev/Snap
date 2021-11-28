@@ -50,6 +50,10 @@ Be warned though: This app is in an alpha stage! Bugs will occur!
 |Customizable|✅||✅|✅|
 |Free|✅|✅|✅||
 
+## Screenshots
+![](screenshots/Search.jpg?raw=true)
+![](screenshots/Preferences.jpg?raw=true)
+
 ## Building
 
 Snap doesn't have any dependencies, you can just build the project in Xcode.
