@@ -31,23 +31,24 @@ If you want to install a precompiled .app file, download and extract the zip fil
 Be warned though: This app is in an alpha stage! Bugs will occur!
 
 ## Comparison
-|Feature|Snap|Spotlight|
-|:---|:---:|:---:|
-|Searching Files|✅|✅|
-|Searching the Web|✅|✅|
-|Quick Look Previews|✅|✅|
-|Calendar Search|✅|✅|
-|Contact Search|✅|✅|
-|Reminder Search||✅|
-|Restarting, Sleeping etc.|✅| |
-|User Definded Actions|✅| |
-|Clipboard History|✅| |
-|Snippet Expansion|✅| |
-|Music Controller|✅| |
-|Completely Open Source|✅| |
-|Free License|✅| |
-|Customizable|✅| |
-|Free|✅|✅|
+|Feature|Snap|Spotlight|Alfred (Free)|Alfred (Paid)|
+|:---|:---:|:---:|:---:|:---:|
+|Searching Files|✅|✅|✅|✅|
+|Searching the Web|✅|✅|✅|✅|
+|Quick Look Previews|✅|✅|✅|✅|
+|Calendar Search|✅|✅|||
+|Contact Search|✅|✅||✅|
+|Reminder Search||✅|||
+|Restarting, Sleeping etc.|✅| |✅|✅|
+|User Definded Actions|✅|||✅|
+|Clipboard History|✅|||✅|
+|Snippet Expansion|✅|||✅|
+|Music Controller|✅|||✅|
+|Dictionary||✅|✅|✅|
+|Completely Open Source|✅||||
+|Free License|✅||||
+|Customizable|✅||✅|✅|
+|Free|✅|✅|✅||
 
 ## Building
 
