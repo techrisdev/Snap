@@ -256,6 +256,9 @@ class Snap {
 				// Post a notification.
 				notificationCenter.post(name: .EscapeKeyWasPressed, object: nil)
 				
+				// Close the Snap Window.
+				self.deactivate()
+				
 				// Return from the closure.
 				return nil
 			}
