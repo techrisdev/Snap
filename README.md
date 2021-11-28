@@ -20,8 +20,7 @@ Snap is an application which searches your Files, Contacts and Calendar events u
 * Clipboard History
 * Snippet Expansion
 * Actions like restarting the computer
-* Web search
-<!-- Not Working? * Quick Look previews -->
+* Web search<!-- Not Working? * Quick Look previews -->
 * Uses SwiftUI
 * Completely open source
 
@@ -44,3 +43,8 @@ Snap is an application which searches your Files, Contacts and Calendar events u
 ## Building
 
 Snap doesn't have any dependencies, you can just build the project in Xcode.
+
+## Planned Features
+
+* Reminder Search
+* Quick Look Previews
