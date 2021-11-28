@@ -1,6 +1,6 @@
 {
-	"backgroundColor": "#111111",
-	"textColor": "#FFFFFF",
+	"backgroundColor": "#282A36",
+	"textColor": "#F8F8F2",
 	"showingIcons": true,
 	"iconSizeWidth": 35,
 	"iconSizeHeight": 50,
@@ -16,7 +16,7 @@
 		"size": 24
 	},
 	"searchBarHeight": 50,
-	"insertionPointColor": "#FFFFFF",
+	"insertionPointColor": "#F8F8F2",
 	"maximumWidth": 775,
 	"maximumHeight": 600,
 	"shouldAnimateNavigation": true,
@@ -24,7 +24,7 @@
 		"name": "SF Pro",
 		"size": 18
 	},
-	"selectedItemBackgroundColor": "#FE0470",
+	"selectedItemBackgroundColor": "#FF79C6",
 	"activationKeyboardShortcut": {
 		"key": {"keyCode": 49},
 		"modifiers": ["option"],
