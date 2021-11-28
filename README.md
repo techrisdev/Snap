@@ -71,6 +71,7 @@ Please read [CONTRIBUTING.md](./CONTRIBUTING.md).
 * The Full Disk Access Window on first startup doesn't close
 * Sometimes, the Snippet Expansion doesn't work (for example, if you press the 'o' key in Vim to create a new line)
 * Calculator not working sometimes
+* When a new Setting gets added, the old configuration file becomes invalid
 
 ## Screenshots
 ![](screenshots/Search.jpg?raw=true)
