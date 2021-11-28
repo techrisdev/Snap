@@ -21,9 +21,25 @@ Snap is an application which searches your Files, Contacts and Calendar events u
 * Snippet Expansion
 * Actions like restarting the computer
 * Web search
-* Quick Look previews
+<!-- Not Working? * Quick Look previews -->
 * Uses SwiftUI
 * Completely open source
+
+## Comparison
+|Feature|Snap|Spotlight|
+|---|---|---|
+|Searching Files| ✅| ✅|
+|Searching the Web| ✅| ✅|
+|Calendar Search| ✅| ✅|
+|Contact Search| ✅| ✅|
+|Restarting, Sleeping etc.| ✅| |
+|Clipboard History| ✅| |
+|Snippet Expansion| ✅| |
+|Music Controller| ✅| |
+|Completely Open Source| ✅| |
+|Free License| ✅| |
+|Customizable| ✅| |
+|Free| ✅| ✅|
 
 ## Building
 
