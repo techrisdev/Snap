@@ -58,6 +58,7 @@ Please read [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 * Reminder Search
 * Quick Look Previews
+* Custom Names for Actions, for example "Reboot" for "Restart"
 
 ## Known Bugs
 
