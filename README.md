@@ -66,3 +66,4 @@ Please read [CONTRIBUTING.md](./CONTRIBUTING.md).
 ## Known Bugs
 
 * The Full Disk Access Window on first startup doesn't close
+* Sometimes, the Snippet Expansion doesn't work (for example, if you press the 'o' key in Vim to create a new line)
