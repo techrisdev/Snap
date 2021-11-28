@@ -79,13 +79,14 @@ class Permissions {
 		// Configure the alert.
 		let alert = NSAlert()
 		alert.messageText = "Snap would like to have Full Disk Access."
-		alert.informativeText = "Full Disk Access is required for searching files in your Home directory."
+		alert.informativeText = "Full Disk Access is required for searching files all in your Home directory."
 		alert.icon = NSWorkspace.shared.icon(forFile: "/System/Library/PreferencePanes/Security.prefPane")
 		
 		// Add the buttons.
 		let okButton = alert.addButton(withTitle: "OK")
-		okButton.target = self
-		okButton.action = #selector(showFullDiskAccessPreferences)
+		// TODO: FIX OK BUTTON (It doesn't close the alert)
+//		okButton.target = self
+//		okButton.action = #selector(showFullDiskAccessPreferences)
 		
 		alert.addButton(withTitle: "Don't Allow")
 		
@@ -93,7 +94,7 @@ class Permissions {
 		alert.runModal()
 	}
 	
-	@objc static private func showFullDiskAccessPreferences() {
+	@objc static private func showFullDiskAccessPreferences(alert: NSAlert) {
 		// Create a URL pointing to the Full Disk Access preferences.
 		let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles")!
 		
