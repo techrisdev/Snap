@@ -26,7 +26,7 @@ Snap is an application which searches your Files, Contacts and Calendar events u
 
 ## Comparison
 |Feature|Snap|Spotlight|
-|:---:|:---:|:---:|
+|:---|:---:|:---:|
 |Searching Files|✅|✅|
 |Searching the Web|✅|✅|
 |Calendar Search|✅|✅|
