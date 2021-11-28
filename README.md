@@ -45,6 +45,10 @@ Snap is an application which searches your Files, Contacts and Calendar events u
 
 Snap doesn't have any dependencies, you can just build the project in Xcode.
 
+## Contributing
+All contributions are welcome!
+Please read [CONTRIBUTING.md](./CONTRIBUTING.md).
+
 ## Planned Features
 
 * Reminder Search
