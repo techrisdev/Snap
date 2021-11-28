@@ -39,6 +39,9 @@ class Search: ObservableObject {
 		metadataQuery.stop()
 	}
 	
+	let actionSearch = ActionSearch()
+	let applicationSearch = ApplicationSearch()
+	
 	@objc private func metadataQueryDidFinishGathering() {
 		// Execute code on the main queue.
 		DispatchQueue.main.async { [self] in
@@ -46,11 +49,9 @@ class Search: ObservableObject {
 			results = [SearchItem]()
 			
 			// If an Action for the string exists, then append the action to the search results.
-			let actionSearch = ActionSearch()
 			results += actionSearch.searchForString(currentString)
 			
 			// If an Action for the string exists, then append the action to the search results.
-			let applicationSearch = ApplicationSearch()
 			let searchResults = applicationSearch.searchForString(currentString)
 			results += searchResults
 			

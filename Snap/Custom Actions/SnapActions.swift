@@ -5,14 +5,14 @@
 import Foundation
 
 /// Non-codable actions.
-enum SnapAction: CaseIterable {
+enum SnapActions: CaseIterable {
 	case openPreferences
 	
 	/// All actions converted to search items.
 	static var allItems: [SearchItem] = {
 		var result = [SearchItem]()
 		
-		for action in SnapAction.allCases {
+		for action in SnapActions.allCases {
 			switch action {
 			case .openPreferences:
 				result.append(PreferencesAction())

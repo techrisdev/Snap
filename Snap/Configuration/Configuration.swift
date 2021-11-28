@@ -42,6 +42,9 @@ struct Configuration: Codable {
 	// Snippet Expansion
 	var snippetExpansionEnabled: Bool
 	var snippets: [Snippet]
+	
+	// Actions
+	var blockedActions: [String]
 
 	static private func decodeConfigurationFile() -> Configuration {
 		let decoder = JSONDecoder()

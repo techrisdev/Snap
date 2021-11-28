@@ -54,5 +54,6 @@
 	},
 	"itemMergedSoundEnabled": true,
 	"snippetExpansionEnabled": true,
-	"snippets": []
+	"snippets": [],
+	"blockedActions": []
 }
