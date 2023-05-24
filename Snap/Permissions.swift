@@ -29,17 +29,17 @@ class Permissions {
 		
 		// MARK: Searching for reminders doesn't work right now.
 		// Request access for reminders.
-		//		EKEventStore().requestAccess(to: .reminder, completion: { result, _ in
-		//			if !result {
-		//				print("Access denied.")
-		//			}
-		//		})
-		//
-		//		// Get the authorization status.
-		//		let remindersAuthorizationStatus = EKEventStore.authorizationStatus(for: .reminder)
-		//
-		//		// Set the value in UserDefaults so it can be used later.
-		//		UserDefaults.standard.setValue(remindersAuthorizationStatus.rawValue, forKey: "RemindersAuthorizationStatus")
+//				EKEventStore().requestAccess(to: .reminder, completion: { result, _ in
+//					if !result {
+//						print("Access denied.")
+//					}
+//				})
+//
+//				// Get the authorization status.
+//				let remindersAuthorizationStatus = EKEventStore.authorizationStatus(for: .reminder)
+//
+//				// Set the value in UserDefaults so it can be used later.
+//				UserDefaults.standard.setValue(remindersAuthorizationStatus.rawValue, forKey: "RemindersAuthorizationStatus")
 	}
 	
 	/// Request access for Contacts.

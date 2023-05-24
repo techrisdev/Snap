@@ -68,9 +68,9 @@ struct PreferencesView: View {
 				NavigationLink(destination: SnippetExpansionSectionView(snippetExpansionEnabled: $snippetExpansionEnabled, snippets: $snippets)) {
 					Label("Snippet Expansion", systemImage: "bolt")
 				}
-				NavigationLink(destination: ActionSectionView(blockedActions: $blockedActions)) {
-					Label("Actions", systemImage: "hare")
-				}
+//				NavigationLink(destination: ActionSectionView(blockedActions: $blockedActions)) {
+//					Label("Actions", systemImage: "hare")
+//				}
 			}
 			.listStyle(SidebarListStyle())
 			.frame(minWidth: 175)

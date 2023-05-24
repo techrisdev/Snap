@@ -60,7 +60,6 @@
 		6C7873F426199E3D002D48FE /* ApplicationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7873F326199E3D002D48FE /* ApplicationButton.swift */; };
 		6C82999425F699B600A25064 /* Notification Name Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C82999325F699B600A25064 /* Notification Name Extension.swift */; };
 		6C83FE5925FF900000DAC7C1 /* Color Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C83FE5825FF900000DAC7C1 /* Color Extension.swift */; };
-		6CA96693275387D900AF74F5 /* ActionSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA96692275387D900AF74F5 /* ActionSectionView.swift */; };
 		6CB0F2CD2621BB99008A0E1F /* NSEventModifierFlags Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB0F2CC2621BB99008A0E1F /* NSEventModifierFlags Extension.swift */; };
 		6CB0F2D12621BC7D008A0E1F /* KeyboardShortcutModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB0F2D02621BC7D008A0E1F /* KeyboardShortcutModifier.swift */; };
 		6CB6017025FE2AD200613136 /* ApplicationSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6016F25FE2AD200613136 /* ApplicationSearchItem.swift */; };
@@ -161,7 +160,6 @@
 		6C7873F326199E3D002D48FE /* ApplicationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationButton.swift; sourceTree = "<group>"; };
 		6C82999325F699B600A25064 /* Notification Name Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification Name Extension.swift"; sourceTree = "<group>"; };
 		6C83FE5825FF900000DAC7C1 /* Color Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color Extension.swift"; sourceTree = "<group>"; };
-		6CA96692275387D900AF74F5 /* ActionSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActionSectionView.swift; path = ../../../../../../../Documents/ActionSectionView.swift; sourceTree = "<group>"; };
 		6CB0F2CC2621BB99008A0E1F /* NSEventModifierFlags Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSEventModifierFlags Extension.swift"; sourceTree = "<group>"; };
 		6CB0F2D02621BC7D008A0E1F /* KeyboardShortcutModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcutModifier.swift; sourceTree = "<group>"; };
 		6CB6016F25FE2AD200613136 /* ApplicationSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSearchItem.swift; sourceTree = "<group>"; };
@@ -444,7 +442,6 @@
 				6CB9DE382628480F0071A06B /* ClipboardHistorySectionView.swift */,
 				6CB9DEB52628A36D0071A06B /* SnippetExpansionSectionView.swift */,
 				6CB9DEB92628A9F90071A06B /* AddSnippetExpansionView.swift */,
-				6CA96692275387D900AF74F5 /* ActionSectionView.swift */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -664,7 +661,6 @@
 				6CB9DEAC262887200071A06B /* LoopVideoPlayer.swift in Sources */,
 				6C5B518E25F80E15000B004A /* SpotlightSearchItem.swift in Sources */,
 				6CB9DE35262845C30071A06B /* SearchResultsSectionView.swift in Sources */,
-				6CA96693275387D900AF74F5 /* ActionSectionView.swift in Sources */,
 				6C3E3CB4262193A6001A512C /* WebSearch.swift in Sources */,
 				6C0723D22604DE69009F0E63 /* Icon.swift in Sources */,
 				6C106F4B25F655BB0047E0B0 /* SearchView.swift in Sources */,
