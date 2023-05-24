@@ -4,6 +4,13 @@
 
 <h1 align="center">Snap</h1>
 <h3 align="center">A better Spotlight search.</h4>
+<h1 align="center">
+<p>
+  <a href="https://www.paypal.me/chrissklei">
+      <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt="paypal">
+  </a>
+</p>
+</h1>
 
 ## Introduction
 
