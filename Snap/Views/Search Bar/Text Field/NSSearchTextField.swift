@@ -8,8 +8,10 @@ import AppKit
 class NSSearchTextField: NSTextField {
 	func setFont(_ font: NSFont) {
 		// Set the text field's font.
-		// TODO: CHECK IF FONT EXISTS; OTHERWISE THE PROGRAM WILL CRASH
-		super.font = font
+		// CHECK IF FONT EXISTS; OTHERWISE THE PROGRAM WILL CRASH
+		if NSFontManager.shared.availableFontFamilies.contains(font.familyName ?? font.fontName) {
+			super.font = font
+		}
 	}
 	
 	override var font: NSFont? {

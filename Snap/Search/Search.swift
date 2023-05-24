@@ -97,7 +97,7 @@ class Search: ObservableObject {
 					results.insert(CalculatorSearchItem(calculation: currentString), at: 0)
 				}
 			}
-			// MARK: The bookmark search isn't working properly right now.
+			// MARK: TODO - The bookmark search isn't working properly right now.
 			//			let bookmarks = Bookmark.decodedBookmarks.searchForBookmarks(string)
 			//			for bookmark in bookmarks {
 			//				results.append(WebSearchItem(searchString: bookmark.URLString ?? "", searchType: .url, name: bookmark.URLString ?? "", takesNameAsArgument: true))

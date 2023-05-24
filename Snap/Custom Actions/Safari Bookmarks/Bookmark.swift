@@ -11,7 +11,7 @@ struct Bookmark: Decodable {
 	var Children: [Bookmark]?
 	var URLString: String?
 	
-	// MARK: The bookmark search isn't working properly.
+	// MARK: TODO - The bookmark search isn't working properly.
 	func searchForBookmarks(_ searchString: String) -> [Bookmark] {
 		var result = [Bookmark]()
 		
