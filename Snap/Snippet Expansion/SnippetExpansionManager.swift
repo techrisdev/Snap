@@ -19,6 +19,7 @@ struct SnippetExpansionManager {
 		// The current word.
 		var currentWord = ""
 		
+		// MARK: TODO - Fix Snippet expansion, doesn't work every time
 		// Listen to "keyDown" events.
 		NSEvent.addGlobalMonitorForEvents(matching: .keyDown, handler: { event in
 			// Check if the event has a character.

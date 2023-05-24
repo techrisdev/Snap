@@ -27,7 +27,7 @@ class Permissions {
 		// Set the Full Disk Access status in UserDefaults so it can be used later.
 		UserDefaults.standard.setValue(fullDiskAccess, forKey: "FullDiskAccess")
 		
-		// MARK: Searching for reminders doesn't work right now.
+		// MARK: TODO - Searching for reminders doesn't work right now.
 		// Request access for reminders.
 //				EKEventStore().requestAccess(to: .reminder, completion: { result, _ in
 //					if !result {
@@ -69,6 +69,9 @@ class Permissions {
 		return FileManager.default.contents(atPath: "\(NSHomeDirectory())/Library/Safari/CloudTabs.db") != nil
 	}
 	
+	/// Alert for requesting Full Disk Access.
+	static private let fullDiskAccessAlert = NSAlert()
+	
 	/// Request access to folders like the users desktop folder.
 	static private func requestFullDiskAccess() {
 		// If there is Full Disk Access, return from the function.
@@ -77,22 +80,19 @@ class Permissions {
 		}
 		
 		// Configure the alert.
-		let alert = NSAlert()
-		alert.messageText = "Snap would like to have Full Disk Access."
-		alert.informativeText = "Full Disk Access is required for searching files all in your Home directory."
-		alert.icon = NSWorkspace.shared.icon(forFile: "/System/Library/PreferencePanes/Security.prefPane")
+		fullDiskAccessAlert.messageText = "Snap would like to have Full Disk Access."
+		fullDiskAccessAlert.informativeText = "Full Disk Access is required for searching files all in your Home directory."
+		fullDiskAccessAlert.icon = NSWorkspace.shared.icon(forFile: "/System/Library/PreferencePanes/Security.prefPane")
 		
 		// Add the buttons.
-		alert.addButton(withTitle: "OK")
-		// TODO: FIX OK BUTTON (It doesn't close the alert)
-		//let okButton = alert.addButton(withTitle: "OK")
-//		okButton.target = self
-//		okButton.action = #selector(showFullDiskAccessPreferences)
+		let okButton = fullDiskAccessAlert.addButton(withTitle: "OK")
+		okButton.target = self
+		okButton.action = #selector(showFullDiskAccessPreferences)
 		
-		alert.addButton(withTitle: "Don't Allow")
+		fullDiskAccessAlert.addButton(withTitle: "Don't Allow")
 		
 		// Present the alert.
-		alert.runModal()
+		fullDiskAccessAlert.runModal()
 	}
 	
 	@objc static private func showFullDiskAccessPreferences(alert: NSAlert) {
@@ -101,5 +101,8 @@ class Permissions {
 		
 		// Open the URL.
 		NSWorkspace.shared.open(url)
+		
+		// Close Alert.
+		fullDiskAccessAlert.window.close()
 	}
 }

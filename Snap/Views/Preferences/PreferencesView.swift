@@ -68,9 +68,12 @@ struct PreferencesView: View {
 				NavigationLink(destination: SnippetExpansionSectionView(snippetExpansionEnabled: $snippetExpansionEnabled, snippets: $snippets)) {
 					Label("Snippet Expansion", systemImage: "bolt")
 				}
+				// MARK: Todo - Add View
 //				NavigationLink(destination: ActionSectionView(blockedActions: $blockedActions)) {
 //					Label("Actions", systemImage: "hare")
 //				}
+				
+				// MARK: Todo - Add Info View with donate button
 			}
 			.listStyle(SidebarListStyle())
 			.frame(minWidth: 175)
@@ -81,7 +84,6 @@ struct PreferencesView: View {
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		HStack {
-			// MARK: TODO: Add a "Reset" button.
 			Button("Reset") {
 				showingResetPopover.toggle()
 			}
@@ -100,6 +102,7 @@ struct PreferencesView: View {
 			}
 			.padding([.bottom, .leading])
 			Spacer()
+			
 			Button("Save") {
 				save()
 			}
@@ -109,7 +112,11 @@ struct PreferencesView: View {
 	
 	func save() {
 		// Create a configuration with all preferences.
+		// MARK: Todo - Make this easier.
 		let newConfiguration = Configuration(backgroundColor: backgroundColor.hexString, textColor: textColor.hexString, activationKeyboardShortcut: activationKeyboardShortcut, maximumWidth: maximumWdith, maximumHeight: maximumHeight, searchBarFont: searchBarFont, searchBarHeight: searchBarHeight, insertionPointColor: insertionPointColor.hexString, showingIcons: showingIcons, blockedPaths: blockedPaths, iconSizeWidth: iconWidth, iconSizeHeight: iconHeight, resultItemFont: resultItemFont, resultItemHeight: resultItemHeight, resultItemLimit: resultItemLimit, shouldAnimateNavigation: shouldAnimateNavigation, selectedItemBackgroundColor: selectedItemBackgroundColor.hexString, showPathKeyboardShortcut: showPathKeyboardShortcut, quickLookKeyboardShortcut: quickLookKeyboardShortcut, clipboardHistoryEnabled: clipboardHistoryEnabled, clipboardHistoryItemLimit: clipboardHistoryItemLimit, copyLastItemToClipboardKeyboardShortcut: copyLastItemToClipboardKeyboardShortcut, mergeClipboardHistoryItemKeyboardShortcut: mergeClipboardHistoryItemKeyboardShortcut, itemMergedSoundEnabled: itemMergedSoundEnabled, snippetExpansionEnabled: snippetExpansionEnabled, snippets: snippets, blockedActions: blockedActions)
+		
+		// MARK: TODO - Check if anything changed. Works when Equatable
+		//Configuration.decoded == newConfiguration ? return : print("changed")
 		
 		// Write the new configuration to the configuration path.
 		newConfiguration.write()

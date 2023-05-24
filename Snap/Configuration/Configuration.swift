@@ -5,6 +5,14 @@
 import SwiftUI
 
 struct Configuration: Codable {
+	
+	// MARK: TODO - Make structure conform to Equatable protocol; Could be annoying when adding new preference, this function needs to be adjusted as well
+//	static func == (lhs: Configuration, rhs: Configuration) -> Bool {
+//		let keys: [KeyPath<Configuration, String>] = [\.backgroundColor, \.textColor, \.activationKeyboardShortcut, \.maximumWidth, \.maxi]
+//	}
+	
+	
+	
 	static let decoded = decodeConfigurationFile()
 	
 	// General preferences
