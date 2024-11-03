@@ -30,6 +30,7 @@ Snap is an application which searches your Files, Contacts and Calendar events u
 * User Defined Actions (custom Apple Scripts)
 * Web search<!-- Not Working? * Quick Look previews -->
 * Uses SwiftUI
+* Very customizable
 * Completely open source
 * Not using any libraries to make the project precise and easy to read
 

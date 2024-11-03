@@ -81,7 +81,7 @@ class Permissions {
 		
 		// Configure the alert.
 		fullDiskAccessAlert.messageText = "Snap would like to have Full Disk Access."
-		fullDiskAccessAlert.informativeText = "Full Disk Access is required for searching files all in your Home directory."
+		fullDiskAccessAlert.informativeText = "Full Disk Access is required for searching all files."
 		fullDiskAccessAlert.icon = NSWorkspace.shared.icon(forFile: "/System/Library/PreferencePanes/Security.prefPane")
 		
 		// Add the buttons.

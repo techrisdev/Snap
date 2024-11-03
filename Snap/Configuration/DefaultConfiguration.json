@@ -2,7 +2,7 @@
 	"backgroundColor": "#282A36",
 	"textColor": "#F8F8F2",
 	"showingIcons": true,
-	"iconSizeWidth": 35,
+	"iconSizeWidth": 50,
 	"iconSizeHeight": 50,
 	"blockedPaths": [
 		"/System/Library/Frameworks/",
