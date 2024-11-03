@@ -12,9 +12,9 @@ struct SearchBarView: View {
 		VStack {
 			Spacer()
 			SearchTextField(text: $text)
-			Spacer()
 		}
-		.padding([.leading, .trailing], 5)
+		// MARK: TODO - Maybe an option for changing this padding?
+		.padding([.leading, .trailing], 10)
 		.frame(height: configuration.searchBarHeight)
 	}
 }

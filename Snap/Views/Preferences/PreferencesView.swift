@@ -74,6 +74,7 @@ struct PreferencesView: View {
 //				}
 				
 				// MARK: Todo - Add Info View with donate button
+//				NavigationLink(destination: InfoSectionView(), label: <#T##() -> _#>)
 			}
 			.listStyle(SidebarListStyle())
 			.frame(minWidth: 175)

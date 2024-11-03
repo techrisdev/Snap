@@ -45,7 +45,10 @@ class SearchTextFieldViewController: NSViewController, NSTextFieldDelegate {
 		
 		// Set the text field's placeholder.
 		// MARK: TODO: The placeholder string is not centered.
-		//textField.placeholderAttributedString = NSAttributedString(string: "Search", attributes: [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : textColor.withAlphaComponent(0.6), NSAttributedString.Key.baselineOffset : -(font.pointSize / 2)])
+		//let centeredParagraphStyle = NSMutableParagraphStyle()
+		//centeredParagraphStyle.alignment = .center
+//		textField.placeholderAttributedString = NSAttributedString(string: "Search", attributes: [.paragraphStyle: centeredParagraphStyle])
+//		textField.placeholderAttributedString = NSAttributedString(string: "Search", attributes: [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : textColor.withAlphaComponent(0.6), NSAttributedString.Key.baselineOffset : -(font.pointSize / 2)])
 		
 		// Configure the text field's text and colors.
 		let backgroundColor = NSColor(configuration.backgroundColor.color)
