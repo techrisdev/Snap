@@ -22,6 +22,7 @@ struct SearchItemView: View {
 					Text(item.path)
 						.font(configuration.resultItemFont.font)
 						.foregroundColor(configuration.textColor.color)
+						.padding(.leading)
 					Spacer()
 				}
 				.padding([.leading, .trailing], 5)

@@ -51,7 +51,17 @@ struct SearchView: View {
 					search.searchForString(text)
 				}
 				.onReceive(notificationCenter.publisher(for: .ReturnKeyWasPressed)) { _ in
-					// Execute the selected item's action.
+					// If the path is shown and the item has a path, open the items path in Finder
+					if self.showingPath {
+						let url = URL(fileURLWithPath: search.results[selectedItemIndex].path)
+						
+						print(search.results[selectedItemIndex])
+						print(search.results[selectedItemIndex].path)
+						NSWorkspace.shared.activateFileViewerSelecting([url])
+						return
+					}
+					
+					// Otherwise, just execute the selected item's action.
 					if search.results.indices.contains(selectedItemIndex) {
 						itemAction(selectedItem)
 					}
